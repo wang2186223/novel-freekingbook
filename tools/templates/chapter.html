@@ -419,15 +419,37 @@
         </div>
     </header>
 
+    <!-- Ad Unit 1 - After Header -->
+    <div style="text-align: center; margin: 20px 0;">
+        <div data-adunit="xixifreenovel.com_1_BN" data-pmid="2616576" data-sizes-desktop="[[970,250],[970,90],[728,90],[640,360],[336,280],[320,480],[320,100],[320,50],[300,600],[300,250],[250,250],[160,600],[120,600],[1,1]]" data-sizes-mobile="[[336,280],[320,480],[320,100],[320,50],[300,600],[300,480],[300,250],[250,250],[1,1]]"></div>
+    </div>
+
     <main>
         <div class="container">
             <h1 class="chapter-title">{{ chapter.title if chapter.title else 'Chapter ' + chapter.number|string }}</h1>
+            
+            <!-- Ad Unit 2 - After Chapter Title -->
+            <div style="text-align: center; margin: 20px 0;">
+                <div data-adunit="xixifreenovel.com_1_BN" data-pmid="2616576" data-sizes-desktop="[[970,250],[970,90],[728,90],[640,360],[336,280],[320,480],[320,100],[320,50],[300,600],[300,250],[250,250],[160,600],[120,600],[1,1]]" data-sizes-mobile="[[336,280],[320,480],[320,100],[320,50],[300,600],[300,480],[300,250],[250,250],[1,1]]"></div>
+            </div>
+            
             <div class="content font-medium">
                 {% for paragraph in chapter.content.split('\n') %}
                 {% if paragraph.strip() %}
                 <p>{{ paragraph.strip() }}</p>
                 {% endif %}
+                {% if loop.index == (loop.length // 2) %}
+                <!-- Ad Unit 3 - Middle of Content -->
+                <div style="text-align: center; margin: 30px 0;">
+                    <div data-adunit="xixifreenovel.com_1_BN" data-pmid="2616576" data-sizes-desktop="[[970,250],[970,90],[728,90],[640,360],[336,280],[320,480],[320,100],[320,50],[300,600],[300,250],[250,250],[160,600],[120,600],[1,1]]" data-sizes-mobile="[[336,280],[320,480],[320,100],[320,50],[300,600],[300,480],[300,250],[250,250],[1,1]]"></div>
+                </div>
+                {% endif %}
                 {% endfor %}
+            </div>
+            
+            <!-- Ad Unit 4 - After Content -->
+            <div style="text-align: center; margin: 30px 0;">
+                <div data-adunit="xixifreenovel.com_1_BN" data-pmid="2616576" data-sizes-desktop="[[970,250],[970,90],[728,90],[640,360],[336,280],[320,480],[320,100],[320,50],[300,600],[300,250],[250,250],[160,600],[120,600],[1,1]]" data-sizes-mobile="[[336,280],[320,480],[320,100],[320,50],[300,600],[300,480],[300,250],[250,250],[1,1]]"></div>
             </div>
             
             <div class="font-controls">
@@ -437,6 +459,11 @@
             </div>
         </div>
     </main>
+
+    <!-- Ad Unit 5 - Before Footer Navigation -->
+    <div style="text-align: center; margin: 30px 0;">
+        <div data-adunit="xixifreenovel.com_1_BN" data-pmid="2616576" data-sizes-desktop="[[970,250],[970,90],[728,90],[640,360],[336,280],[320,480],[320,100],[320,50],[300,600],[300,250],[250,250],[160,600],[120,600],[1,1]]" data-sizes-mobile="[[336,280],[320,480],[320,100],[320,50],[300,600],[300,480],[300,250],[250,250],[1,1]]"></div>
+    </div>
 
     <footer>
         <div class="container">
@@ -624,5 +651,6 @@
             localStorage.setItem('readingHistory', JSON.stringify(history));
         });
     </script>
+    <script data-cfasync="false" async src="https://cdn.premiumtag.net/tag/76863/01664790-ecc0-4170-b0ea-3f42ba942e5b.js"></script>
 </body>
 </html>
