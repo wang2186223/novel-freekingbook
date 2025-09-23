@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://my.newreadnovel.com/sitemap.xml
+Sitemap: https://ads.xixifreenovel.com/sitemap.xml
 
 # Allow all search engines to crawl the site
 Allow: /novels/

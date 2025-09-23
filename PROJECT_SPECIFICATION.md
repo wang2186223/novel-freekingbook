@@ -27,9 +27,9 @@ website/
 ```
 
 #### 1.2 URL结构设计（SEO友好）
-- 首页: `https://yoursite.github.io/`
-- 小说详情: `https://yoursite.github.io/novels/{novel-slug}/`
-- 章节阅读: `https://yoursite.github.io/novels/{novel-slug}/chapter-{number}.html`
+- 首页: `https://ads.xixifreenovel.com/`
+- 小说详情: `https://ads.xixifreenovel.com/novels/{novel-slug}/`
+- 章节阅读: `https://ads.xixifreenovel.com/novels/{novel-slug}/chapter-{number}.html`
 
 ### 2. 数据库设计（JSON格式）
 
@@ -141,12 +141,13 @@ novel library/
 #### 5.3 代码模板
 ```html
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6BKGBPW0W"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EWY8W7MKKM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-B6BKGBPW0W');
+
+  gtag('config', 'G-EWY8W7MKKM');
 </script>
 
 <!-- Google AdSense -->

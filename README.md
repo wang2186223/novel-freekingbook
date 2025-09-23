@@ -91,10 +91,10 @@ python tools/dev.py install
   "site": {
     "name": "NovelVibe",
     "description": "Free Werewolf Novels for American Women",
-    "url": "https://yourusername.github.io/novel-free-my"
+    "url": "https://ads.xixifreenovel.com"
   },
   "analytics": {
-    "google_analytics_id": "G-XXXXXXXXXX",
+    "google_analytics_id": "G-EWY8W7MKKM",
     "google_adsense_id": "ca-pub-XXXXXXXXXXXXXXXX"
   }
 }
@@ -448,8 +448,8 @@ python tools/optimize-images.py
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3785399647875281"></script>
 
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6BKGBPW0W"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EWY8W7MKKM"></script>
 ```
 
 ## 🐛 故障排除

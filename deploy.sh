@@ -17,7 +17,7 @@ echo "推送到 GitHub..."
 git push origin main
 
 echo "✅ 部署完成!"
-echo "网站将在几分钟内更新: https://yourusername.github.io/novel-free-my"
+echo "网站将在几分钟内更新: https://ads.xixifreenovel.com"
 echo ""
 echo "📝 下一步:"
 echo "1. 在 GitHub 仓库设置中启用 GitHub Pages"
