@@ -250,3 +250,4 @@ pubmatic.com, 154037, RESELLER, 5d62403b186f2ace
 openx.com, 537149888, RESELLER, 6a698e2ec38604c6
 appnexus.com, 3703, RESELLER, f5ab79cb980f11d1
 g-global.net, 21852, DIRECT
+google.com, pub-6892179169063217, DIRECT, f08c47fec0942fa0
