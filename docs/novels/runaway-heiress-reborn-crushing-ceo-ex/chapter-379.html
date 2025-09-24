@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-09-24T18:38:47.516250">
-    <meta property="article:modified_time" content="2025-09-24T18:38:47.516250">
+    <meta property="article:published_time" content="2025-09-24T19:06:06.001404">
+    <meta property="article:modified_time" content="2025-09-24T19:06:06.001404">
     <meta name="date" content="2025-09-24">
-    <meta name="last-modified" content="2025-09-24 18:38:47">
+    <meta name="last-modified" content="2025-09-24 19:06:06">
     
     
     <!-- Open Graph Meta Tags -->
@@ -43,6 +43,24 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6892179169063217"
          crossorigin="anonymous"></script>
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    fbq('init', '3902941096613787');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=3902941096613787&ev=PageView&noscript=1"
+    /></noscript>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -361,8 +379,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-09-24T18:38:47.516250",
-        "dateModified": "2025-09-24T18:38:47.516250",
+        "datePublished": "2025-09-24T19:06:06.001404",
+        "dateModified": "2025-09-24T19:06:06.001404",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -2759,7 +2777,7 @@
                 title: 'Runaway Heiress Reborn： Crushing CEO Ex',
                 url: '/novels/runaway-heiress-reborn-crushing-ceo-ex/',
                 cover_url: '/covers/runaway-heiress-reborn-crushing-ceo-ex-wechat_2025-09-23_153718_051.png',
-                lastRead: new Date().toI。SOString(),
+                lastRead: new Date().toISOString(),
                 currentChapter: 379
             };
             
@@ -2776,6 +2794,133 @@
             
             localStorage.setItem('readingHistory', JSON.stringify(history));
         });
+    </script>
+    
+    <!-- Facebook Reading Tracker -->
+    <script>
+    class FacebookReadingTracker {
+        constructor() {
+            this.startTime = Date.now();
+            this.totalActiveTime = 0;
+            this.lastActiveTime = Date.now();
+            this.isActive = true;
+            this.hasSent1Min = false;
+            this.hasSent20Min = false;
+            
+            // 发送进入页面事件
+            this.sendInWebEvent();
+            
+            // 初始化追踪
+            this.init();
+        }
+        
+        init() {
+            this.bindEvents();
+            this.startTracking();
+        }
+        
+        sendInWebEvent() {
+            if (typeof fbq !== 'undefined') {
+                fbq('trackCustom', 'in_web');
+                console.log('Facebook事件已发送: in_web (用户进入页面)');
+            }
+        }
+        
+        bindEvents() {
+            // 页面可见性变化
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    this.handleInactive();
+                } else {
+                    this.handleActive();
+                }
+            });
+            
+            // 用户交互事件
+            ['mousemove', 'keydown', 'scroll', 'click'].forEach(event => {
+                document.addEventListener(event, () => this.handleActive());
+            });
+            
+            // 窗口焦点事件
+            window.addEventListener('blur', () => this.handleInactive());
+            window.addEventListener('focus', () => this.handleActive());
+            
+            // 页面卸载前保存数据
+            window.addEventListener('beforeunload', () => this.updateActiveTime());
+        }
+        
+        handleActive() {
+            if (!this.isActive) {
+                this.isActive = true;
+                this.lastActiveTime = Date.now();
+            }
+        }
+        
+        handleInactive() {
+            if (this.isActive) {
+                this.isActive = false;
+                this.updateActiveTime();
+            }
+        }
+        
+        updateActiveTime() {
+            if (this.isActive) {
+                const now = Date.now();
+                const sessionTime = now - this.lastActiveTime;
+                
+                // 只计算合理的时间段（小于5分钟的连续活跃时间）
+                if (sessionTime < 5 * 60 * 1000) {
+                    this.totalActiveTime += sessionTime;
+                }
+                
+                this.lastActiveTime = now;
+            }
+            
+            this.checkMilestones();
+        }
+        
+        checkMilestones() {
+            const totalMinutes = this.totalActiveTime / (1000 * 60);
+            
+            // 检查1分钟里程碑
+            if (totalMinutes >= 1 && !this.hasSent1Min) {
+                this.hasSent1Min = true;
+                if (typeof fbq !== 'undefined') {
+                    fbq('trackCustom', '1m_web');
+                    console.log('Facebook事件已发送: 1m_web (用户阅读1分钟)');
+                }
+            }
+            
+            // 检查20分钟里程碑
+            if (totalMinutes >= 20 && !this.hasSent20Min) {
+                this.hasSent20Min = true;
+                if (typeof fbq !== 'undefined') {
+                    fbq('trackCustom', '20m_web');
+                    console.log('Facebook事件已发送: 20m_web (用户阅读20分钟)');
+                }
+            }
+        }
+        
+        startTracking() {
+            // 每5秒检查一次阅读时间
+            setInterval(() => {
+                this.updateActiveTime();
+            }, 5000);
+        }
+        
+        // 调试方法：获取当前阅读时间（分钟）
+        getCurrentReadingMinutes() {
+            this.updateActiveTime();
+            return Math.floor(this.totalActiveTime / (1000 * 60));
+        }
+    }
+    
+    // 初始化Facebook阅读追踪器
+    document.addEventListener('DOMContentLoaded', function() {
+        window.facebookTracker = new FacebookReadingTracker();
+        
+        // 调试：可以在控制台使用 window.facebookTracker.getCurrentReadingMinutes() 查看当前阅读时间
+    });
     </script>
 </body>
 </html>
