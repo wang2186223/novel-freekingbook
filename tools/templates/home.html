@@ -851,6 +851,7 @@
             this.totalActiveTime = 0;
             this.lastActiveTime = Date.now();
             this.isActive = true;
+            this.isUnloading = false; // 添加页面卸载标志
             this.hasSent1Min = false;
             this.hasSent20Min = false;
             
@@ -892,8 +893,11 @@
             window.addEventListener('blur', () => this.handleInactive());
             window.addEventListener('focus', () => this.handleActive());
             
-            // 页面卸载前保存数据
-            window.addEventListener('beforeunload', () => this.updateActiveTime());
+            // 页面卸载前标记状态，但不发送事件
+            window.addEventListener('beforeunload', () => {
+                this.isUnloading = true;
+                this.updateActiveTime(true); // 传递参数表示正在卸载，不发送事件
+            });
         }
         
         handleActive() {
@@ -910,7 +914,7 @@
             }
         }
         
-        updateActiveTime() {
+        updateActiveTime(isUnloading = false) {
             if (this.isActive) {
                 const now = Date.now();
                 const sessionTime = now - this.lastActiveTime;
@@ -923,10 +927,18 @@
                 this.lastActiveTime = now;
             }
             
-            this.checkMilestones();
+            // 如果不是页面卸载，才检查里程碑并发送事件
+            if (!isUnloading && !this.isUnloading) {
+                this.checkMilestones();
+            }
         }
         
         checkMilestones() {
+            // 如果正在卸载页面，不发送任何Facebook事件
+            if (this.isUnloading) {
+                return;
+            }
+            
             const totalMinutes = this.totalActiveTime / (1000 * 60);
             
             // 检查1分钟里程碑

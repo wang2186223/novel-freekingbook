@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-09-26T14:49:30.468976">
-    <meta property="article:modified_time" content="2025-09-26T14:49:30.468976">
+    <meta property="article:published_time" content="2025-09-26T15:56:24.361859">
+    <meta property="article:modified_time" content="2025-09-26T15:56:24.361859">
     <meta name="date" content="2025-09-26">
-    <meta name="last-modified" content="2025-09-26 14:49:30">
+    <meta name="last-modified" content="2025-09-26 15:56:24">
     
     
     <!-- Open Graph Meta Tags -->
@@ -38,6 +38,14 @@
       gtag('js', new Date());
 
       gtag('config', 'G-EWY8W7MKKM');
+      
+      // 追踪小说章节阅读
+      gtag('event', 'chapter_read', {
+        'novel_title': 'The Hidden Heiress Divorces the CEO',
+        'chapter_number': '342',
+        'novel_id': '',
+        'value': 1
+      });
     </script>
     
     <!-- Google AdSense -->
@@ -379,8 +387,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-09-26T14:49:30.468976",
-        "dateModified": "2025-09-26T14:49:30.468976",
+        "datePublished": "2025-09-26T15:56:24.361859",
+        "dateModified": "2025-09-26T15:56:24.361859",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -2806,6 +2814,7 @@
         });
     </script>
     
+    
     <!-- Facebook Reading Tracker -->
     <script>
     class FacebookReadingTracker {
@@ -2814,8 +2823,12 @@
             this.totalActiveTime = 0;
             this.lastActiveTime = Date.now();
             this.isActive = true;
+            this.isUnloading = false; // 页面卸载标志
             this.hasSent1Min = false;
             this.hasSent20Min = false;
+            
+            // 初始化24小时事件限制
+            this.initEventLimits();
             
             // 发送进入页面事件
             this.sendInWebEvent();
@@ -2824,15 +2837,81 @@
             this.init();
         }
         
+        initEventLimits() {
+            // 检查并清理过期的事件记录
+            this.cleanExpiredEvents();
+            
+            // 检查用户今日是否已发送过各类事件
+            this.hasSent1MinToday = this.hasEventSentToday('1m_web');
+            this.hasSent20MinToday = this.hasEventSentToday('20m_web');
+            this.hasSentInWebToday = this.hasEventSentToday('in_web');
+        }
+        
+        cleanExpiredEvents() {
+            try {
+                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
+                const now = Date.now();
+                const oneDayMs = 24 * 60 * 60 * 1000; // 24小时毫秒数
+                
+                // 清理超过24小时的记录
+                Object.keys(eventHistory).forEach(eventType => {
+                    if (eventHistory[eventType] && (now - eventHistory[eventType]) > oneDayMs) {
+                        delete eventHistory[eventType];
+                    }
+                });
+                
+                localStorage.setItem('fb_event_history', JSON.stringify(eventHistory));
+            } catch (e) {
+                console.log('清理事件历史时出错:', e);
+            }
+        }
+        
+        hasEventSentToday(eventType) {
+            try {
+                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
+                const lastSent = eventHistory[eventType];
+                
+                if (!lastSent) return false;
+                
+                const now = Date.now();
+                const oneDayMs = 24 * 60 * 60 * 1000;
+                
+                return (now - lastSent) < oneDayMs;
+            } catch (e) {
+                console.log('检查事件历史时出错:', e);
+                return false;
+            }
+        }
+        
+        recordEventSent(eventType) {
+            try {
+                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
+                eventHistory[eventType] = Date.now();
+                localStorage.setItem('fb_event_history', JSON.stringify(eventHistory));
+            } catch (e) {
+                console.log('记录事件时出错:', e);
+            }
+        }
+        
         init() {
             this.bindEvents();
             this.startTracking();
         }
         
         sendInWebEvent() {
+            // 检查24小时内是否已发送过in_web事件
+            if (this.hasSentInWebToday) {
+                console.log('用户今日已发送过in_web事件，跳过发送');
+                return;
+            }
+            
             if (typeof fbq !== 'undefined') {
                 fbq('trackCustom', 'in_web');
                 console.log('Facebook事件已发送: in_web (用户进入页面)');
+                
+                // 记录事件发送时间
+                this.recordEventSent('in_web');
+                this.hasSentInWebToday = true;
             }
         }
         
@@ -2855,8 +2934,11 @@
             window.addEventListener('blur', () => this.handleInactive());
             window.addEventListener('focus', () => this.handleActive());
             
-            // 页面卸载前保存数据
-            window.addEventListener('beforeunload', () => this.updateActiveTime());
+            // 页面卸载前标记状态，但不发送事件
+            window.addEventListener('beforeunload', () => {
+                this.isUnloading = true;
+                this.updateActiveTime(true); // 传递参数表示正在卸载，不发送事件
+            });
         }
         
         handleActive() {
@@ -2873,7 +2955,7 @@
             }
         }
         
-        updateActiveTime() {
+        updateActiveTime(isUnloading = false) {
             if (this.isActive) {
                 const now = Date.now();
                 const sessionTime = now - this.lastActiveTime;
@@ -2886,28 +2968,56 @@
                 this.lastActiveTime = now;
             }
             
-            this.checkMilestones();
+            // 如果不是页面卸载，才检查里程碑并发送事件
+            if (!isUnloading && !this.isUnloading) {
+                this.checkMilestones();
+            }
         }
         
         checkMilestones() {
+            // 如果正在卸载页面，不发送任何Facebook事件
+            if (this.isUnloading) {
+                return;
+            }
+            
             const totalMinutes = this.totalActiveTime / (1000 * 60);
             
             // 检查1分钟里程碑
-            if (totalMinutes >= 1 && !this.hasSent1Min) {
+            if (totalMinutes >= 1 && !this.hasSent1Min && !this.hasSent1MinToday) {
                 this.hasSent1Min = true;
+                this.hasSent1MinToday = true;
+                
                 if (typeof fbq !== 'undefined') {
                     fbq('trackCustom', '1m_web');
                     console.log('Facebook事件已发送: 1m_web (用户阅读1分钟)');
+                    
+                    // 记录事件发送时间
+                    this.recordEventSent('1m_web');
+                } else {
+                    console.log('Facebook Pixel未加载，跳过1m_web事件');
                 }
+            } else if (totalMinutes >= 1 && !this.hasSent1Min && this.hasSent1MinToday) {
+                this.hasSent1Min = true; // 标记为已处理，但不发送事件
+                console.log('用户今日已发送过1m_web事件，跳过发送');
             }
             
             // 检查20分钟里程碑
-            if (totalMinutes >= 20 && !this.hasSent20Min) {
+            if (totalMinutes >= 20 && !this.hasSent20Min && !this.hasSent20MinToday) {
                 this.hasSent20Min = true;
+                this.hasSent20MinToday = true;
+                
                 if (typeof fbq !== 'undefined') {
                     fbq('trackCustom', '20m_web');
                     console.log('Facebook事件已发送: 20m_web (用户阅读20分钟)');
+                    
+                    // 记录事件发送时间
+                    this.recordEventSent('20m_web');
+                } else {
+                    console.log('Facebook Pixel未加载，跳过20m_web事件');
                 }
+            } else if (totalMinutes >= 20 && !this.hasSent20Min && this.hasSent20MinToday) {
+                this.hasSent20Min = true; // 标记为已处理，但不发送事件
+                console.log('用户今日已发送过20m_web事件，跳过发送');
             }
         }
         
