@@ -86,12 +86,11 @@ class WebsiteBuilder:
         cleanExpiredEvents() {
             try {
                 const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                const now = Date.now();
-                const oneDayMs = 24 * 60 * 60 * 1000; // 24小时毫秒数
+                const today = new Date().toDateString(); // 获取今天的日期字符串
                 
-                // 清理超过24小时的记录
+                // 清理非今日的记录
                 Object.keys(eventHistory).forEach(eventType => {
-                    if (eventHistory[eventType] && (now - eventHistory[eventType]) > oneDayMs) {
+                    if (eventHistory[eventType] && eventHistory[eventType].date !== today) {
                         delete eventHistory[eventType];
                     }
                 });
@@ -105,14 +104,14 @@ class WebsiteBuilder:
         hasEventSentToday(eventType) {
             try {
                 const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                const lastSent = eventHistory[eventType];
+                const eventRecord = eventHistory[eventType];
                 
-                if (!lastSent) return false;
+                if (!eventRecord) return false;
                 
-                const now = Date.now();
-                const oneDayMs = 24 * 60 * 60 * 1000;
+                const today = new Date().toDateString();
                 
-                return (now - lastSent) < oneDayMs;
+                // 检查是否是今天发送的事件
+                return eventRecord.date === today;
             } catch (e) {
                 console.log('检查事件历史时出错:', e);
                 return false;
@@ -122,7 +121,10 @@ class WebsiteBuilder:
         recordEventSent(eventType) {
             try {
                 const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                eventHistory[eventType] = Date.now();
+                eventHistory[eventType] = {
+                    date: new Date().toDateString(),
+                    timestamp: Date.now()
+                };
                 localStorage.setItem('fb_event_history', JSON.stringify(eventHistory));
             } catch (e) {
                 console.log('记录事件时出错:', e);
