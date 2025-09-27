@@ -453,7 +453,7 @@
                 {% for paragraph in chapter.content.split('\n') %}
                 {% if paragraph.strip() %}
                 <p>{{ paragraph.strip() }}</p>
-                {% if loop.index == 1 %}
+                {% if loop.index == 1 or loop.index == 5 %}
                 <!-- In-article Ad -->
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5678834518894660"
                      crossorigin="anonymous"></script>
