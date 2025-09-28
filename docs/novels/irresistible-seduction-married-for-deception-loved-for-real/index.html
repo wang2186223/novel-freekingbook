@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-09-28T10:40:45.894838">
-    <meta property="article:modified_time" content="2025-09-28T10:40:45.894838">
+    <meta property="article:published_time" content="2025-09-28T11:23:41.988369">
+    <meta property="article:modified_time" content="2025-09-28T11:23:41.988369">
     <meta name="date" content="2025-09-28">
-    <meta name="last-modified" content="2025-09-28 10:40:45">
+    <meta name="last-modified" content="2025-09-28 11:23:41">
     
     
     <!-- Open Graph Meta Tags -->
@@ -198,6 +198,82 @@
             margin: 25px 0;
         }
         
+        /* 阅读历史记录样式 */
+        .reading-history {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .history-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .history-header i {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .history-info {
+            margin-bottom: 15px;
+        }
+        
+        .last-read-chapter {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .reading-progress {
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .last-read-time {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        #continue-reading-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        #continue-reading-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
         .btn {
             padding: 12px 25px;
             border-radius: 12px;
@@ -293,6 +369,7 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.2s ease;
+            position: relative;
         }
         
         .chapter-item:hover {
@@ -301,6 +378,46 @@
         
         .chapter-item:last-child {
             border-bottom: none;
+        }
+        
+        .chapter-item.read {
+            background: rgba(0, 113, 227, 0.05);
+        }
+        
+        .chapter-item.current {
+            background: rgba(0, 113, 227, 0.1);
+            border-left: 4px solid #0071e3;
+        }
+        
+        .chapter-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+        
+        .status-icon.read {
+            background: #34c759;
+            color: white;
+        }
+        
+        .status-icon.current {
+            background: #0071e3;
+            color: white;
+        }
+        
+        .status-icon.unread {
+            background: #f0f0f0;
+            color: #86868b;
         }
         
         .chapter-title {
@@ -429,8 +546,8 @@
         
         "image": "/covers/irresistible-seduction-married-for-deception-loved-for-real-封面.png",
         
-        "datePublished": "2025-09-28T10:40:45.894838",
-        "dateModified": "2025-09-28T10:40:45.894838",
+        "datePublished": "2025-09-28T11:23:41.988369",
+        "dateModified": "2025-09-28T11:23:41.988369",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -502,7 +619,24 @@
                 
                 <div class="action-buttons">
                     
-                    <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-1" class="btn btn-primary">Start Reading</a>
+                    <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-1" class="btn btn-primary" id="start-reading-btn">Start Reading</a>
+                    <div class="reading-history" id="reading-history" style="display: none;">
+                        <div class="history-header">
+                            <i class="fas fa-history"></i>
+                            <span>Continue Reading</span>
+                        </div>
+                        <div class="history-info">
+                            <div class="last-read-chapter">Chapter <span id="last-chapter-num">1</span></div>
+                            <div class="reading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-fill"></div>
+                                </div>
+                                <span class="progress-text" id="progress-text">0% completed</span>
+                            </div>
+                            <div class="last-read-time">Last read: <span id="last-read-time">Never</span></div>
+                        </div>
+                        <a href="#" class="btn btn-primary" id="continue-reading-btn">Continue Reading</a>
+                    </div>
                     
                 </div>
             </div>
@@ -535,963 +669,1498 @@
             
             <ul class="chapters-list">
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="1">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-1" class="chapter-link">
-                        <span class="chapter-title">Chapter 1</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-1">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 1</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="2">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-2" class="chapter-link">
-                        <span class="chapter-title">Chapter 2</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-2">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 2</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="3">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-3" class="chapter-link">
-                        <span class="chapter-title">Chapter 3</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-3">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 3</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="4">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-4" class="chapter-link">
-                        <span class="chapter-title">Chapter 3</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-4">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 3</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="5">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-5" class="chapter-link">
-                        <span class="chapter-title">Chapter 4</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-5">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 4</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="6">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-6" class="chapter-link">
-                        <span class="chapter-title">Chapter 5</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-6">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 5</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="7">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-7" class="chapter-link">
-                        <span class="chapter-title">Chapter 6</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-7">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 6</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="8">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-8" class="chapter-link">
-                        <span class="chapter-title">Chapter 7</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-8">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 7</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="9">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-9" class="chapter-link">
-                        <span class="chapter-title">Chapter 8</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-9">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 8</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="10">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-10" class="chapter-link">
-                        <span class="chapter-title">Chapter 9</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-10">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 9</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="11">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-11" class="chapter-link">
-                        <span class="chapter-title">Chapter 10</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-11">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 10</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="12">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-12" class="chapter-link">
-                        <span class="chapter-title">Chapter 11</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-12">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 11</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="13">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-13" class="chapter-link">
-                        <span class="chapter-title">Chapter 12</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-13">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 12</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="14">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-14" class="chapter-link">
-                        <span class="chapter-title">Chapter 13</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-14">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 13</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="15">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-15" class="chapter-link">
-                        <span class="chapter-title">Chapter 14</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-15">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 14</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="16">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-16" class="chapter-link">
-                        <span class="chapter-title">Chapter 15</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-16">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 15</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="17">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-17" class="chapter-link">
-                        <span class="chapter-title">Chapter 15</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-17">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 15</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="18">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-18" class="chapter-link">
-                        <span class="chapter-title">Chapter 16</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-18">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 16</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="19">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-19" class="chapter-link">
-                        <span class="chapter-title">Chapter 17</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-19">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 17</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="20">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-20" class="chapter-link">
-                        <span class="chapter-title">Chapter 18</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-20">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 18</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="21">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-21" class="chapter-link">
-                        <span class="chapter-title">Chapter 19</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-21">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 19</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="22">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-22" class="chapter-link">
-                        <span class="chapter-title">Chapter 20</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-22">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 20</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="23">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-23" class="chapter-link">
-                        <span class="chapter-title">Chapter 21</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-23">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 21</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="24">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-24" class="chapter-link">
-                        <span class="chapter-title">Chapter 22</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-24">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 22</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="25">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-25" class="chapter-link">
-                        <span class="chapter-title">Chapter 23</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-25">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 23</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="26">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-26" class="chapter-link">
-                        <span class="chapter-title">Chapter 24</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-26">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 24</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="27">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-27" class="chapter-link">
-                        <span class="chapter-title">Chapter 25</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-27">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 25</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="28">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-28" class="chapter-link">
-                        <span class="chapter-title">Chapter 26</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-28">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 26</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="29">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-29" class="chapter-link">
-                        <span class="chapter-title">Chapter 27</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-29">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 27</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="30">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-30" class="chapter-link">
-                        <span class="chapter-title">Chapter 28</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-30">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 28</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="31">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-31" class="chapter-link">
-                        <span class="chapter-title">Chapter 29</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-31">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 29</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="32">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-32" class="chapter-link">
-                        <span class="chapter-title">Chapter 30</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-32">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 30</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="33">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-33" class="chapter-link">
-                        <span class="chapter-title">Chapter 31</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-33">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 31</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="34">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-34" class="chapter-link">
-                        <span class="chapter-title">Chapter 32</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-34">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 32</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="35">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-35" class="chapter-link">
-                        <span class="chapter-title">Chapter 33</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-35">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 33</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="36">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-36" class="chapter-link">
-                        <span class="chapter-title">Chapter 34</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-36">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 34</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="37">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-37" class="chapter-link">
-                        <span class="chapter-title">Chapter 37</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-37">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 37</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="38">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-38" class="chapter-link">
-                        <span class="chapter-title">Chapter 35</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-38">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 35</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="39">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-39" class="chapter-link">
-                        <span class="chapter-title">Chapter 36</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-39">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 36</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="40">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-40" class="chapter-link">
-                        <span class="chapter-title">Chapter 37</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-40">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 37</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="41">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-41" class="chapter-link">
-                        <span class="chapter-title">Chapter 38</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-41">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 38</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="42">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-42" class="chapter-link">
-                        <span class="chapter-title">Chapter 39</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-42">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 39</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="43">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-43" class="chapter-link">
-                        <span class="chapter-title">Chapter 40</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-43">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 40</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="44">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-44" class="chapter-link">
-                        <span class="chapter-title">Chapter 41</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-44">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 41</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="45">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-45" class="chapter-link">
-                        <span class="chapter-title">Chapter 42</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-45">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 42</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="46">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-46" class="chapter-link">
-                        <span class="chapter-title">Chapter 43</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-46">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 43</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="47">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-47" class="chapter-link">
-                        <span class="chapter-title">Chapter 44</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-47">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 44</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="48">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-48" class="chapter-link">
-                        <span class="chapter-title">Chapter 45</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-48">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 45</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="49">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-49" class="chapter-link">
-                        <span class="chapter-title">Chapter 46</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-49">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 46</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="50">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-50" class="chapter-link">
-                        <span class="chapter-title">Chapter 47</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-50">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 47</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="51">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-51" class="chapter-link">
-                        <span class="chapter-title">Chapter 48</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-51">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 48</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="52">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-52" class="chapter-link">
-                        <span class="chapter-title">Chapter 49</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-52">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 49</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="53">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-53" class="chapter-link">
-                        <span class="chapter-title">Chapter 53</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-53">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 53</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="54">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-54" class="chapter-link">
-                        <span class="chapter-title">Chapter 50</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-54">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 50</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="55">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-55" class="chapter-link">
-                        <span class="chapter-title">Chapter 51</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-55">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 51</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="56">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-56" class="chapter-link">
-                        <span class="chapter-title">Chapter 52</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-56">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 52</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="57">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-57" class="chapter-link">
-                        <span class="chapter-title">Chapter 53</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-57">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 53</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="58">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-58" class="chapter-link">
-                        <span class="chapter-title">Chapter 54</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-58">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 54</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="59">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-59" class="chapter-link">
-                        <span class="chapter-title">Chapter 59</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-59">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 59</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="60">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-60" class="chapter-link">
-                        <span class="chapter-title">Chapter 55</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-60">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 55</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="61">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-61" class="chapter-link">
-                        <span class="chapter-title">Chapter 56</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-61">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 56</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="62">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-62" class="chapter-link">
-                        <span class="chapter-title">Chapter 57</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-62">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 57</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="63">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-63" class="chapter-link">
-                        <span class="chapter-title">Chapter 58</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-63">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 58</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="64">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-64" class="chapter-link">
-                        <span class="chapter-title">Chapter 59</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-64">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 59</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="65">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-65" class="chapter-link">
-                        <span class="chapter-title">Chapter 60</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-65">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 60</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="66">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-66" class="chapter-link">
-                        <span class="chapter-title">Chapter 61</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-66">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 61</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="67">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-67" class="chapter-link">
-                        <span class="chapter-title">Chapter 62</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-67">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 62</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="68">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-68" class="chapter-link">
-                        <span class="chapter-title">Chapter 63</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-68">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 63</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="69">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-69" class="chapter-link">
-                        <span class="chapter-title">Chapter 64</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-69">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 64</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="70">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-70" class="chapter-link">
-                        <span class="chapter-title">Chapter 65</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-70">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 65</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="71">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-71" class="chapter-link">
-                        <span class="chapter-title">Chapter 66</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-71">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 66</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="72">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-72" class="chapter-link">
-                        <span class="chapter-title">Chapter 67</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-72">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 67</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="73">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-73" class="chapter-link">
-                        <span class="chapter-title">Chapter 68</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-73">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 68</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="74">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-74" class="chapter-link">
-                        <span class="chapter-title">Chapter 69</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-74">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 69</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="75">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-75" class="chapter-link">
-                        <span class="chapter-title">Chapter 70</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-75">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 70</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="76">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-76" class="chapter-link">
-                        <span class="chapter-title">Chapter 71</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-76">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 71</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="77">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-77" class="chapter-link">
-                        <span class="chapter-title">Chapter 72</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-77">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 72</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="78">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-78" class="chapter-link">
-                        <span class="chapter-title">Chapter 73</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-78">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 73</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="79">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-79" class="chapter-link">
-                        <span class="chapter-title">Chapter 74</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-79">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 74</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="80">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-80" class="chapter-link">
-                        <span class="chapter-title">Chapter 75</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-80">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 75</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="81">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-81" class="chapter-link">
-                        <span class="chapter-title">Chapter 76</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-81">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 76</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="82">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-82" class="chapter-link">
-                        <span class="chapter-title">Chapter 76</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-82">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 76</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="83">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-83" class="chapter-link">
-                        <span class="chapter-title">Chapter 77</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-83">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 77</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="84">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-84" class="chapter-link">
-                        <span class="chapter-title">Chapter 78</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-84">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 78</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="85">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-85" class="chapter-link">
-                        <span class="chapter-title">Chapter 79</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-85">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 79</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="86">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-86" class="chapter-link">
-                        <span class="chapter-title">Chapter 80</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-86">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 80</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="87">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-87" class="chapter-link">
-                        <span class="chapter-title">Chapter 81</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-87">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 81</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="88">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-88" class="chapter-link">
-                        <span class="chapter-title">Chapter 82</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-88">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 82</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="89">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-89" class="chapter-link">
-                        <span class="chapter-title">Chapter 83</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-89">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 83</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="90">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-90" class="chapter-link">
-                        <span class="chapter-title">Chapter 84</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-90">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 84</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="91">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-91" class="chapter-link">
-                        <span class="chapter-title">Chapter 85</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-91">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 85</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="92">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-92" class="chapter-link">
-                        <span class="chapter-title">Chapter 86</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-92">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 86</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="93">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-93" class="chapter-link">
-                        <span class="chapter-title">Chapter 87</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-93">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 87</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="94">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-94" class="chapter-link">
-                        <span class="chapter-title">Chapter 88</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-94">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 88</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="95">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-95" class="chapter-link">
-                        <span class="chapter-title">Chapter 89</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-95">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 89</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="96">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-96" class="chapter-link">
-                        <span class="chapter-title">Chapter 90</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-96">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 90</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="97">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-97" class="chapter-link">
-                        <span class="chapter-title">Chapter 91</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-97">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 91</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="98">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-98" class="chapter-link">
-                        <span class="chapter-title">Chapter 92</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-98">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 92</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="99">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-99" class="chapter-link">
-                        <span class="chapter-title">Chapter 93</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-99">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 93</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="100">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-100" class="chapter-link">
-                        <span class="chapter-title">Chapter 100</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-100">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 100</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="101">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-101" class="chapter-link">
-                        <span class="chapter-title">Chapter 94</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-101">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 94</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="102">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-102" class="chapter-link">
-                        <span class="chapter-title">Chapter 95</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-102">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 95</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="103">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-103" class="chapter-link">
-                        <span class="chapter-title">Chapter 96</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-103">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 96</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="104">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-104" class="chapter-link">
-                        <span class="chapter-title">Chapter 97</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-104">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 97</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="105">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-105" class="chapter-link">
-                        <span class="chapter-title">Chapter 98</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-105">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 98</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="106">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-106" class="chapter-link">
-                        <span class="chapter-title">Chapter 99</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-106">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 99</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
                     </a>
                 </li>
                 
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="107">
                     <a href="/novels/irresistible-seduction-married-for-deception-loved-for-real/chapter-107" class="chapter-link">
-                        <span class="chapter-title">Chapter 100</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-107">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">Chapter 100</span>
+                        </div>
                         
                         <span class="chapter-date">2025-09-28</span>
                         
@@ -1522,24 +2191,162 @@
     </div>
 
     <script>
-        // 简单的交互效果
+        // 阅读历史记录管理
         document.addEventListener('DOMContentLoaded', function() {
+            const novelTitle = 'Irresistible Seduction Married For Deception, Loved For Real';
+            const totalChapters = 107;
+            
+            // 加载并显示阅读历史
+            loadReadingHistory();
+            
+            function loadReadingHistory() {
+                const history = JSON.parse(localStorage.getItem('readingHistory') || '[]');
+                const currentNovelHistory = history.find(item => item.title === novelTitle);
+                
+                if (currentNovelHistory && currentNovelHistory.currentChapter > 0) {
+                    showReadingHistory(currentNovelHistory);
+                    updateChapterStatuses(currentNovelHistory);
+                }
+            }
+            
+            function showReadingHistory(historyData) {
+                const startReadingBtn = document.getElementById('start-reading-btn');
+                const readingHistory = document.getElementById('reading-history');
+                const continueBtn = document.getElementById('continue-reading-btn');
+                
+                if (startReadingBtn && readingHistory) {
+                    startReadingBtn.style.display = 'none';
+                    readingHistory.style.display = 'block';
+                    
+                    // 更新历史信息
+                    document.getElementById('last-chapter-num').textContent = historyData.currentChapter;
+                    
+                    // 计算阅读进度
+                    const progress = Math.round((historyData.currentChapter / totalChapters) * 100);
+                    document.getElementById('progress-fill').style.width = progress + '%';
+                    document.getElementById('progress-text').textContent = progress + '% completed';
+                    
+                    // 格式化最后阅读时间
+                    const lastReadTime = new Date(historyData.lastRead);
+                    const now = new Date();
+                    const timeDiff = now - lastReadTime;
+                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                    const days = Math.floor(hours / 24);
+                    
+                    let timeText;
+                    if (days > 0) {
+                        timeText = days === 1 ? '1 day ago' : `${days} days ago`;
+                    } else if (hours > 0) {
+                        timeText = hours === 1 ? '1 hour ago' : `${hours} hours ago`;
+                    } else {
+                        timeText = 'Just now';
+                    }
+                    
+                    document.getElementById('last-read-time').textContent = timeText;
+                    
+                    // 设置继续阅读按钮链接
+                    const chapterUrl = findChapterUrl(historyData.currentChapter);
+                    if (chapterUrl) {
+                        continueBtn.href = chapterUrl;
+                    }
+                }
+            }
+            
+            function updateChapterStatuses(historyData) {
+                const currentChapter = historyData.currentChapter;
+                
+                // 更新所有章节的状态
+                for (let i = 1; i <= totalChapters; i++) {
+                    const statusIcon = document.getElementById(`status-${i}`);
+                    const chapterItem = document.querySelector(`[data-chapter="${i}"]`);
+                    
+                    if (statusIcon && chapterItem) {
+                        if (i < currentChapter) {
+                            // 已读章节
+                            statusIcon.className = 'status-icon read';
+                            statusIcon.innerHTML = '<i class="fas fa-check"></i>';
+                            chapterItem.classList.add('read');
+                        } else if (i === currentChapter) {
+                            // 当前章节
+                            statusIcon.className = 'status-icon current';
+                            statusIcon.innerHTML = '<i class="fas fa-play" style="font-size: 8px;"></i>';
+                            chapterItem.classList.add('current');
+                        } else {
+                            // 未读章节
+                            statusIcon.className = 'status-icon unread';
+                            statusIcon.innerHTML = '<i class="fas fa-circle" style="font-size: 6px;"></i>';
+                        }
+                    }
+                }
+            }
+            
+            function findChapterUrl(chapterNumber) {
+                const chapterLinks = document.querySelectorAll('.chapter-link');
+                for (let link of chapterLinks) {
+                    const chapterItem = link.closest('[data-chapter]');
+                    if (chapterItem && parseInt(chapterItem.dataset.chapter) === chapterNumber) {
+                        return link.href;
+                    }
+                }
+                return null;
+            }
+            
             // 过滤按钮切换
             const filterButtons = document.querySelectorAll('.filter-btn');
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
+                    
+                    const filterType = this.textContent.trim();
+                    filterChapters(filterType);
                 });
             });
+            
+            function filterChapters(filterType) {
+                const chapterItems = document.querySelectorAll('.chapter-item');
+                
+                chapterItems.forEach(item => {
+                    let shouldShow = true;
+                    
+                    switch(filterType) {
+                        case 'Free':
+                            // 所有章节都是免费的
+                            shouldShow = true;
+                            break;
+                        case 'Latest':
+                            // 显示最新的10章
+                            const chapterNum = parseInt(item.dataset.chapter);
+                            shouldShow = chapterNum > totalChapters - 10;
+                            break;
+                        case 'All':
+                        default:
+                            shouldShow = true;
+                            break;
+                    }
+                    
+                    item.style.display = shouldShow ? 'flex' : 'none';
+                });
+            }
             
             // 章节点击效果
             const chapterItems = document.querySelectorAll('.chapter-item a');
             chapterItems.forEach(item => {
                 item.addEventListener('click', function(e) {
-                    // 让链接正常跳转，只是添加一些日志
-                    console.log('Opening chapter: ' + this.querySelector('.chapter-title').textContent);
-                    // 不要阻止默认行为，让链接正常工作
+                    // 记录用户点击了哪一章
+                    const chapterItem = this.closest('[data-chapter]');
+                    if (chapterItem) {
+                        const chapterNumber = parseInt(chapterItem.dataset.chapter);
+                        console.log(`User clicked on chapter ${chapterNumber}: ${this.querySelector('.chapter-title').textContent}`);
+                        
+                        // 可以在这里添加分析跟踪代码
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'chapter_click', {
+                                'novel_title': novelTitle,
+                                'chapter_number': chapterNumber
+                            });
+                        }
+                    }
                 });
             });
         });

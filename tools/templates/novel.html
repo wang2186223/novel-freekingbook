@@ -198,6 +198,82 @@
             margin: 25px 0;
         }
         
+        /* 阅读历史记录样式 */
+        .reading-history {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .history-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .history-header i {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .history-info {
+            margin-bottom: 15px;
+        }
+        
+        .last-read-chapter {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .reading-progress {
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .last-read-time {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        #continue-reading-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        #continue-reading-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
         .btn {
             padding: 12px 25px;
             border-radius: 12px;
@@ -293,6 +369,7 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.2s ease;
+            position: relative;
         }
         
         .chapter-item:hover {
@@ -301,6 +378,46 @@
         
         .chapter-item:last-child {
             border-bottom: none;
+        }
+        
+        .chapter-item.read {
+            background: rgba(0, 113, 227, 0.05);
+        }
+        
+        .chapter-item.current {
+            background: rgba(0, 113, 227, 0.1);
+            border-left: 4px solid #0071e3;
+        }
+        
+        .chapter-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+        
+        .status-icon.read {
+            background: #34c759;
+            color: white;
+        }
+        
+        .status-icon.current {
+            background: #0071e3;
+            color: white;
+        }
+        
+        .status-icon.unread {
+            background: #f0f0f0;
+            color: #86868b;
         }
         
         .chapter-title {
@@ -502,7 +619,24 @@
                 
                 <div class="action-buttons">
                     {% if novel.chapters and novel.chapters|length > 0 %}
-                    <a href="{{ novel.chapters[0].url }}" class="btn btn-primary">Start Reading</a>
+                    <a href="{{ novel.chapters[0].url }}" class="btn btn-primary" id="start-reading-btn">Start Reading</a>
+                    <div class="reading-history" id="reading-history" style="display: none;">
+                        <div class="history-header">
+                            <i class="fas fa-history"></i>
+                            <span>Continue Reading</span>
+                        </div>
+                        <div class="history-info">
+                            <div class="last-read-chapter">Chapter <span id="last-chapter-num">1</span></div>
+                            <div class="reading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-fill"></div>
+                                </div>
+                                <span class="progress-text" id="progress-text">0% completed</span>
+                            </div>
+                            <div class="last-read-time">Last read: <span id="last-read-time">Never</span></div>
+                        </div>
+                        <a href="#" class="btn btn-primary" id="continue-reading-btn">Continue Reading</a>
+                    </div>
                     {% else %}
                     <button class="btn btn-primary" disabled>Coming Soon</button>
                     {% endif %}
@@ -537,9 +671,14 @@
             
             <ul class="chapters-list">
                 {% for chapter in novel.chapters %}
-                <li class="chapter-item">
+                <li class="chapter-item" data-chapter="{{ chapter.number }}">
                     <a href="{{ chapter.url }}" class="chapter-link">
-                        <span class="chapter-title">{{ chapter.title }}</span>
+                        <div class="chapter-status">
+                            <div class="status-icon unread" id="status-{{ chapter.number }}">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i>
+                            </div>
+                            <span class="chapter-title">{{ chapter.title }}</span>
+                        </div>
                         {% if chapter.publish_date %}
                         <span class="chapter-date">{{ chapter.publish_date }}</span>
                         {% endif %}
@@ -570,24 +709,162 @@
     </div>
 
     <script>
-        // 简单的交互效果
+        // 阅读历史记录管理
         document.addEventListener('DOMContentLoaded', function() {
+            const novelTitle = '{{ novel.title }}';
+            const totalChapters = {{ novel.chapters|length if novel.chapters else 0 }};
+            
+            // 加载并显示阅读历史
+            loadReadingHistory();
+            
+            function loadReadingHistory() {
+                const history = JSON.parse(localStorage.getItem('readingHistory') || '[]');
+                const currentNovelHistory = history.find(item => item.title === novelTitle);
+                
+                if (currentNovelHistory && currentNovelHistory.currentChapter > 0) {
+                    showReadingHistory(currentNovelHistory);
+                    updateChapterStatuses(currentNovelHistory);
+                }
+            }
+            
+            function showReadingHistory(historyData) {
+                const startReadingBtn = document.getElementById('start-reading-btn');
+                const readingHistory = document.getElementById('reading-history');
+                const continueBtn = document.getElementById('continue-reading-btn');
+                
+                if (startReadingBtn && readingHistory) {
+                    startReadingBtn.style.display = 'none';
+                    readingHistory.style.display = 'block';
+                    
+                    // 更新历史信息
+                    document.getElementById('last-chapter-num').textContent = historyData.currentChapter;
+                    
+                    // 计算阅读进度
+                    const progress = Math.round((historyData.currentChapter / totalChapters) * 100);
+                    document.getElementById('progress-fill').style.width = progress + '%';
+                    document.getElementById('progress-text').textContent = progress + '% completed';
+                    
+                    // 格式化最后阅读时间
+                    const lastReadTime = new Date(historyData.lastRead);
+                    const now = new Date();
+                    const timeDiff = now - lastReadTime;
+                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                    const days = Math.floor(hours / 24);
+                    
+                    let timeText;
+                    if (days > 0) {
+                        timeText = days === 1 ? '1 day ago' : `${days} days ago`;
+                    } else if (hours > 0) {
+                        timeText = hours === 1 ? '1 hour ago' : `${hours} hours ago`;
+                    } else {
+                        timeText = 'Just now';
+                    }
+                    
+                    document.getElementById('last-read-time').textContent = timeText;
+                    
+                    // 设置继续阅读按钮链接
+                    const chapterUrl = findChapterUrl(historyData.currentChapter);
+                    if (chapterUrl) {
+                        continueBtn.href = chapterUrl;
+                    }
+                }
+            }
+            
+            function updateChapterStatuses(historyData) {
+                const currentChapter = historyData.currentChapter;
+                
+                // 更新所有章节的状态
+                for (let i = 1; i <= totalChapters; i++) {
+                    const statusIcon = document.getElementById(`status-${i}`);
+                    const chapterItem = document.querySelector(`[data-chapter="${i}"]`);
+                    
+                    if (statusIcon && chapterItem) {
+                        if (i < currentChapter) {
+                            // 已读章节
+                            statusIcon.className = 'status-icon read';
+                            statusIcon.innerHTML = '<i class="fas fa-check"></i>';
+                            chapterItem.classList.add('read');
+                        } else if (i === currentChapter) {
+                            // 当前章节
+                            statusIcon.className = 'status-icon current';
+                            statusIcon.innerHTML = '<i class="fas fa-play" style="font-size: 8px;"></i>';
+                            chapterItem.classList.add('current');
+                        } else {
+                            // 未读章节
+                            statusIcon.className = 'status-icon unread';
+                            statusIcon.innerHTML = '<i class="fas fa-circle" style="font-size: 6px;"></i>';
+                        }
+                    }
+                }
+            }
+            
+            function findChapterUrl(chapterNumber) {
+                const chapterLinks = document.querySelectorAll('.chapter-link');
+                for (let link of chapterLinks) {
+                    const chapterItem = link.closest('[data-chapter]');
+                    if (chapterItem && parseInt(chapterItem.dataset.chapter) === chapterNumber) {
+                        return link.href;
+                    }
+                }
+                return null;
+            }
+            
             // 过滤按钮切换
             const filterButtons = document.querySelectorAll('.filter-btn');
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
+                    
+                    const filterType = this.textContent.trim();
+                    filterChapters(filterType);
                 });
             });
+            
+            function filterChapters(filterType) {
+                const chapterItems = document.querySelectorAll('.chapter-item');
+                
+                chapterItems.forEach(item => {
+                    let shouldShow = true;
+                    
+                    switch(filterType) {
+                        case 'Free':
+                            // 所有章节都是免费的
+                            shouldShow = true;
+                            break;
+                        case 'Latest':
+                            // 显示最新的10章
+                            const chapterNum = parseInt(item.dataset.chapter);
+                            shouldShow = chapterNum > totalChapters - 10;
+                            break;
+                        case 'All':
+                        default:
+                            shouldShow = true;
+                            break;
+                    }
+                    
+                    item.style.display = shouldShow ? 'flex' : 'none';
+                });
+            }
             
             // 章节点击效果
             const chapterItems = document.querySelectorAll('.chapter-item a');
             chapterItems.forEach(item => {
                 item.addEventListener('click', function(e) {
-                    // 让链接正常跳转，只是添加一些日志
-                    console.log('Opening chapter: ' + this.querySelector('.chapter-title').textContent);
-                    // 不要阻止默认行为，让链接正常工作
+                    // 记录用户点击了哪一章
+                    const chapterItem = this.closest('[data-chapter]');
+                    if (chapterItem) {
+                        const chapterNumber = parseInt(chapterItem.dataset.chapter);
+                        console.log(`User clicked on chapter ${chapterNumber}: ${this.querySelector('.chapter-title').textContent}`);
+                        
+                        // 可以在这里添加分析跟踪代码
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'chapter_click', {
+                                'novel_title': novelTitle,
+                                'chapter_number': chapterNumber
+                            });
+                        }
+                    }
                 });
             });
         });
