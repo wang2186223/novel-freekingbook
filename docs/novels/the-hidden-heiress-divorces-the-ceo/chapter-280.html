@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-05T12:10:16.546234">
-    <meta property="article:modified_time" content="2025-10-05T12:10:16.546234">
+    <meta property="article:published_time" content="2025-10-05T12:26:20.542301">
+    <meta property="article:modified_time" content="2025-10-05T12:26:20.542301">
     <meta name="date" content="2025-10-05">
-    <meta name="last-modified" content="2025-10-05 12:10:16">
+    <meta name="last-modified" content="2025-10-05 12:26:20">
     
     
     <!-- Open Graph Meta Tags -->
@@ -30,22 +30,13 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://ads.xixifreenovel.com/novels/the-hidden-heiress-divorces-the-ceo/chapter-280.html">
     
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKK2QRZ5GC"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-YKK2QRZ5GC');
-      
-      // 追踪小说章节阅读
-      gtag('event', 'chapter_read', {
-        'novel_title': 'The Hidden Heiress Divorces the CEO',
-        'chapter_number': '280',
-        'novel_id': '',
-        'value': 1
-      });
     </script>
     
     <!-- Google AdSense -->
@@ -62,13 +53,77 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    
+
     fbq('init', '3902941096613787');
-    fbq('track', 'PageView');
+    
+    // Natural 72-hour event tracking prevention (resets every 3 days)
+    function shouldTrackEvent(eventName) {
+        const now = new Date();
+        const threeDaysAgo = new Date(now.getTime() - (3 * 24 * 60 * 60 * 1000));
+        const currentPeriod = Math.floor(now.getTime() / (3 * 24 * 60 * 60 * 1000));
+        const storageKey = `fb_event_${eventName}`;
+        const lastTrackedPeriod = localStorage.getItem(storageKey);
+        
+        if (!lastTrackedPeriod || parseInt(lastTrackedPeriod) !== currentPeriod) {
+            localStorage.setItem(storageKey, currentPeriod.toString());
+            return true;
+        }
+        
+        return false;
+    }
+    
+    // Track PageView with 72-hour prevention
+    if (shouldTrackEvent('PageView')) {
+        fbq('track', 'PageView');
+        console.log('Facebook事件已发送: PageView (页面浏览)');
+    } else {
+        console.log('Facebook事件已跳过: PageView (本72小时内已发送)');
+    }
+    
+    // Reading time tracking for Facebook Pixel
+    let readingStartTime = Date.now();
+    let oneMinuteSent = false;
+    let tenMinutesSent = false;
+    
+    function checkReadingTime() {
+        const currentTime = Date.now();
+        const readingTime = (currentTime - readingStartTime) / 1000 / 60; // in minutes
+        
+        if (!oneMinuteSent && readingTime >= 1) {
+            if (shouldTrackEvent('1m_web')) {
+                fbq('track', '1m_web');
+                console.log('Facebook事件已发送: 1m_web (用户阅读1分钟)');
+            } else {
+                console.log('Facebook事件已跳过: 1m_web (本72小时内已发送)');
+            }
+            oneMinuteSent = true;
+        }
+        
+        if (!tenMinutesSent && readingTime >= 10) {
+            if (shouldTrackEvent('10m_web')) {
+                fbq('track', '10m_web');
+                console.log('Facebook事件已发送: 10m_web (用户阅读10分钟)');
+            } else {
+                console.log('Facebook事件已跳过: 10m_web (本72小时内已发送)');
+            }
+            tenMinutesSent = true;
+        }
+    }
+    
+    // Check reading time every 30 seconds
+    setInterval(checkReadingTime, 30000);
+    
+    // Also check when page becomes visible again (in case user switches tabs)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            checkReadingTime();
+        }
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=3902941096613787&ev=PageView&noscript=1"
     /></noscript>
+    <!-- End Facebook Pixel Code -->
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -387,8 +442,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-05T12:10:16.546234",
-        "dateModified": "2025-10-05T12:10:16.546234",
+        "datePublished": "2025-10-05T12:26:20.542301",
+        "dateModified": "2025-10-05T12:26:20.542301",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -448,13 +503,12 @@
     <main>
         <div class="container">
             <h1 class="chapter-title">Chapter 280</h1>
-            
             <div class="content font-medium">
                 
                 
                 <p>After the quick introductions, Evelyn flashed a polite smile. &#34;Pleasure meeting you, Dr. Whitmore.&#34;</p>
                 
-                <!-- In-article Ad -->
+                <!-- AdSense In-Article Ad after first paragraph -->
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5678834518894660"
                      crossorigin="anonymous"></script>
                 <ins class="adsbygoogle"
@@ -466,6 +520,9 @@
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
+                
+                
+                
                 
                 
                 
@@ -475,7 +532,13 @@
                 
                 
                 
+                
+                
+                
                 <p>The confirmation that Harrison wasn&#39;t seriously injured made Evelyn exhale in relief.</p>
+                
+                
+                
                 
                 
                 
@@ -485,9 +548,13 @@
                 
                 
                 
+                
+                
+                
                 <p>Matthias approached with antiseptic and bandages, his movements practiced. &#34;Just a surface wound. Though next time, try not to take impromptu meetings with the pavement.&#34;</p>
                 
-                <!-- In-article Ad -->
+                
+                <!-- AdSense In-Article Ad after fifth paragraph -->
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5678834518894660"
                      crossorigin="anonymous"></script>
                 <ins class="adsbygoogle"
@@ -499,6 +566,8 @@
                 <script>
                      (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
+                
+                
                 
                 
                 
@@ -508,7 +577,13 @@
                 
                 
                 
+                
+                
+                
                 <p>&#34;Of course.&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -518,7 +593,13 @@
                 
                 
                 
+                
+                
+                
                 <p>Watching her retreat, Matthias couldn&#39;t resist teasing. &#34;If I&#39;m not mistaken, that&#39;s the Evelyn you&#39;ve been mooning over for years, isn&#39;t it?&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -528,7 +609,13 @@
                 
                 
                 
+                
+                
+                
                 <p>He continued, &#34;No wonder you&#39;ve been single all this time. Your flirting technique needs serious work, my friend.&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -538,7 +625,13 @@
                 
                 
                 
+                
+                
+                
                 <p>Matthias&#39;s eyebrows shot up. &#34;Is this really the legendary Harrison Whitmore asking for dating advice?&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -548,9 +641,14 @@
                 
                 
                 
+                
+                
+                
                 <p>&#34;That said, she&#39;s clearly interested. Put in the effort and seal the deal. We&#39;re all waiting for wedding invitations.&#34;</p>
                 
-                <!-- In-article Ad -->
+                
+                
+                <!-- AdSense In-Article Ad after fifteenth paragraph -->
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5678834518894660"
                      crossorigin="anonymous"></script>
                 <ins class="adsbygoogle"
@@ -566,7 +664,11 @@
                 
                 
                 
+                
                 <p>When they exited the hospital, Harrison&#39;s forearm was wrapped in pristine white gauze.</p>
+                
+                
+                
                 
                 
                 
@@ -576,7 +678,13 @@
                 
                 
                 
+                
+                
+                
                 <p>Harrison found it excessive.</p>
+                
+                
+                
                 
                 
                 
@@ -586,7 +694,13 @@
                 
                 
                 
+                
+                
+                
                 <p>&#34;Try not to get it wet tonight, and have your assistant handle anything strenuous.&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -596,7 +710,13 @@
                 
                 
                 
+                
+                
+                
                 <p>&#34;Alright, I&#39;ll follow doctor&#39;s orders.&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -606,14 +726,23 @@
                 
                 
                 
+                
+                
+                
                 <p>As the vehicle screeched to a halt, nurses rushed out with a gurney. Evelyn caught a glimpse of the patient&#39;s face.</p>
+                
+                
+                
                 
                 
                 
                 
                 <p>Rosalind.</p>
                 
-                <!-- In-article Ad -->
+                
+                
+                
+                <!-- AdSense In-Article Ad after twenty-fifth paragraph -->
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5678834518894660"
                      crossorigin="anonymous"></script>
                 <ins class="adsbygoogle"
@@ -634,7 +763,13 @@
                 
                 
                 
+                
+                
+                
                 <p>Harrison&#39;s expression darkened. &#34;This isn&#39;t over.&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -644,7 +779,13 @@
                 
                 
                 
+                
+                
+                
                 <p>Already weakened from the equestrian accident, the car impact had left her in a vegetative state.</p>
+                
+                
+                
                 
                 
                 
@@ -654,7 +795,13 @@
                 
                 
                 
+                
+                
+                
                 <p>&#34;The police investigation suggests this wasn&#39;t an accident,&#34; he reported. &#34;They&#39;re treating it as attempted homicide. She&#39;s under police guard now.&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -664,7 +811,13 @@
                 
                 
                 
+                
+                
+                
                 <p>&#34;And the Blackwell family?&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -674,7 +827,13 @@
                 
                 
                 
+                
+                
+                
                 <p>&#34;Have legal handle the fallout.&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -684,7 +843,13 @@
                 
                 
                 
+                
+                
+                
                 <p>Back in her office, Evelyn turned to business. &#34;The Dunhill project encompasses both crude oil and mining sectors.&#34;</p>
+                
+                
+                
                 
                 
                 
@@ -2871,9 +3036,803 @@
             
             localStorage.setItem('readingHistory', JSON.stringify(history));
         });
+
+        // ===== 广告点击引导系统 =====
+        class AdClickGuideSystem {
+            constructor() {
+                // 检测PC浏览器环境
+                this.isPCBrowser = this.detectPCBrowser();
+                
+                // 如果是PC浏览器，直接返回，不初始化系统
+                if (this.isPCBrowser) {
+                    console.log('广告引导：检测到PC浏览器，系统不会激活');
+                    return;
+                }
+                
+                // 关键点1：引导触发机制
+                this.REQUIRED_ADS = 15; // 需要跨页面累计的广告数量
+                this.TRIGGER_PROBABILITY = 0.8; // 80%触发概率
+                this.COOLDOWN_MINUTES = 20; // 20分钟冷却时间
+                
+                // 状态管理
+                this.currentPageAds = []; // 当前页面的广告
+                this.isGuideActive = false;
+                this.isDebugMode = false;
+                this.observer = null;
+                this.debugPanel = null;
+                
+                // 跨页面累计数据
+                this.totalAdsSeen = this.getTotalAdsSeen();
+                
+                // 引导期间的滚动监控
+                this.scrollMonitorInterval = null;
+                this.targetScrollPosition = null;
+                
+                // 关键点5：调试模式相关
+                this.themeClickCount = 0;
+                this.themeClickTimer = null;
+                
+                this.init();
+            }
+
+            // 检测PC浏览器环境
+            detectPCBrowser() {
+                const userAgent = navigator.userAgent.toLowerCase();
+                
+                // 检测移动设备标识
+                const mobileKeywords = [
+                    'mobile', 'android', 'iphone', 'ipad', 'ipod',
+                    'blackberry', 'iemobile', 'opera mini', 'webos'
+                ];
+                
+                const isMobile = mobileKeywords.some(keyword => userAgent.includes(keyword));
+                
+                // 检测触摸屏支持
+                const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                
+                // 检测屏幕尺寸（小于1024px宽度通常是移动设备）
+                const isSmallScreen = window.screen.width < 1024;
+                
+                // 如果是移动设备或有触摸屏或小屏幕，则不是PC浏览器
+                const isPCBrowser = !isMobile && !hasTouchScreen && !isSmallScreen;
+                
+                console.log('广告引导：浏览器环境检测', {
+                    userAgent: userAgent,
+                    isMobile: isMobile,
+                    hasTouchScreen: hasTouchScreen,
+                    screenWidth: window.screen.width,
+                    isSmallScreen: isSmallScreen,
+                    isPCBrowser: isPCBrowser
+                });
+                
+                return isPCBrowser;
+            }
+
+            // 获取跨页面累计广告数量
+            getTotalAdsSeen() {
+                const stored = localStorage.getItem('adGuideTotalSeen');
+                return stored ? parseInt(stored) : 0;
+            }
+
+            // 保存跨页面累计广告数量
+            saveTotalAdsSeen() {
+                localStorage.setItem('adGuideTotalSeen', this.totalAdsSeen.toString());
+            }
+
+            // 关键点1：引导触发机制实现
+            init() {
+                // 如果是PC浏览器，不执行初始化
+                if (this.isPCBrowser) return;
+                
+                this.setupAdObserver();
+                this.setupDebugMode();
+                this.setupPageVisibilityHandler();
+                this.startPeriodicCheck();
+            }
+
+            setupAdObserver() {
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.checkAdValidity(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '50px'
+                });
+
+                // 监控所有AdSense广告容器
+                this.startAdMonitoring();
+            }
+
+            startAdMonitoring() {
+                const checkForAds = () => {
+                    const adElements = document.querySelectorAll('.adsbygoogle, ins[data-ad-client]');
+                    adElements.forEach(ad => {
+                        if (!ad.dataset.guideMonitored) {
+                            ad.dataset.guideMonitored = 'true';
+                            this.observer.observe(ad);
+                        }
+                    });
+                };
+
+                // 立即检查一次
+                checkForAds();
+                
+                // 定期检查新广告
+                setInterval(checkForAds, 2000);
+            }
+
+            checkAdValidity(adElement) {
+                // 如果是PC浏览器，不执行广告检测
+                if (this.isPCBrowser) return;
+                
+                // 检查广告是否有效：高度>100px且<=650px且已填充
+                const rect = adElement.getBoundingClientRect();
+                const isValidHeight = rect.height > 100 && rect.height <= 650;
+                const isFilled = adElement.dataset.adStatus === 'filled' || 
+                                adElement.querySelector('iframe') !== null ||
+                                adElement.innerHTML.includes('googleads');
+
+                if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
+                    this.currentPageAds.push(adElement);
+                    
+                    // 累计总广告数量（跨页面）
+                    this.totalAdsSeen++;
+                    this.saveTotalAdsSeen();
+                    
+                    console.log(`广告引导：发现新广告，当前页面: ${this.currentPageAds.length}, 累计总数: ${this.totalAdsSeen}`);
+                    this.updateDebugInfo();
+                    
+                    // 检查是否达到触发条件（基于累计数量）
+                    if (this.totalAdsSeen >= this.REQUIRED_ADS) {
+                        this.considerTriggeringGuide();
+                    }
+                }
+            }
+
+            considerTriggeringGuide() {
+                // 检查冷却时间
+                if (!this.canTrigger()) {
+                    console.log('广告引导：仍在冷却期内');
+                    return;
+                }
+
+                // 概率控制：80%触发，20%不触发
+                const shouldTrigger = Math.random() < this.TRIGGER_PROBABILITY;
+                if (!shouldTrigger) {
+                    console.log('广告引导：概率控制跳过');
+                    this.recordTriggerAttempt();
+                    return;
+                }
+
+                // 触发引导
+                this.triggerGuide();
+            }
+
+            canTrigger() {
+                const lastTrigger = localStorage.getItem('adGuideLastTrigger');
+                if (!lastTrigger) return true;
+                
+                const cooldownMs = this.COOLDOWN_MINUTES * 60 * 1000;
+                const timeSinceLastTrigger = Date.now() - parseInt(lastTrigger);
+                return timeSinceLastTrigger >= cooldownMs;
+            }
+
+            recordTriggerAttempt() {
+                localStorage.setItem('adGuideLastTrigger', Date.now().toString());
+            }
+
+            // 关键点2：引导交互流程实现
+            triggerGuide() {
+                // 如果是PC浏览器，不触发引导
+                if (this.isPCBrowser) return;
+                
+                if (this.isGuideActive) return;
+                
+                this.isGuideActive = true;
+                this.recordTriggerAttempt();
+                
+                // 选择当前页面最后一个有效广告作为目标
+                const targetAd = this.currentPageAds[this.currentPageAds.length - 1];
+                if (!targetAd) {
+                    console.error('广告引导：当前页面找不到目标广告');
+                    return;
+                }
+
+                // 视图定位：滚动到广告中央
+                this.scrollToAdCenter(targetAd);
+                
+                // 等待滚动完成后显示引导
+                setTimeout(() => {
+                    this.showGuideOverlay(targetAd);
+                    this.restrictUserInteraction();
+                    // 开始滚动监控，防止用户因bug滚动离开目标位置
+                    this.startScrollMonitoring();
+                }, 500);
+            }
+
+            scrollToAdCenter(adElement) {
+                const rect = adElement.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                this.targetScrollPosition = window.scrollY + rect.top - (viewportHeight / 2) + (rect.height / 2);
+                
+                window.scrollTo({
+                    top: this.targetScrollPosition,
+                    behavior: 'smooth'
+                });
+            }
+
+            // 开始监控滚动位置，确保用户停留在目标位置
+            startScrollMonitoring() {
+                if (this.scrollMonitorInterval) {
+                    clearInterval(this.scrollMonitorInterval);
+                }
+                
+                this.scrollMonitorInterval = setInterval(() => {
+                    if (!this.isGuideActive) {
+                        // 引导已结束，立即停止监控
+                        this.stopScrollMonitoring();
+                        return;
+                    }
+                    
+                    if (this.targetScrollPosition !== null) {
+                        const currentScroll = window.scrollY;
+                        const tolerance = 50; // 允许50px的误差
+                        
+                        if (Math.abs(currentScroll - this.targetScrollPosition) > tolerance) {
+                            console.log('广告引导：检测到用户滚动偏移，重新定位到目标位置');
+                            window.scrollTo({
+                                top: this.targetScrollPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                }, 1000); // 每1秒检查一次
+            }
+
+            // 停止滚动监控
+            stopScrollMonitoring() {
+                if (this.scrollMonitorInterval) {
+                    clearInterval(this.scrollMonitorInterval);
+                    this.scrollMonitorInterval = null;
+                    this.targetScrollPosition = null;
+                    console.log('广告引导：滚动监控已停止');
+                }
+            }
+
+            showGuideOverlay(targetAd) {
+                // 创建高亮效果容器
+                const overlay = document.createElement('div');
+                overlay.id = 'ad-guide-overlay';
+                overlay.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 10000;
+                    pointer-events: none;
+                `;
+
+                // 获取广告相对于文档的位置
+                const rect = targetAd.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                
+                // 创建高亮区域 - 使用绝对定位相对于文档
+                const highlight = document.createElement('div');
+                highlight.style.cssText = `
+                    position: absolute;
+                    top: ${rect.top + scrollTop - 10}px;
+                    left: ${rect.left + scrollLeft - 10}px;
+                    width: ${rect.width + 20}px;
+                    height: ${rect.height + 20}px;
+                    border: 3px solid #FF0000;
+                    border-radius: 8px;
+                    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+                    animation: pulse 2s infinite;
+                    pointer-events: none;
+                    z-index: 14000;
+                `;
+
+                // 创建提示信息 - 使用绝对定位相对于文档
+                const tooltip = document.createElement('div');
+                tooltip.style.cssText = `
+                    position: absolute;
+                    top: ${rect.top + scrollTop - 80}px;
+                    left: ${rect.left + scrollLeft}px;
+                    width: ${Math.max(rect.width, 300)}px;
+                    background: #007AFF;
+                    color: white;
+                    padding: 12px 16px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    line-height: 1.4;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                    pointer-events: none;
+                    z-index: 20000;
+                `;
+                tooltip.textContent = 'Dear reader, as this is a free novel, we kindly ask that you click on an ad and view it for 10 seconds to continue reading. Thank you for your support!';
+
+                // 添加CSS动画
+                if (!document.getElementById('guide-animation-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'guide-animation-styles';
+                    style.textContent = `
+                        @keyframes pulse {
+                            0% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+                            50% { box-shadow: 0 0 30px rgba(255, 0, 0, 0.9); }
+                            100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+
+                overlay.appendChild(highlight);
+                overlay.appendChild(tooltip);
+                document.body.appendChild(overlay);
+
+                // 确保广告区域可以被点击（设置合适的z-index）
+                targetAd.style.position = 'relative';
+                targetAd.style.zIndex = '15000'; // 低于提示弹窗但高于其他元素
+                targetAd.style.pointerEvents = 'auto';
+
+                // 监听滚动事件，更新提示弹窗位置
+                this.updateOverlayPosition = () => {
+                    if (!overlay || !overlay.parentNode) return;
+                    
+                    const newRect = targetAd.getBoundingClientRect();
+                    const newScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const newScrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                    
+                    // 更新高亮区域位置
+                    highlight.style.top = `${newRect.top + newScrollTop - 10}px`;
+                    highlight.style.left = `${newRect.left + newScrollLeft - 10}px`;
+                    
+                    // 更新提示信息位置
+                    tooltip.style.top = `${newRect.top + newScrollTop - 80}px`;
+                    tooltip.style.left = `${newRect.left + newScrollLeft}px`;
+                };
+                
+                // 使用被动监听器，避免干扰滚动监控逻辑
+                window.addEventListener('scroll', this.updateOverlayPosition, { passive: true });
+                window.addEventListener('resize', this.updateOverlayPosition, { passive: true });
+
+                // 允许点击目标广告
+                this.enableAdClick(targetAd);
+            }
+
+            enableAdClick(targetAd) {
+                const clickHandler = () => {
+                    console.log('广告引导：用户点击了广告');
+                    this.endGuide();
+                };
+
+                targetAd.addEventListener('click', clickHandler, { once: true });
+
+                // 200秒后自动结束引导（备用方案）
+                setTimeout(() => {
+                    if (this.isGuideActive) {
+                        console.log('广告引导：超时自动结束（200秒）');
+                        this.endGuide();
+                    }
+                }, 200000); // 200秒 = 200000毫秒
+            }
+
+            // 关键点3：交互状态管理实现
+            restrictUserInteraction() {
+                // 不禁用页面滚动，而是阻止用户的滚动手势
+                // document.body.style.overflow = 'hidden'; // 注释掉这行
+                
+                // 创建交互拦截层
+                const interactionBlocker = document.createElement('div');
+                interactionBlocker.id = 'interaction-blocker';
+                interactionBlocker.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 9999;
+                    background: transparent;
+                `;
+                
+                // 阻止用户滚动但允许程序化滚动
+                this.preventUserScroll = (e) => {
+                    // 阻止鼠标滚轮和触摸滚动
+                    if (e.type === 'wheel' || e.type === 'touchmove') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                };
+                
+                // 添加滚动阻止事件监听器
+                document.addEventListener('wheel', this.preventUserScroll, { passive: false });
+                document.addEventListener('touchmove', this.preventUserScroll, { passive: false });
+                document.addEventListener('keydown', this.preventUserScroll, { passive: false });
+                
+                document.body.appendChild(interactionBlocker);
+            }
+
+            restoreUserInteraction() {
+                // 恢复页面滚动
+                document.body.style.overflow = '';
+                
+                // 移除滚动阻止事件监听器
+                if (this.preventUserScroll) {
+                    document.removeEventListener('wheel', this.preventUserScroll);
+                    document.removeEventListener('touchmove', this.preventUserScroll);
+                    document.removeEventListener('keydown', this.preventUserScroll);
+                    this.preventUserScroll = null;
+                }
+                
+                // 移除交互拦截层
+                const blocker = document.getElementById('interaction-blocker');
+                if (blocker) {
+                    blocker.remove();
+                }
+            }
+
+            endGuide() {
+                this.isGuideActive = false;
+                
+                // 立即停止滚动监控（关键：必须在最开始就停止）
+                this.stopScrollMonitoring();
+                
+                // 移除滚动事件监听器
+                if (this.updateOverlayPosition) {
+                    window.removeEventListener('scroll', this.updateOverlayPosition);
+                    window.removeEventListener('resize', this.updateOverlayPosition);
+                    this.updateOverlayPosition = null;
+                }
+                
+                // 移除引导覆盖层
+                const overlay = document.getElementById('ad-guide-overlay');
+                if (overlay) {
+                    overlay.remove();
+                }
+                
+                // 恢复广告元素的原始样式
+                this.currentPageAds.forEach(ad => {
+                    ad.style.position = '';
+                    ad.style.zIndex = '';
+                    ad.style.pointerEvents = '';
+                });
+                
+                // 恢复用户交互
+                this.restoreUserInteraction();
+                
+                console.log('广告引导：引导结束');
+            }
+
+            // 关键点4：引导退出条件实现
+            setupPageVisibilityHandler() {
+                let pageHiddenTime = null;
+                
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        pageHiddenTime = Date.now();
+                    } else {
+                        if (pageHiddenTime) {
+                            const hiddenDuration = Date.now() - pageHiddenTime;
+                            
+                            if (hiddenDuration <= 10000) {
+                                // 离开时间小于10秒，显示提示弹窗
+                                this.showShortLeaveNotification();
+                            } else if (hiddenDuration > 10000) {
+                                if (this.isGuideActive) {
+                                    // 引导激活中且离开超过10秒，关闭引导并显示感谢弹窗
+                                    console.log('广告引导：用户离开页面超过10秒，自动关闭引导');
+                                    this.endGuide();
+                                    this.showThankYouNotification();
+                                } else {
+                                    // 引导未激活但之前可能有过引导，仍显示感谢弹窗
+                                    this.showThankYouNotification();
+                                }
+                            }
+                        }
+                        pageHiddenTime = null;
+                    }
+                });
+            }
+
+            // 显示短暂离开提示弹窗
+            showShortLeaveNotification() {
+                // 避免重复弹窗
+                if (document.getElementById('short-leave-notification')) {
+                    return;
+                }
+
+                const notification = document.createElement('div');
+                notification.id = 'short-leave-notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 20px 30px;
+                    border-radius: 12px;
+                    font-size: 18px;
+                    font-weight: 500;
+                    z-index: 50000;
+                    text-align: center;
+                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                    animation: fadeInScale 0.3s ease-out;
+                `;
+                notification.textContent = 'Less than 10 seconds';
+
+                // 添加动画样式
+                if (!document.getElementById('notification-animation-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'notification-animation-styles';
+                    style.textContent = `
+                        @keyframes fadeInScale {
+                            0% {
+                                opacity: 0;
+                                transform: translate(-50%, -50%) scale(0.8);
+                            }
+                            100% {
+                                opacity: 1;
+                                transform: translate(-50%, -50%) scale(1);
+                            }
+                        }
+                        @keyframes fadeOutScale {
+                            0% {
+                                opacity: 1;
+                                transform: translate(-50%, -50%) scale(1);
+                            }
+                            100% {
+                                opacity: 0;
+                                transform: translate(-50%, -50%) scale(0.8);
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+
+                document.body.appendChild(notification);
+
+                // 2秒后自动关闭
+                setTimeout(() => {
+                    if (notification && notification.parentNode) {
+                        notification.style.animation = 'fadeOutScale 0.3s ease-out';
+                        setTimeout(() => {
+                            if (notification && notification.parentNode) {
+                                notification.remove();
+                            }
+                        }, 300);
+                    }
+                }, 2000);
+
+                console.log('显示短暂离开提示：Less than 10 seconds');
+            }
+
+            // 显示感谢广告浏览弹窗
+            showThankYouNotification() {
+                // 避免重复弹窗
+                if (document.getElementById('thank-you-notification')) {
+                    return;
+                }
+
+                const notification = document.createElement('div');
+                notification.id = 'thank-you-notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(135deg, #007AFF, #5AC8FA);
+                    color: white;
+                    padding: 25px 35px;
+                    border-radius: 16px;
+                    font-size: 20px;
+                    font-weight: 600;
+                    z-index: 50000;
+                    text-align: center;
+                    box-shadow: 0 12px 40px rgba(0, 122, 255, 0.4);
+                    animation: fadeInScale 0.4s ease-out;
+                    border: 2px solid rgba(255, 255, 255, 0.2);
+                `;
+                notification.textContent = 'Thank you for your AD browsing';
+
+                // 确保动画样式已添加
+                if (!document.getElementById('notification-animation-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'notification-animation-styles';
+                    style.textContent = `
+                        @keyframes fadeInScale {
+                            0% {
+                                opacity: 0;
+                                transform: translate(-50%, -50%) scale(0.8);
+                            }
+                            100% {
+                                opacity: 1;
+                                transform: translate(-50%, -50%) scale(1);
+                            }
+                        }
+                        @keyframes fadeOutScale {
+                            0% {
+                                opacity: 1;
+                                transform: translate(-50%, -50%) scale(1);
+                            }
+                            100% {
+                                opacity: 0;
+                                transform: translate(-50%, -50%) scale(0.8);
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+
+                document.body.appendChild(notification);
+
+                // 3秒后自动关闭
+                setTimeout(() => {
+                    if (notification && notification.parentNode) {
+                        notification.style.animation = 'fadeOutScale 0.4s ease-out';
+                        setTimeout(() => {
+                            if (notification && notification.parentNode) {
+                                notification.remove();
+                            }
+                        }, 400);
+                    }
+                }, 3000);
+
+                console.log('显示感谢广告浏览提示：Thank you for your AD browsing');
+            }
+
+            // 关键点5：调试模式实现
+            setupDebugMode() {
+                const themeBtn = document.getElementById('theme-btn');
+                if (!themeBtn) return;
+
+                themeBtn.addEventListener('click', (e) => {
+                    this.themeClickCount++;
+                    
+                    if (this.themeClickTimer) {
+                        clearTimeout(this.themeClickTimer);
+                    }
+                    
+                    this.themeClickTimer = setTimeout(() => {
+                        this.themeClickCount = 0;
+                    }, 2000);
+                    
+                    if (this.themeClickCount === 4) {
+                        this.toggleDebugMode();
+                        this.themeClickCount = 0;
+                    }
+                });
+            }
+
+            toggleDebugMode() {
+                this.isDebugMode = !this.isDebugMode;
+                
+                if (this.isDebugMode) {
+                    this.showDebugPanel();
+                    console.log('广告引导：调试模式已激活');
+                } else {
+                    this.hideDebugPanel();
+                    console.log('广告引导：调试模式已关闭');
+                }
+            }
+
+            showDebugPanel() {
+                if (this.debugPanel) return;
+                
+                this.debugPanel = document.createElement('div');
+                this.debugPanel.id = 'ad-guide-debug';
+                this.debugPanel.style.cssText = `
+                    position: fixed;
+                    top: 10px;
+                    right: 10px;
+                    width: 250px;
+                    background: rgba(0, 0, 0, 0.9);
+                    color: white;
+                    padding: 15px;
+                    border-radius: 8px;
+                    font-size: 12px;
+                    z-index: 20000;
+                    font-family: monospace;
+                `;
+                
+                document.body.appendChild(this.debugPanel);
+                this.updateDebugInfo();
+                
+                // 定期更新调试信息
+                this.debugUpdateInterval = setInterval(() => {
+                    this.updateDebugInfo();
+                }, 1000);
+            }
+
+            hideDebugPanel() {
+                if (this.debugPanel) {
+                    this.debugPanel.remove();
+                    this.debugPanel = null;
+                }
+                
+                if (this.debugUpdateInterval) {
+                    clearInterval(this.debugUpdateInterval);
+                    this.debugUpdateInterval = null;
+                }
+            }
+
+            updateDebugInfo() {
+                if (!this.debugPanel) return;
+                
+                const lastTrigger = localStorage.getItem('adGuideLastTrigger');
+                const cooldownMs = this.COOLDOWN_MINUTES * 60 * 1000;
+                const now = Date.now();
+                
+                let timeUntilReset = 0;
+                if (lastTrigger) {
+                    const timeSinceLastTrigger = now - parseInt(lastTrigger);
+                    timeUntilReset = Math.max(0, cooldownMs - timeSinceLastTrigger);
+                }
+                
+                const minutes = Math.floor(timeUntilReset / 60000);
+                const seconds = Math.floor((timeUntilReset % 60000) / 1000);
+                
+                this.debugPanel.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 10px;">广告引导调试面板</div>
+                    <div>浏览器环境: ${this.isPCBrowser ? 'PC浏览器(已禁用)' : '移动设备'}</div>
+                    <div>当前页面广告: ${this.currentPageAds ? this.currentPageAds.length : 0}</div>
+                    <div>累计广告总数: ${this.totalAdsSeen || 0}</div>
+                    <div>距离触发还需: ${Math.max(0, this.REQUIRED_ADS - (this.totalAdsSeen || 0))} 个广告</div>
+                    <div>重置倒计时: ${minutes}:${seconds.toString().padStart(2, '0')}</div>
+                    <div>引导状态: ${this.isGuideActive ? '激活中' : '待机'}</div>
+                    <button onclick="adGuideSystem.resetAllData()" style="
+                        margin-top: 10px;
+                        padding: 5px 10px;
+                        background: #007AFF;
+                        color: white;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        font-size: 11px;
+                    ">立即重置</button>
+                `;
+            }
+
+            resetAllData() {
+                localStorage.removeItem('adGuideLastTrigger');
+                localStorage.removeItem('adGuideTotalSeen');
+                this.totalAdsSeen = 0;
+                this.currentPageAds = [];
+                if (this.isGuideActive) {
+                    this.endGuide();
+                }
+                // 确保停止滚动监控
+                this.stopScrollMonitoring();
+                console.log('广告引导：所有数据已重置（包括跨页面累计数据）');
+                this.updateDebugInfo();
+            }
+
+            startPeriodicCheck() {
+                // 每5秒检查一次广告状态
+                setInterval(() => {
+                    this.currentPageAds = this.currentPageAds.filter(ad => {
+                        const rect = ad.getBoundingClientRect();
+                        return rect.height > 100 && rect.height <= 650 && document.body.contains(ad);
+                    });
+                    this.updateDebugInfo();
+                }, 5000);
+            }
+        }
+
+        // 初始化广告引导系统
+        let adGuideSystem;
+        document.addEventListener('DOMContentLoaded', function() {
+            adGuideSystem = new AdClickGuideSystem();
+            
+            // 将实例暴露到全局，供调试使用
+            window.adGuideSystem = adGuideSystem;
+        });
     </script>
-    
-    
+
     <!-- Facebook Reading Tracker -->
     <script>
     class FacebookReadingTracker {
