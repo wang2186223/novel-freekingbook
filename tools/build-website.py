@@ -48,239 +48,6 @@ class WebsiteBuilder:
         
         self.site_url = config.get('site_url', 'https://example.github.io')
         
-    def get_improved_facebook_tracker(self) -> str:
-        """生成改进的Facebook追踪器JavaScript代码，支持24小时事件限制"""
-        return """
-    <!-- Facebook Reading Tracker -->
-    <script>
-    class FacebookReadingTracker {
-        constructor() {
-            this.startTime = Date.now();
-            this.totalActiveTime = 0;
-            this.lastActiveTime = Date.now();
-            this.isActive = true;
-            this.isUnloading = false; // 页面卸载标志
-            this.hasSent1Min = false;
-            this.hasSent20Min = false;
-            
-            // 初始化24小时事件限制
-            this.initEventLimits();
-            
-            // 发送进入页面事件
-            this.sendInWebEvent();
-            
-            // 初始化追踪
-            this.init();
-        }
-        
-        initEventLimits() {
-            // 检查并清理过期的事件记录
-            this.cleanExpiredEvents();
-            
-            // 检查用户今日是否已发送过各类事件
-            this.hasSent1MinToday = this.hasEventSentToday('1m_web');
-            this.hasSent20MinToday = this.hasEventSentToday('20m_web');
-            this.hasSentInWebToday = this.hasEventSentToday('in_web');
-        }
-        
-        cleanExpiredEvents() {
-            try {
-                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                const today = new Date().toDateString(); // 获取今天的日期字符串
-                
-                // 清理非今日的记录
-                Object.keys(eventHistory).forEach(eventType => {
-                    if (eventHistory[eventType] && eventHistory[eventType].date !== today) {
-                        delete eventHistory[eventType];
-                    }
-                });
-                
-                localStorage.setItem('fb_event_history', JSON.stringify(eventHistory));
-            } catch (e) {
-                console.log('清理事件历史时出错:', e);
-            }
-        }
-        
-        hasEventSentToday(eventType) {
-            try {
-                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                const eventRecord = eventHistory[eventType];
-                
-                if (!eventRecord) return false;
-                
-                const today = new Date().toDateString();
-                
-                // 检查是否是今天发送的事件
-                return eventRecord.date === today;
-            } catch (e) {
-                console.log('检查事件历史时出错:', e);
-                return false;
-            }
-        }
-        
-        recordEventSent(eventType) {
-            try {
-                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                eventHistory[eventType] = {
-                    date: new Date().toDateString(),
-                    timestamp: Date.now()
-                };
-                localStorage.setItem('fb_event_history', JSON.stringify(eventHistory));
-            } catch (e) {
-                console.log('记录事件时出错:', e);
-            }
-        }
-        
-        init() {
-            this.bindEvents();
-            this.startTracking();
-        }
-        
-        sendInWebEvent() {
-            // 检查24小时内是否已发送过in_web事件
-            if (this.hasSentInWebToday) {
-                console.log('用户今日已发送过in_web事件，跳过发送');
-                return;
-            }
-            
-            if (typeof fbq !== 'undefined') {
-                fbq('trackCustom', 'in_web');
-                console.log('Facebook事件已发送: in_web (用户进入页面)');
-                
-                // 记录事件发送时间
-                this.recordEventSent('in_web');
-                this.hasSentInWebToday = true;
-            }
-        }
-        
-        bindEvents() {
-            // 页面可见性变化
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    this.handleInactive();
-                } else {
-                    this.handleActive();
-                }
-            });
-            
-            // 用户交互事件
-            ['mousemove', 'keydown', 'scroll', 'click'].forEach(event => {
-                document.addEventListener(event, () => this.handleActive());
-            });
-            
-            // 窗口焦点事件
-            window.addEventListener('blur', () => this.handleInactive());
-            window.addEventListener('focus', () => this.handleActive());
-            
-            // 页面卸载前标记状态，但不发送事件
-            window.addEventListener('beforeunload', () => {
-                this.isUnloading = true;
-                this.updateActiveTime(true); // 传递参数表示正在卸载，不发送事件
-            });
-        }
-        
-        handleActive() {
-            if (!this.isActive) {
-                this.isActive = true;
-                this.lastActiveTime = Date.now();
-            }
-        }
-        
-        handleInactive() {
-            if (this.isActive) {
-                this.isActive = false;
-                this.updateActiveTime();
-            }
-        }
-        
-        updateActiveTime(isUnloading = false) {
-            if (this.isActive) {
-                const now = Date.now();
-                const sessionTime = now - this.lastActiveTime;
-                
-                // 只计算合理的时间段（小于5分钟的连续活跃时间）
-                if (sessionTime < 5 * 60 * 1000) {
-                    this.totalActiveTime += sessionTime;
-                }
-                
-                this.lastActiveTime = now;
-            }
-            
-            // 如果不是页面卸载，才检查里程碑并发送事件
-            if (!isUnloading && !this.isUnloading) {
-                this.checkMilestones();
-            }
-        }
-        
-        checkMilestones() {
-            // 如果正在卸载页面，不发送任何Facebook事件
-            if (this.isUnloading) {
-                return;
-            }
-            
-            const totalMinutes = this.totalActiveTime / (1000 * 60);
-            
-            // 检查1分钟里程碑
-            if (totalMinutes >= 1 && !this.hasSent1Min && !this.hasSent1MinToday) {
-                this.hasSent1Min = true;
-                this.hasSent1MinToday = true;
-                
-                if (typeof fbq !== 'undefined') {
-                    fbq('trackCustom', '1m_web');
-                    console.log('Facebook事件已发送: 1m_web (用户阅读1分钟)');
-                    
-                    // 记录事件发送时间
-                    this.recordEventSent('1m_web');
-                } else {
-                    console.log('Facebook Pixel未加载，跳过1m_web事件');
-                }
-            } else if (totalMinutes >= 1 && !this.hasSent1Min && this.hasSent1MinToday) {
-                this.hasSent1Min = true; // 标记为已处理，但不发送事件
-                console.log('用户今日已发送过1m_web事件，跳过发送');
-            }
-            
-            // 检查20分钟里程碑
-            if (totalMinutes >= 20 && !this.hasSent20Min && !this.hasSent20MinToday) {
-                this.hasSent20Min = true;
-                this.hasSent20MinToday = true;
-                
-                if (typeof fbq !== 'undefined') {
-                    fbq('trackCustom', '20m_web');
-                    console.log('Facebook事件已发送: 20m_web (用户阅读20分钟)');
-                    
-                    // 记录事件发送时间
-                    this.recordEventSent('20m_web');
-                } else {
-                    console.log('Facebook Pixel未加载，跳过20m_web事件');
-                }
-            } else if (totalMinutes >= 20 && !this.hasSent20Min && this.hasSent20MinToday) {
-                this.hasSent20Min = true; // 标记为已处理，但不发送事件
-                console.log('用户今日已发送过20m_web事件，跳过发送');
-            }
-        }
-        
-        startTracking() {
-            // 每5秒检查一次阅读时间
-            setInterval(() => {
-                this.updateActiveTime();
-            }, 5000);
-        }
-        
-        // 调试方法：获取当前阅读时间（分钟）
-        getCurrentReadingMinutes() {
-            this.updateActiveTime();
-            return Math.floor(this.totalActiveTime / (1000 * 60));
-        }
-    }
-    
-    // 初始化Facebook阅读追踪器
-    document.addEventListener('DOMContentLoaded', function() {
-        window.facebookTracker = new FacebookReadingTracker();
-        
-        // 调试：可以在控制台使用 window.facebookTracker.getCurrentReadingMinutes() 查看当前阅读时间
-    });
-    </script>"""
-        
     def get_file_timestamps(self, file_path: Path) -> Dict[str, str]:
         """获取文件的创建时间和修改时间"""
         try:
@@ -472,20 +239,6 @@ class WebsiteBuilder:
             site_url=self.site_url
         )
         
-        # 注入改进的Facebook追踪器（替换现有的）
-        improved_tracker = self.get_improved_facebook_tracker()
-        
-        # 查找并替换现有的Facebook Reading Tracker部分
-        import re
-        pattern = r'<!-- Facebook Reading Tracker -->.*?</script>'
-        
-        if re.search(pattern, html_content, re.DOTALL):
-            # 如果找到现有的追踪器，替换它
-            html_content = re.sub(pattern, improved_tracker, html_content, flags=re.DOTALL)
-        else:
-            # 如果没有找到，在</body>标签前插入
-            html_content = html_content.replace('</body>', improved_tracker + '\n</body>')
-        
         # 保存文件
         output_file = novel_dir / 'index.html'
         with open(output_file, 'w', encoding='utf-8') as f:
@@ -551,20 +304,6 @@ class WebsiteBuilder:
                 site_url=self.site_url
             )
             
-            # 注入改进的Facebook追踪器（替换现有的）
-            improved_tracker = self.get_improved_facebook_tracker()
-            
-            # 查找并替换现有的Facebook Reading Tracker部分
-            import re
-            pattern = r'<!-- Facebook Reading Tracker -->.*?</script>'
-            
-            if re.search(pattern, html_content, re.DOTALL):
-                # 如果找到现有的追踪器，替换它
-                html_content = re.sub(pattern, improved_tracker, html_content, flags=re.DOTALL)
-            else:
-                # 如果没有找到，在</body>标签前插入
-                html_content = html_content.replace('</body>', improved_tracker + '\n</body>')
-            
             # 保存文件
             output_file = novel_dir / f"chapter-{chapter['number']}.html"
             with open(output_file, 'w', encoding='utf-8') as f:
@@ -627,20 +366,6 @@ class WebsiteBuilder:
             canonical_url=f"{self.site_url}/",
             site_url=self.site_url
         )
-        
-        # 注入改进的Facebook追踪器（替换现有的）
-        improved_tracker = self.get_improved_facebook_tracker()
-        
-        # 查找并替换现有的Facebook Reading Tracker部分
-        import re
-        pattern = r'<!-- Facebook Reading Tracker -->.*?</script>'
-        
-        if re.search(pattern, html_content, re.DOTALL):
-            # 如果找到现有的追踪器，替换它
-            html_content = re.sub(pattern, improved_tracker, html_content, flags=re.DOTALL)
-        else:
-            # 如果没有找到，在</body>标签前插入
-            html_content = html_content.replace('</body>', improved_tracker + '\n</body>')
         
         # 保存首页
         output_file = self.output_path / 'index.html'
@@ -818,7 +543,7 @@ def main():
     args = parser.parse_args()
     
     # 读取配置文件
-    site_url = 'https://ads.xixifreenovel.com'  # 默认正确域名
+    site_url = 'https://re.cankalp.com'  # 默认正确域名
     config_file = 'config.json'
     if os.path.exists(config_file):
         try:

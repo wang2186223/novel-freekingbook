@@ -1,8 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset=    // Natural 72-hour event    // Track PageView with 72-hour prevention
+    if (shouldTrackEvent('PageView_Novel')) {
+        fbq('track', 'PageView');
+        console.log('Facebook事件已发送: PageView (小说介绍页浏览)');
+    } else {
+        console.log('Facebook事件已跳过: PageView_Novel (本72小时内已发送)');
+    }ng prevention (resets every 3 days)
+    function shouldTrackEvent(eventName) {
+        const now = new Date();
+        const threeDaysAgo = new Date(now.getTime() - (3 * 24 * 60 * 60 * 1000));
+        const currentPeriod = Math.floor(now.getTime() / (3 * 24 * 60 * 60 * 1000));
+        const storageKey = `fb_event_${eventName}`;
+        const lastTrackedPeriod = localStorage.getItem(storageKey);
+        
+        if (!lastTrackedPeriod || parseInt(lastTrackedPeriod) !== currentPeriod) {
+            localStorage.setItem(storageKey, currentPeriod.toString());
+            return true;
+        }
+        
+        return false;
+    }meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if novel.title %}{{ novel.title }} - NovelVibe{% else %}Book Details - NovelVibe{% endif %}</title>
     <meta name="description" content="{% if novel.description %}{{ novel.description }}{% else %}Read free werewolf romance novels on NovelVibe{% endif %}">
     <meta name="keywords" content="{% if novel.tags %}{{ novel.tags|join(', ') }}{% else %}werewolf, romance, free novels{% endif %}">
@@ -30,13 +49,12 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ canonical_url }}">
     
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKK2QRZ5GC"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-YKK2QRZ5GC');
     </script>
     
@@ -54,13 +72,37 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    
+
     fbq('init', '3902941096613787');
-    fbq('track', 'PageView');
+    
+    // Natural 72-hour event tracking prevention (resets every 3 days)
+    function shouldTrackEvent(eventName) {
+        const now = new Date();
+        const threeDaysAgo = new Date(now.getTime() - (3 * 24 * 60 * 60 * 1000));
+        const currentPeriod = Math.floor(now.getTime() / (3 * 24 * 60 * 60 * 1000));
+        const storageKey = `fb_event_${eventName}`;
+        const lastTrackedPeriod = localStorage.getItem(storageKey);
+        
+        if (!lastTrackedPeriod || parseInt(lastTrackedPeriod) !== currentPeriod) {
+            localStorage.setItem(storageKey, currentPeriod.toString());
+            return true;
+        }
+        
+        return false;
+    }
+    
+    // Track PageView with 24-hour prevention
+    if (shouldTrackEvent('PageView_Novel')) {
+        fbq('track', 'PageView');
+        console.log('Facebook事件已发送: PageView (小说介绍页浏览)');
+    } else {
+        console.log('Facebook事件已跳过: PageView_Novel (今日已发送)');
+    }
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=3902941096613787&ev=PageView&noscript=1"
     /></noscript>
+    <!-- End Facebook Pixel Code -->
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -198,6 +240,28 @@
             margin: 25px 0;
         }
         
+        .btn {
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #0071e3;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0077ed;
+            transform: translateY(-2px);
+        }
+        
         /* 阅读历史记录样式 */
         .reading-history {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -271,28 +335,6 @@
         
         #continue-reading-btn:hover {
             background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        .btn {
-            padding: 12px 25px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .btn-primary {
-            background: #0071e3;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #0077ed;
             transform: translateY(-2px);
         }
         
@@ -868,196 +910,6 @@
                 });
             });
         });
-    </script>
-    
-    <!-- Facebook Reading Tracker -->
-    <script>
-    class FacebookReadingTracker {
-        constructor() {
-            this.startTime = Date.now();
-            this.totalActiveTime = 0;
-            this.lastActiveTime = Date.now();
-            this.isActive = true;
-            this.isUnloading = false; // 添加页面卸载标志
-            this.hasSent1Min = false;
-            this.hasSent20Min = false;
-            
-            // 初始化24小时事件限制
-            this.initEventLimits();
-            
-            // 发送进入页面事件
-            this.sendInWebEvent();
-            
-            // 初始化追踪
-            this.init();
-        }
-        
-        initEventLimits() {
-            // 检查并清理过期的事件记录
-            this.cleanExpiredEvents();
-            
-            // 检查用户今日是否已发送过各类事件
-            this.hasSent1MinToday = this.hasEventSentToday('1m_web');
-            this.hasSent20MinToday = this.hasEventSentToday('20m_web');
-            this.hasSentInWebToday = this.hasEventSentToday('in_web');
-        }
-        
-        cleanExpiredEvents() {
-            try {
-                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                const now = Date.now();
-                const oneDayMs = 24 * 60 * 60 * 1000; // 24小时毫秒数
-                
-                // 清理超过24小时的记录
-                Object.keys(eventHistory).forEach(eventType => {
-                    if (eventHistory[eventType] && (now - eventHistory[eventType]) > oneDayMs) {
-                        delete eventHistory[eventType];
-                    }
-                });
-                
-                localStorage.setItem('fb_event_history', JSON.stringify(eventHistory));
-            } catch (e) {
-                console.log('清理事件历史时出错:', e);
-            }
-        }
-        
-        hasEventSentToday(eventType) {
-            try {
-                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                const lastSent = eventHistory[eventType];
-                
-                if (!lastSent) return false;
-                
-                const now = Date.now();
-                const oneDayMs = 24 * 60 * 60 * 1000;
-                
-                return (now - lastSent) < oneDayMs;
-            } catch (e) {
-                console.log('检查事件历史时出错:', e);
-                return false;
-            }
-        }
-        
-        recordEventSent(eventType) {
-            try {
-                const eventHistory = JSON.parse(localStorage.getItem('fb_event_history') || '{}');
-                eventHistory[eventType] = Date.now();
-                localStorage.setItem('fb_event_history', JSON.stringify(eventHistory));
-            } catch (e) {
-                console.log('记录事件时出错:', e);
-            }
-        }
-        
-        init() {
-            this.bindEvents();
-            this.startTracking();
-        }
-        
-        sendInWebEvent() {
-            if (typeof fbq !== 'undefined') {
-                fbq('trackCustom', 'in_web');
-                console.log('Facebook事件已发送: in_web (用户进入页面)');
-            }
-        }
-        
-        bindEvents() {
-            // 页面可见性变化
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    this.handleInactive();
-                } else {
-                    this.handleActive();
-                }
-            });
-            
-            // 用户交互事件
-            ['mousemove', 'keydown', 'scroll', 'click'].forEach(event => {
-                document.addEventListener(event, () => this.handleActive());
-            });
-            
-            // 窗口焦点事件
-            window.addEventListener('blur', () => this.handleInactive());
-            window.addEventListener('focus', () => this.handleActive());
-            
-            // 页面卸载前标记状态，但不发送事件
-            window.addEventListener('beforeunload', () => {
-                this.isUnloading = true;
-                this.updateActiveTime(true); // 传递参数表示正在卸载，不发送事件
-            });
-        }
-        
-        handleActive() {
-            if (!this.isActive) {
-                this.isActive = true;
-                this.lastActiveTime = Date.now();
-            }
-        }
-        
-        handleInactive() {
-            if (this.isActive) {
-                this.isActive = false;
-                this.updateActiveTime();
-            }
-        }
-        
-        updateActiveTime() {
-            if (this.isActive) {
-                const now = Date.now();
-                const sessionTime = now - this.lastActiveTime;
-                
-                // 只计算合理的时间段（小于5分钟的连续活跃时间）
-                if (sessionTime < 5 * 60 * 1000) {
-                    this.totalActiveTime += sessionTime;
-                }
-                
-                this.lastActiveTime = now;
-            }
-            
-            this.checkMilestones();
-        }
-        
-        checkMilestones() {
-            const totalMinutes = this.totalActiveTime / (1000 * 60);
-            
-            // 检查1分钟里程碑
-            if (totalMinutes >= 1 && !this.hasSent1Min) {
-                this.hasSent1Min = true;
-                if (typeof fbq !== 'undefined') {
-                    fbq('trackCustom', '1m_web');
-                    console.log('Facebook事件已发送: 1m_web (用户阅读1分钟)');
-                }
-            }
-            
-            // 检查20分钟里程碑
-            if (totalMinutes >= 20 && !this.hasSent20Min) {
-                this.hasSent20Min = true;
-                if (typeof fbq !== 'undefined') {
-                    fbq('trackCustom', '20m_web');
-                    console.log('Facebook事件已发送: 20m_web (用户阅读20分钟)');
-                }
-            }
-        }
-        
-        startTracking() {
-            // 每5秒检查一次阅读时间
-            setInterval(() => {
-                this.updateActiveTime();
-            }, 5000);
-        }
-        
-        // 调试方法：获取当前阅读时间（分钟）
-        getCurrentReadingMinutes() {
-            this.updateActiveTime();
-            return Math.floor(this.totalActiveTime / (1000 * 60));
-        }
-    }
-    
-    // 初始化Facebook阅读追踪器
-    document.addEventListener('DOMContentLoaded', function() {
-        window.facebookTracker = new FacebookReadingTracker();
-        
-        // 调试：可以在控制台使用 window.facebookTracker.getCurrentReadingMinutes() 查看当前阅读时间
-    });
     </script>
 </body>
 </html>

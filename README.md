@@ -1,5 +1,8 @@
 # 免费狼人小说网站 - 完整使用指南
 
+**版本**: v1.2.0  
+**更新日期**: 2025年10月2日
+
 ## 🎯 项目概述
 
 这是一个专为美国女性读者设计的免费狼人小说网站生成器。项目提供完整的解决方案，可以将中文小说库批量转换成英文静态网站，支持SEO优化、Google Analytics和AdSense集成。
@@ -91,10 +94,10 @@ python tools/dev.py install
   "site": {
     "name": "NovelVibe",
     "description": "Free Werewolf Novels for American Women",
-    "url": "https://ads.xixifreenovel.com"
+    "url": "https://yourusername.github.io/novel-free-my"
   },
   "analytics": {
-    "google_analytics_id": "G-EWY8W7MKKM",
+    "google_analytics_id": "G-XXXXXXXXXX",
     "google_adsense_id": "ca-pub-XXXXXXXXXXXXXXXX"
   }
 }
@@ -448,8 +451,8 @@ python tools/optimize-images.py
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3785399647875281"></script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EWY8W7MKKM"></script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B6BKGBPW0W"></script>
 ```
 
 ## 🐛 故障排除
