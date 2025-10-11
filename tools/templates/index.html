@@ -85,6 +85,37 @@
     /></noscript>
     <!-- End Facebook Pixel Code -->
     
+    <!-- 页面访问统计代码 -->
+    <script>
+    // 页面访问数据收集
+    function sendPageVisit() {
+        const data = {
+            page: window.location.href,
+            userAgent: navigator.userAgent,
+            referrer: document.referrer || 'direct'
+        };
+        
+        // 发送数据到 Google Apps Script
+        fetch('https://script.google.com/macros/s/AKfycbyZcfM-KswnbQ7-IWAEk50T8OLMs1Y7YY4t977ID11oFx2N6KTU15tgldbRA2_HU92C/exec', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).catch(error => {
+            console.log('Analytics error:', error);
+        });
+    }
+    
+    // 页面加载完成后发送访问数据
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', sendPageVisit);
+    } else {
+        sendPageVisit();
+    }
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
