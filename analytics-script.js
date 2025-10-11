@@ -10,8 +10,8 @@ function doPost(e) {
     // 解析请求数据
     const data = JSON.parse(e.postData.contents);
     
-    // 北京时间处理
-    const beijingTime = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+    // 北京时间处理 - 直接使用timeZone配置，不手动加减时间
+    const beijingTime = new Date();
     const timeString = beijingTime.toLocaleString('zh-CN', {
       timeZone: 'Asia/Shanghai',
       year: 'numeric',
@@ -19,10 +19,11 @@ function doPost(e) {
       day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit'
+      second: '2-digit',
+      hour12: false  // 使用24小时制
     });
     
-    const dateString = beijingTime.toLocaleDateString('zh-CN', {
+    const dateString = new Date().toLocaleDateString('zh-CN', {
       timeZone: 'Asia/Shanghai',
       year: 'numeric',
       month: '2-digit',
