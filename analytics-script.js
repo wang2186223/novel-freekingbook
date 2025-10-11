@@ -10,6 +10,9 @@ function doPost(e) {
     // 解析请求数据
     const data = JSON.parse(e.postData.contents);
     
+    // 获取用户IP地址（优先使用前端发送的IP）
+    const userIP = data.userIP || getUserIP(e);
+    
     // 北京时间处理 - 直接使用timeZone配置，不手动加减时间
     const beijingTime = new Date();
     const timeString = beijingTime.toLocaleString('zh-CN', {
@@ -33,12 +36,13 @@ function doPost(e) {
     // 获取或创建今日数据表
     const todaySheet = getOrCreateDailySheet(spreadsheet, dateString);
     
-    // 准备要插入的数据
+    // 准备要插入的数据（新增IP地址字段）
     const rowData = [
       timeString,                    // 时间 (北京时间)
       data.page || '',              // 访问页面
       data.userAgent || '',         // 用户属性 (浏览器信息)
-      data.referrer || ''           // 来源页面
+      data.referrer || '',          // 来源页面
+      userIP || ''                  // 用户IP地址
     ];
     
     // 插入数据到今日表格
@@ -62,6 +66,30 @@ function doPost(e) {
   }
 }
 
+// 获取用户IP地址
+function getUserIP(e) {
+  try {
+    // 由于Google Apps Script的安全限制，无法直接获取真实用户IP
+    // IP地址将由前端JavaScript获取并通过data参数发送
+    // 这里只是一个备用处理
+    return 'Pending'; // 等待前端发送
+    
+  } catch (error) {
+    console.error('获取IP地址失败:', error);
+    return 'Error';
+  }
+}
+
+// 验证IP地址格式
+function isValidIP(ip) {
+  // IPv4 格式验证
+  const ipv4Regex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  // IPv6 格式验证（简化版）
+  const ipv6Regex = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+  
+  return ipv4Regex.test(ip) || ipv6Regex.test(ip) || ip === '::1' || ip === 'localhost';
+}
+
 // 获取或创建每日数据表
 function getOrCreateDailySheet(spreadsheet, dateString) {
   const sheetName = `详细-${dateString}`;
@@ -71,13 +99,13 @@ function getOrCreateDailySheet(spreadsheet, dateString) {
     // 创建新的日期表格
     sheet = spreadsheet.insertSheet(sheetName);
     
-    // 设置标题行
-    sheet.getRange(1, 1, 1, 4).setValues([
-      ['时间', '访问页面', '用户属性', '来源页面']
+    // 设置标题行（新增IP地址列）
+    sheet.getRange(1, 1, 1, 5).setValues([
+      ['时间', '访问页面', '用户属性', '来源页面', 'IP地址']
     ]);
     
     // 格式化标题行
-    const headerRange = sheet.getRange(1, 1, 1, 4);
+    const headerRange = sheet.getRange(1, 1, 1, 5);
     headerRange.setBackground('#4285f4');
     headerRange.setFontColor('white');
     headerRange.setFontWeight('bold');
@@ -120,27 +148,34 @@ function updateDashboard(spreadsheet, currentDate) {
 // 初始化控制台
 function initializeDashboard(sheet) {
   // 设置标题
-  sheet.getRange(1, 1, 1, 4).merge();
+  sheet.getRange(1, 1, 1, 5).merge();
   sheet.getRange(1, 1).setValue('📊 网站访问统计控制台');
   
   // 设置统计项目
   const headers = [
-    ['统计项目', '数值', '最后更新', '说明'],
-    ['今日访问量', 0, '', '当天的访问次数'],
-    ['总访问量', 0, '', '所有详细记录的总数'],
-    ['活跃天数', 0, '', '有访问记录的天数'],
-    ['平均日访问', 0, '', '每日平均访问量'],
-    ['', '', '', ''],
-    ['数据管理', '', '', ''],
-    ['详细数据保留', '7天', '', '自动删除7天前数据'],
-    ['表格状态', '正常', '', '系统运行状态']
+    ['统计项目', '数值', '最后更新', '说明', ''],
+    ['今日访问量', 0, '', '当天的访问次数', ''],
+    ['总访问量', 0, '', '所有详细记录的总数', ''],
+    ['活跃天数', 0, '', '有访问记录的天数', ''],
+    ['平均日访问', 0, '', '每日平均访问量', ''],
+    ['', '', '', '', ''],
+    ['数据管理', '', '', '', ''],
+    ['详细数据保留', '7天', '', '自动删除7天前数据', ''],
+    ['表格状态', '正常', '', '系统运行状态', ''],
+    ['', '', '', '', ''],
+    ['数据字段', '', '', '', ''],
+    ['时间', '', '', '北京时间24小时制', ''],
+    ['访问页面', '', '', '用户访问的完整URL', ''],
+    ['用户属性', '', '', '浏览器和设备信息', ''],
+    ['来源页面', '', '', '用户来源页面URL', ''],
+    ['IP地址', '', '', '用户访问IP地址', '']
   ];
   
-  sheet.getRange(2, 1, headers.length, 4).setValues(headers);
+  sheet.getRange(2, 1, headers.length, 5).setValues(headers);
   
   // 格式化
   sheet.getRange(1, 1).setBackground('#1a73e8').setFontColor('white').setFontSize(14).setFontWeight('bold');
-  sheet.getRange(2, 1, 1, 4).setBackground('#4285f4').setFontColor('white').setFontWeight('bold');
+  sheet.getRange(2, 1, 1, 5).setBackground('#4285f4').setFontColor('white').setFontWeight('bold');
 }
 
 // 更新总计统计
