@@ -50,7 +50,7 @@ echo ""
 
 echo "📋 预期结果："
 echo "新表格格式: [时间][访问页面][用户属性][来源页面][IP地址]"
-echo "数据示例: 2025/10/11 14:30:45 | https://re.cankalp.com/... | Mozilla/5.0... | https://... | 123.456.789.101"
+echo "数据示例: 2025/10/11 14:30:45 | https://adx.myfreenovel.com/... | Mozilla/5.0... | https://... | 123.456.789.101"
 echo ""
 
 echo "⚡ 部署完成后，访问统计将包含完整的IP地址信息！"

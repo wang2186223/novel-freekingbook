@@ -19,16 +19,16 @@
 | 时间   | 访问页面 | 用户属性 | 来源页面 |
 
 ### 🧪 测试方法
-1. 访问您网站的任何页面：https://re.cankalp.com
+1. 访问您网站的任何页面：https://adx.myfreenovel.com
 2. 等待几秒钟
 3. 检查您的 Google Sheets 是否有新数据
 
 ### 📈 数据格式示例
 ```
 时间: 2025/10/11 15:30:45
-访问页面: https://re.cankalp.com/novels/my-rejected-mate-regrets/chapter-1.html
+访问页面: https://adx.myfreenovel.com/novels/my-rejected-mate-regrets/chapter-1.html
 用户属性: Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X)
-来源页面: https://re.cankalp.com/novels/my-rejected-mate-regrets/
+来源页面: https://adx.myfreenovel.com/novels/my-rejected-mate-regrets/
 ```
 
 ### 🚀 系统特点

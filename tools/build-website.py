@@ -543,7 +543,7 @@ def main():
     args = parser.parse_args()
     
     # 读取配置文件
-    site_url = 'https://re.cankalp.com'  # 默认正确域名
+    site_url = 'https://adx.myfreenovel.com'  # 默认正确域名
     config_file = 'config.json'
     if os.path.exists(config_file):
         try:

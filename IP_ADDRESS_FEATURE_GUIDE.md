@@ -88,9 +88,9 @@ E列：IP地址 ← 新增
 ### 新的数据记录格式：
 ```
 时间: 2025/10/11 14:30:45
-访问页面: https://re.cankalp.com/novels/my-rejected-mate-regrets/chapter-1.html
+访问页面: https://adx.myfreenovel.com/novels/my-rejected-mate-regrets/chapter-1.html
 用户属性: Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X)
-来源页面: https://re.cankalp.com/novels/my-rejected-mate-regrets/
+来源页面: https://adx.myfreenovel.com/novels/my-rejected-mate-regrets/
 IP地址: 123.456.789.101 ← 新增
 ```
 
