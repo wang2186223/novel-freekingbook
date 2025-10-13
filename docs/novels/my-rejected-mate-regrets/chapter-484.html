@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.226253">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.226253">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.664131">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.664131">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.226253",
-        "dateModified": "2025-10-13T13:35:01.226253",
+        "datePublished": "2025-10-13T14:11:52.664131",
+        "dateModified": "2025-10-13T14:11:52.664131",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>His eyes drop to my untouched plate. &#34;Ivy? You should eat something.&#34; That intense stare pins me in place until I reluctantly pick up my fork and push food around.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;Pack law supersedes parental rights when a pup&#39;s safety is compromised. Let&#39;s hear what Alpha Alistair proposes before we panic.&#34; His tone leaves no room for argument.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;Obviously. You&#39;re stuck with me, Guardian.&#34; A rough chuckle escapes him. &#34;Only two of our kind exist. That&#39;s a lifetime commitment whether you like it or not.&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;Ivy?&#34; His voice pulls me from dangerous thoughts. I realize I&#39;ve been staring blankly at my plate. &#34;Eat. We&#39;ll handle this.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>When he finishes, we head to Alpha Alistair&#39;s office. The knock echoes ominously. Inside, the air crackles with tension - Alpha Alistair, Beta Nathaniel, and Gamma Donovan all waiting.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>I glance at Gregory before letting my wolf forward. Alpha Alistair nods solemnly. &#34;Congratulations, Valeria, though celebrations must wait. You understand the danger of an unmated underage Guardian?&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;We&#39;ll implement every protection possible. But there&#39;s another matter.&#34; His gaze darkens. &#34;Alpha Dominic. I understand your father took you to visit him this weekend?&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;Walk us through everything that happened with Alpha Dominic.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;Did Alpha Dominic make any... physical advances?&#34; Alpha Alistair&#39;s question drops like a stone.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>I stare at the table. &#34;He asked if I wanted to &#39;take him for a test ride.&#39;&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>&#34;Control yourself, Gregory,&#34; Alpha Alistair warns sharply. &#34;Or you&#39;ll wait outside.&#34;</p>
+                
                 
                 
                 
@@ -3107,14 +3130,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

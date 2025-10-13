@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.658928">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.658928">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.186758">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.186758">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.658928",
-        "dateModified": "2025-10-13T13:34:58.658928",
+        "datePublished": "2025-10-13T14:11:50.186758",
+        "dateModified": "2025-10-13T14:11:50.186758",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Evelyn Carter&#39;s stomach twisted at the sight. She knew exactly what that instrument meant.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>A violent gag reflex seized Evelyn&#39;s throat.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>His grin turned feral. &#34;When you meet the devil tonight, give him my regards.&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Harrison Whitmore moved like lightning, placing himself between Evelyn and danger. His dark eyes promised death to anyone who came closer.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Worthless idiots!&#34; Damian screamed. &#34;Move!&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Harrison&#39;s boot connected with a chest. Ribs shattered. Blood sprayed across the concrete.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;That&#39;s irrelevant.&#34; Harrison&#39;s voice could have frozen hell.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Damian forced a laugh. &#34;Ah yes, your little security detail. Trained professionals, no doubt.&#34; His smile turned vicious. &#34;Pity they won&#39;t be joining us tonight.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Evelyn&#39;s lips curved. &#34;Care to wager your life on that?&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Evelyn&#39;s smile turned predatory. &#34;Are you certain you know whose territory this really is?&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Screams erupted in the blackness.</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>Evelyn pressed her own dagger against Damian&#39;s abdomen. &#34;You wanted to test this blade&#39;s sharpness.&#34; Her voice dripped venom. &#34;Shall we conduct that experiment now?&#34;</p>
+                
                 
                 
                 
@@ -3131,14 +3156,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

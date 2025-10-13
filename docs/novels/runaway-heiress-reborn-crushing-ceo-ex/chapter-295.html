@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:59.426859">
-    <meta property="article:modified_time" content="2025-10-13T13:34:59.426859">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.937418">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.937418">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:59">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:59.426859",
-        "dateModified": "2025-10-13T13:34:59.426859",
+        "datePublished": "2025-10-13T14:11:50.937418",
+        "dateModified": "2025-10-13T14:11:50.937418",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Saturday morning arrived with crisp autumn air as Isabella drove to the Montgomery estate. Most of the Montgomery family resided abroad, leaving only Charles and a handful of servants present when she arrived.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;Yes,&#34; she smiled. Though he appeared healthier than expected, she couldn&#39;t help noticing, &#34;You&#39;ve lost weight.&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>They moved inside where Charles served tea. His failure to ask about Alexander&#39;s absence confirmed what Isabella suspected—he already knew about their impending divorce.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Their conversation flowed easily over tea until interrupted twenty minutes later by a maid announcing another guest&#39;s arrival.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Then came the butler&#39;s voice from the side entrance. &#34;Mr. Whitmore, this way please.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>The clicking of designer heels confirmed Isabella&#39;s suspicion. She turned slightly to see Alexander entering with Victoria Kensington on his arm.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Charles responded with a cold grunt. Undeterred, Alexander continued, &#34;Mr. Montgomery, may I introduce Victoria Kensington.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Though Charles clearly knew about the divorce and Alexander&#39;s relationship with Victoria, he hadn&#39;t expected such a brazen public appearance so soon.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;Mr. Montgomery,&#34; Alexander pressed, clearly displeased by the reception.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Unfazed, Alexander guided Victoria to the opposite sofa, making himself at home. Just days after taking Victoria to meet his family, he was now parading her before Charles?</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Isabella kept her eyes lowered, sipping her tea in silence.</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>Charles slapped his hand away sharply. &#34;Don&#39;t touch what I&#39;ve prepared!&#34;</p>
+                
                 
                 
                 
@@ -823,6 +848,7 @@
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824594360-0'); });
                   </script>
                 </div>
+                
                 
                 
                 
@@ -3174,14 +3200,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

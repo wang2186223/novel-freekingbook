@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.681073">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.681073">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.207960">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.207960">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.681073",
-        "dateModified": "2025-10-13T13:34:58.681073",
+        "datePublished": "2025-10-13T14:11:50.207960",
+        "dateModified": "2025-10-13T14:11:50.207960",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Callum Blackwood rushed forward with an eager grin. &#34;All set, Harrison. Your driver will take you directly to Coronia University&#39;s main gate.&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Evelyn gave a small nod before falling into step beside Harrison. As they moved toward the vehicle, Callum kept pace with animated chatter, pointing out various campus landmarks through the windows.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>The crunch of gravel beneath tires snapped her from her reverie as they entered the university grounds. Sunlight filtered through towering oak trees, casting dappled shadows across the manicured lawns.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Harrison and Evelyn exited the vehicle while Callum wisely remained behind. With a theatrical wave, he called out, &#34;I&#39;ll be right here if you need anything. Just text me!&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Can you believe it&#39;s been nearly four years?&#34; Evelyn murmured, her voice tinged with nostalgia. Three of those years had been wasted on Nathan Sterling - trapped in a loveless marriage she should have escaped sooner.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Evelyn&#39;s cheeks flushed. &#34;I was not a crybaby!&#34; She protested, though her childhood memories had grown fuzzy with time.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Their playful banter continued as they strolled through the campus, their joined hands swinging lightly between them.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>So engrossed was she in her tour guide role that she failed to notice the curious gaze tracking their progress. The observing woman finally approached with tentative steps.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Evelyn spun around to face Professor Katherine Whitaker, her former mentor. &#34;Professor Whitaker!&#34; She rushed forward to embrace the older woman. &#34;It&#39;s been ages!&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Before Evelyn could correct the assumption, Harrison smoothly extended his hand. &#34;Harrison Whitmore, at your service, Professor. Please, call me Harrison.&#34;</p>
+                
                 
                 
                 
@@ -3099,14 +3120,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

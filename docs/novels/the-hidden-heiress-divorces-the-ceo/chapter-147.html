@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.278709">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.278709">
+    <meta property="article:published_time" content="2025-10-13T14:11:49.729243">
+    <meta property="article:modified_time" content="2025-10-13T14:11:49.729243">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:49">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.278709",
-        "dateModified": "2025-10-13T13:34:58.278709",
+        "datePublished": "2025-10-13T14:11:49.729243",
+        "dateModified": "2025-10-13T14:11:49.729243",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Evelyn hadn&#39;t expected such generosity from Nexa Group.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;Yes, Ms. Carter.&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>So absorbed was she that she didn&#39;t notice someone entering her office quietly.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Approaching the desk, Olivia tapped it several times. Without looking up, Evelyn said, &#34;Yes, Maxwell? Could you bring me some coffee?&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Only when silence followed did Evelyn glance up, her eyes widening in surprise. &#34;Olivia? What are you doing here?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Evelyn quickly set aside her documents and stood, taking Olivia&#39;s arm. &#34;Why didn&#39;t you tell me you were coming? I assumed you were Maxwell.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Evelyn checked her phone and winced at the multiple missed calls. &#34;Sorry! My phone was on silent.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Guilt flashed across Evelyn&#39;s face. &#34;I&#39;m so sorry, Olivia.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Only then did Evelyn realize how neglected her complexion had become. &#34;You&#39;re right. I desperately need some self-care.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>They booked a VIP suite for full treatments, emerging completely relaxed afterward.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>&#34;We should enjoy this rare outing to the fullest.&#34; The speaker was unmistakably Eleanor. Though they hadn&#39;t seen her in months, her haughty tone was unforgettable.</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>News of Evelyn&#39;s true lineage as Leonard Kingsley&#39;s granddaughter had spread like wildfire through elite circles.</p>
+                
                 
                 
                 
@@ -827,6 +852,7 @@
                 
                 
                 
+                
                 <p>Eleanor had frequently complained about Evelyn&#39;s shortcomings and belittled her before friends. Now that Evelyn&#39;s status was revealed, these women relished Eleanor&#39;s discomfort.</p>
                 
                 
@@ -835,7 +861,9 @@
                 
                 
                 
+                
                 <p>&#34;Mrs. Blackwell, you really should introduce your daughter-in-law to us. One never knows when such connections might prove useful.&#34;</p>
+                
                 
                 
                 
@@ -3162,14 +3190,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

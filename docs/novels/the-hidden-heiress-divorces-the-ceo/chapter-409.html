@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.730370">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.730370">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.260984">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.260984">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.730370",
-        "dateModified": "2025-10-13T13:34:58.730370",
+        "datePublished": "2025-10-13T14:11:50.260984",
+        "dateModified": "2025-10-13T14:11:50.260984",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Harrison Whitmore arched one perfect eyebrow. &#34;Take a wild guess. Who do you think it would be?&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>A fond smile played on Harrison&#39;s lips. &#34;As you wish, darling.&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Olivia Sinclair and Natalie Reeves had been pacing impatiently. The moment Evelyn appeared, Olivia launched herself forward. &#34;Evie! Finally!&#34; Her arms wrapped tightly around her best friend.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Olivia pulled back instantly. &#34;The designs? You found them?&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Natalie&#39;s eyes sparkled with mischief as she accepted the documents. &#34;Child&#39;s play. Just say when you want this bomb to detonate.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Natalie gave a sharp salute. &#34;Consider it done. The internet won&#39;t know what hit it.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Dawn broke over Pamore&#39;s skyline as Evelyn and Harrison arrived at the imposing Pamore Pentagon precisely at 10 AM.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>The man merely nodded before swinging open the heavy oak doors to reveal an office dripping in ostentatious wealth - all gold accents and modern art that screamed expensive.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Evelyn remained unshaken, meeting Juliette&#39;s gaze head-on. &#34;Patience, Ms. Blackwood. A billion dollars doesn&#39;t disappear that easily.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>&#34;You seem awfully fixated on cash,&#34; Evelyn countered smoothly. &#34;Strange for someone who clearly doesn&#39;t need it.&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Evelyn&#39;s hand slipped into her blazer pocket. &#34;Before we discuss money, there&#39;s something you should see.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>Slowly, Evelyn withdrew a worn sketchbook. &#34;Just some light reading material.&#34;</p>
+                
                 
                 
                 
@@ -827,7 +852,9 @@
                 
                 
                 
+                
                 <p>The game was on.</p>
+                
                 
                 
                 
@@ -3154,14 +3181,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

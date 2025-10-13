@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.161896">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.161896">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.605803">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.605803">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.161896",
-        "dateModified": "2025-10-13T13:35:01.161896",
+        "datePublished": "2025-10-13T14:11:52.605803",
+        "dateModified": "2025-10-13T14:11:52.605803",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>One month later</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>She shakes her head. “Physically, there’s nothing wrong with her that I can detect. Has your bond strengthened at all?”</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Machines surround Isolde, wires snaking across her body. Intravenous feeding keeps our baby nourished, while fluids prevent dehydration. Monitors track both their heartbeats, and an oxygen tube assists her shallow breathing.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>At first, Seraphina urged me to leave—to eat, to sleep at the packhouse. But I can’t. I shower here. Leopold or Donovan brings meals and updates on pack affairs.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Magnus returned to me days after the battle. Those poisoned by silver took up to a week to recover. When he came back, I sent him searching for Aurora. She was there, but unresponsive.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Our pack’s baby boom hasn’t slowed. Elara, Luna, and Stella all gave birth while Isolde slept. Seraphina’s due any day now, but thankfully, her trained assistants can handle the delivery and Isolde’s care.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>“Isolde, please,” I beg, voice breaking. “It’s been too long. I’m losing my mind without you. You promised me you’d be okay. This isn’t okay. I’m not okay. Our baby needs you. I need you. Wake up. Let me hear your voice. Let me yell at you for your recklessness, then tell you how incredible you are for saving everyone. You’re the only good thing in my life. Everything I endured before you was worth it, just to have you. Don’t make me raise our son alone. He needs his mother.”</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Then—</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>My head snaps up. Exhausted but awake, Isolde’s eyes meet mine.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>“Oh, Isolde,” I choke out before crumbling, sobbing against her as my mate finally returns.</p>
+                
                 
                 
                 
@@ -3091,14 +3112,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

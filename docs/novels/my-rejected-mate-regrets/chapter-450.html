@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.166737">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.166737">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.610224">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.610224">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.166737",
-        "dateModified": "2025-10-13T13:35:01.166737",
+        "datePublished": "2025-10-13T14:11:52.610224",
+        "dateModified": "2025-10-13T14:11:52.610224",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Life had transformed in ways I never imagined possible. After the hunter war, after resolving the missing humans crisis, and after my mate finally awoke from his injuries, everything started falling into place.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Until today.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Isla Seraphina.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>The bond between a father and his daughter was sacred. And I swore then—no one would ever harm her.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Back at the packhouse, I collected Sebastian from Leopold and Lillian. Our pack was experiencing a baby boom—Leopold and Lillian were expecting their third child any day now. Seraphina and Donovan had welcomed their children back-to-back—a girl, then a boy. Angel and Sebastian had two boys in the past year, and Evelyn had finally convinced Adrian to expand their family again—this time, a son.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;How’s our Luna?&#34; Lillian asked, rubbing her swollen belly in the same absent gesture Isolde often did.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;We will,&#34; Leopold promised, wrapping his arms around Lillian and massaging the spot she’d been touching. I’d learned that trick from Isolde—our babies always calmed when they felt their father’s touch. Leopold had picked up on it too.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>I reviewed the pack finances, satisfaction warming my chest. We were thriving—completely debt-free, with enough funds to expand without borrowing.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Theodore and Rosalind had opened a smoked meats and hot sauce shop. That damn hot sauce lived up to the hype. The moment they started marketing it, demand exploded. Humans couldn’t get enough. Theodore now had a full team handling production and distribution. Rosalind still smoked meats for the kitchens, but half her stock sold in their store.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Lillian’s chicken initiative had been another success. Hundreds of egg-layers and meat birds now roamed our lands. It gave the younger pups responsibility, kept them busy, and saved us a fortune on eggs and poultry.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Life was good.</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>It was everything we’d fought for.</p>
+                
                 
                 
                 
@@ -3123,14 +3148,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

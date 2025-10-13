@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:59.084243">
-    <meta property="article:modified_time" content="2025-10-13T13:34:59.084243">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.594487">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.594487">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:59">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:59.084243",
-        "dateModified": "2025-10-13T13:34:59.084243",
+        "datePublished": "2025-10-13T14:11:50.594487",
+        "dateModified": "2025-10-13T14:11:50.594487",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Alexander adored Victoria. He&#39;d never intentionally make her feel inadequate just to accommodate Isabella.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>His voice trailed off. Both he and Isabella were Frederick&#39;s protégés—that much was undeniable.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Beneath his frosty exterior, Frederick possessed a compassionate heart. His high standards didn&#39;t negate his genuine care for them.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>This was Nathaniel&#39;s primary concern.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Her priority now was executing her responsibilities flawlessly.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Emerging from her shower, Isabella froze when she spotted Alexander in the bedroom. His unexpected appearance surprised her. She gave a brief nod in acknowledgment.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>The next morning, Isabella slept in. Descending the stairs, she heard Eleanor&#39;s acerbic voice. &#34;It was past eleven when I retired last night, Alexander, and you were still missing. I&#39;d nearly given up hope of seeing you home again!&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>She rapped the table sharply. &#34;Have you lost your tongue?&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;I thought you&#39;d ignored me again!&#34; Eleanor scoffed.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Eleanor clutched her chest dramatically before waving Isabella over. &#34;Join us, dear.&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>&#34;Correction—we three are going,&#34; Eleanor corrected with a chuckle. &#34;Where would you like to visit, Isabella? Your wish is my command.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>Eleanor&#39;s eyes sparkled with mischief. &#34;What about the thermal springs? Our last attempt was... interrupted.&#34; She shot Alexander a pointed look. &#34;This time, certain individuals will make proper amends.&#34;</p>
+                
                 
                 
                 
@@ -827,7 +852,9 @@
                 
                 
                 
+                
                 <p>Isabella averted her gaze. While she&#39;d visited the springs before and currently felt little enthusiasm, she wouldn&#39;t deny Eleanor&#39;s request. &#34;That sounds lovely.&#34;</p>
+                
                 
                 
                 
@@ -3182,14 +3209,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

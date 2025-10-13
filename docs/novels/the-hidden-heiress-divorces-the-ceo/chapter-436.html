@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.773997">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.773997">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.306544">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.306544">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.773997",
-        "dateModified": "2025-10-13T13:34:58.773997",
+        "datePublished": "2025-10-13T14:11:50.306544",
+        "dateModified": "2025-10-13T14:11:50.306544",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>She tapped the presentation screen for emphasis. &#34;While Kingsley Industries hasn&#39;t ventured into this space before, this represents a golden opportunity for diversification—&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;I strongly object, Ms. Carter.&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Evelyn arched an eyebrow. &#34;Do you have concerns, Director Hawthorne?&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>He leaned forward, his gold cufflinks glinting. &#34;These are our specialties. Our proven successes. And now you want us to gamble on some fleeting social media trend?&#34; His gaze sharpened. &#34;Tell me, Ms. Carter, what&#39;s your success rate projection?&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Perhaps reconsider this impulsive decision,&#34; added a silver-haired woman, adjusting her glasses. &#34;The media sector is notoriously volatile.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>The debate grew heated, opinions clashing like waves against rocks.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>When the arguments reached their peak, he delivered his final blow. &#34;Ms. Carter, the board has spoken. Stick to what we know. That property development proposal sounds far more promising than chasing internet fads.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>But the young CEO remained unshaken, her composure steel.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Her question struck like a lightning bolt.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>&#34;Ms. Carter, property will always hold value,&#34; argued one director.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>&#34;Why take unnecessary risks when we have proven business models?&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>Julian&#39;s smirk widened. This should be good.</p>
+                
                 
                 
                 
@@ -827,7 +852,9 @@
                 
                 
                 
+                
                 <p>She laughed.</p>
+                
                 
                 
                 
@@ -843,7 +870,9 @@
                 
                 
                 
+                
                 <p>&#34;Who said we&#39;d be starting from scratch?&#34;</p>
+                
                 
                 
                 
@@ -859,7 +888,9 @@
                 
                 
                 
+                
                 <p>At that precise moment, the conference room doors swung open.</p>
+                
                 
                 
                 
@@ -3186,14 +3217,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

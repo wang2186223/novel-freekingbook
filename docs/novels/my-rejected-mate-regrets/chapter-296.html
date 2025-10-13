@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.919133">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.919133">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.359386">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.359386">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.919133",
-        "dateModified": "2025-10-13T13:35:00.919133",
+        "datePublished": "2025-10-13T14:11:52.359386",
+        "dateModified": "2025-10-13T14:11:52.359386",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Hours passed in a blur of snapping bones and reforming muscle. When it finally ended, I collapsed onto the damp earth, gasping. Aurora surged forward, lifting our unfamiliar four-legged form with cautious steps. Every movement felt alien, uncoordinated.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Aurora bolted. I relinquished control, exhilarated by her joy as she raced through the trees. Her playful bark echoed in my mind, infectious. We ran until a potent scent halted us—pack territory. &#34;We must avoid their borders,&#34; Aurora warned.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;You’re stunning, Aurora.&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>A week had passed since Aurora’s arrival, and our new routine settled in. Days at work, nights running wild. Yet questions gnawed at me. As a Guardian, Aurora insisted we had a purpose—but whether she didn’t know or refused to say, I couldn’t tell.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Tonight, we traced pack boundaries, Aurora drinking in the familiar aromas. I sensed her longing for pack life, but neither of us would return to my father’s cruelty. So when the diner’s bell chimed near closing, the sudden rush of pine and damp earth startled me. A werewolf. The first since my change.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Aurora stirred urgently. &#34;I need to see him.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>The aroma hit like a tidal wave—sandalwood, cedar, and something primal that made my mouth water. My gaze swept the room, locking onto him: the man from over a week ago, watching me with equal intensity.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>His lips curved into a dazzling smile as he echoed, &#34;Mate.&#34;</p>
+                
                 
                 
                 
@@ -3059,14 +3076,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

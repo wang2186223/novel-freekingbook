@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.017184">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.017184">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.457236">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.457236">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.017184",
-        "dateModified": "2025-10-13T13:35:01.017184",
+        "datePublished": "2025-10-13T14:11:52.457236",
+        "dateModified": "2025-10-13T14:11:52.457236",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Walking back into the kitchen, I clap my hands sharply. &#34;Alright, who here has computer experience?&#34; Only Gwendolyn raises her hand.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>As I boot up the system, I question her about previous administrative work. Managing staff rotations for both the kitchens and pack house consumes hours I don&#39;t have. Gwendolyn&#39;s experience assisting her sister, a Lead Omega in their former pack, makes her ideal for this role.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;Luna, may we speak privately?&#34; Leopold asks. Though Lillian bites her lip nervously, she leans into her mate&#39;s embrace.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Lillian immediately presses closer, her grip on his arm speaking volumes. When Leopold kisses her forehead, my heart swells. She sees past what others might consider a flaw.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Lillian trembles as he recounts her escape - how she fought through beatings to save her baby.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Leopold&#39;s jaw clenches. &#34;You mean who fathered her, surely?&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Tears streak Lillian&#39;s face. &#34;I don&#39;t know what they used,&#34; she whispers.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Lillian&#39;s relieved sob cracks something in my chest. &#34;Thank you, Luna. Leopold swore you and Alpha Victor would accept us.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Drying her eyes, Lillian squares her shoulders. &#34;I want to contribute. However I can.&#34;</p>
+                
                 
                 
                 
@@ -3075,14 +3094,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

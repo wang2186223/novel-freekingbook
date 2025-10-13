@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.194195">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.194195">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.635353">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.635353">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.194195",
-        "dateModified": "2025-10-13T13:35:01.194195",
+        "datePublished": "2025-10-13T14:11:52.635353",
+        "dateModified": "2025-10-13T14:11:52.635353",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>I felt her tense as we stepped out of the school. Good. Let them all see. I wanted to make my intentions clear.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>I steered the conversation toward today’s training session. &#34;Tell me—where do you think your strengths and weaknesses lie?&#34; I already had my own assessment from yesterday’s obstacle course, but I wanted to hear her perspective.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Not Ivy. She had clear ideas about where she needed work and how to push herself further. What she lacked was a sparring partner who could truly challenge her. I’d assumed Silas would have filled that role, but now I saw how wrong I’d been—both Alistair and I had underestimated her.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>I jogged to the packhouse, dropped my things in my room, and changed quickly. Excitement thrummed through me—I hadn’t felt this eager for a fight since my last match with Alpha Sebastian. A plan was already forming in my mind, a way to test Ivy’s limits while incorporating her own strategies.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Alpha Sebastian studied me. &#34;Anything I should know, Gregory?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>His skeptical hum told me he didn’t buy it. Fine. As long as he gave me the green light.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;Deal, Alpha.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;Thank you, Sebastian.&#34; I turned just as Ivy approached.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>I grinned at her. &#34;You’re stuck with me.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>&#34;Actually, Alpha Sebastian approved a private session. I want to see what you’re capable of.&#34; I motioned for her to follow me to a more secluded area.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Once we were clear, I shifted into a defensive stance. &#34;Show me what you’ve got.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>&#34;Try to hit me,&#34; I corrected.</p>
+                
                 
                 
                 
@@ -827,7 +852,9 @@
                 
                 
                 
+                
                 <p>I smirked. &#34;Like I said—you can try.&#34;</p>
+                
                 
                 
                 
@@ -843,7 +870,9 @@
                 
                 
                 
+                
                 <p>Let her try. This was going to be fun.</p>
+                
                 
                 
                 
@@ -3162,14 +3191,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

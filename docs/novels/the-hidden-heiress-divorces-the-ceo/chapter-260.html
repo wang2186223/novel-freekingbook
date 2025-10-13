@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.469910">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.469910">
+    <meta property="article:published_time" content="2025-10-13T14:11:49.996902">
+    <meta property="article:modified_time" content="2025-10-13T14:11:49.996902">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:49">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.469910",
-        "dateModified": "2025-10-13T13:34:58.469910",
+        "datePublished": "2025-10-13T14:11:49.996902",
+        "dateModified": "2025-10-13T14:11:49.996902",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Silence thickened the air.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Adrian dismissed him with a glance, turning his attention to Evelyn Carter instead. &#34;What&#39;s your take on this situation, Ms. Carter?&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;Now we&#39;ve all witnessed Mr. Prescott&#39;s capabilities firsthand - how he single-handedly secured the Dunhill project.&#34; Her eyes swept across the room before landing pointedly on Montgomery Pierce. &#34;I believe Mr. Prescott deserves a full explanation for today&#39;s events.&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;Present your proof. Fail to do so, and you&#39;ll face charges for false accusation. That&#39;s a jailable offense.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>What went wrong?</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Julian&#39;s face darkened as he jerked away. &#34;Your actions have nothing to do with me!&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Panic flashed across Julian&#39;s features.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;Director Hawthorne, you gave me direct orders!&#34; Montgomery interrupted hysterically. &#34;You said I just needed to report Mr. Prescott and you&#39;d handle everything else!&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Julian&#39;s face twisted in fury. &#34;Silence!&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Evelyn paid no heed to Julian&#39;s protests. She knelt beside the trembling accountant, her voice low but carrying. &#34;Mr. Pierce, you&#39;ve been with this company for years. You understand how things work.&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Montgomery nodded frantically. &#34;I swear, Ms. Carter! Only the truth! Every word!&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>&#34;It was Director Hawthorne!&#34; Montgomery blurted out. &#34;No - it was his assistant, Donovan Pierce who approached me! They said Mr. Prescott was obstructing the-&#34;</p>
+                
                 
                 
                 
@@ -827,7 +852,9 @@
                 
                 
                 
+                
                 <p>Julian&#39;s face paled as he scrambled to shift blame. &#34;It was Donovan! That traitor! I can&#39;t believe he&#39;d use my name for such schemes. I won&#39;t let him-&#34;</p>
+                
                 
                 
                 
@@ -3154,14 +3181,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

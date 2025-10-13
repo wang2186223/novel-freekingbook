@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:59.820105">
-    <meta property="article:modified_time" content="2025-10-13T13:34:59.820105">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.194756">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.194756">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:59">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:59.820105",
-        "dateModified": "2025-10-13T13:34:59.820105",
+        "datePublished": "2025-10-13T14:11:51.194756",
+        "dateModified": "2025-10-13T14:11:51.194756",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>When Isabella stepped through the doors, the engineering team erupted in applause. News of her stellar performance at the launch had spread like wildfire through the company. These were the colleagues who worked most closely with her, yet even they were stunned by her brilliance today.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>From his seat, Kieran Blackwood observed Isabella with quiet intensity. He&#39;d made multiple attempts to schedule time with her recently, but her packed calendar had prevented any personal meetings. Now, watching her command the room with effortless grace, doubt crept into his mind.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>His gaze dropped to his clasped hands. Had he ever truly stood a chance?</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Isabella flashed him a distracted smile. &#34;Thank you, Kieran.&#34; Her mind already racing toward the backlog of YodaVision work awaiting her attention, she excused herself with a quick nod.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Perhaps fate had brought him back to Salzburg for this very reason.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;Mr. Holloway&#39;s office just called. They&#39;re withdrawing from partnership discussions.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>The assistant hesitated. &#34;There&#39;s more. Mr. Langford and Mr. Pembroke&#39;s offices also called. They&#39;re reconsidering their agreements with us.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;Dismissed.&#34; The word came out clipped but controlled. Only when the door clicked shut did Victoria allow her composure to fracture, just for a moment. Then she straightened her shoulders and reached for the phone. Damage control began now.</p>
+                
                 
                 
                 
@@ -3095,14 +3112,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

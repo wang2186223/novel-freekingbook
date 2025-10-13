@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.039949">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.039949">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.479411">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.479411">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.039949",
-        "dateModified": "2025-10-13T13:35:01.039949",
+        "datePublished": "2025-10-13T14:11:52.479411",
+        "dateModified": "2025-10-13T14:11:52.479411",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>I managed to accomplish everything on our agenda - submitted the official pack registration, enrolled us in Luna&#39;s Challenge, scheduled the first alliance meeting with Adrian and Sebastian&#39;s packs, and promised Sebastian workforce numbers within the week.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Leopold stands waiting at the packhouse entrance, cradling Lillian&#39;s newborn. &#34;Alpha, Luna. Welcome home.&#34; We shift quickly and dress before approaching.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>He grins sheepishly. &#34;Thank you, Alpha.&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Leopold hesitates. &#34;Before you settle in, Lillian and I have something to show you.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Color floods his cheeks. &#34;I lost control. Even without a wolf, the bond took hold.&#34; He pulls Lillian close, pride shining in his eyes.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;Actually,&#34; Leopold adjusts his hold on the baby, &#34;we&#39;d like you to meet our daughter. We chose a name that represents everything we&#39;ve found here. Alpha, Luna, meet Felicity.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Over Isolde&#39;s bent head, Leopold meets my gaze. I nod. &#34;Spread the word - I have announcements at dinner. Everyone should attend.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Isolde touches Lillian&#39;s arm. &#34;A perfect name for such a beautiful child.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;I should check on dinner preparations,&#34; Isolde says, turning to me.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Leopold falls into step beside me. &#34;It&#39;s done then?&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>&#34;Alpha.&#34; He gestures to the adjacent door. &#34;Donovan took your office assignment seriously.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>&#34;Nathaniel, the carpenter working on Felicity&#39;s cradle, repurposed damaged pieces. Yours and Isolde&#39;s offices were first priority. Donovan&#39;s furniture is next, then spaces for Lillian and Seraphina - though she&#39;ll mostly be at the medical center.&#34;</p>
+                
                 
                 
                 
@@ -823,6 +848,7 @@
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824594360-0'); });
                   </script>
                 </div>
+                
                 
                 
                 
@@ -3138,14 +3164,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

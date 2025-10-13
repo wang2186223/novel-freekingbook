@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.917601">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.917601">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.357900">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.357900">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.917601",
-        "dateModified": "2025-10-13T13:35:00.917601",
+        "datePublished": "2025-10-13T14:11:52.357900",
+        "dateModified": "2025-10-13T14:11:52.357900",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>It was my sixteenth birthday. Mom had cleared her schedule to celebrate with me. So many of my birthdays had been tainted by my father&#39;s cruelty, but this one became the most devastating.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>The horror struck during dinner, right when pack celebrations would normally begin. Mom froze mid-bite, her face twisting in sudden anguish. Then came that terrible scream as she clutched her mating mark. I rushed to hold her, accustomed to these episodes by now. But this time... this time it killed her.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Without Theodore&#39;s kindness, I don&#39;t know where I&#39;d be. Probably lost in the human foster system. But I&#39;d already started covering Mom&#39;s shifts at the diner. She&#39;d told Theodore she had cancer - impossible for werewolves with our healing abilities, but he never knew her true nature.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>I&#39;m always wary when bus travelers stop by. Many assume a lone waitress is easy prey for a quick fling. Theodore keeps me safe, but I stay alert around these transient customers.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>On my eighteenth birthday, I wake with no intention of celebration. My birthdays mark only tragedies: failing to manifest my wolf, my banishment, Mom&#39;s death. The sole bright spot? Human law now recognizes me as an adult - no one can force me out.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Oh Isolde, you&#39;ve endured so much waiting for me. Forgive my long absence.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>It&#39;s me, your wolf. My name is Aurora.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>I&#39;ve always been part of you, but couldn&#39;t awaken until now.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Our destined Guardian spirit lived beyond his time. The Moon Goddess honored another&#39;s plea to spare him. I waited until we received our proper Guardian bond.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Always, Isolde. You&#39;ll never be alone again.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Aurora. At last.</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>At work, I tell Theodore I need the evening off. When pressed, I admit it&#39;s my birthday - one I&#39;d planned to ignore, but now must honor. He produces a cupcake with a wink, shooing me out the door.</p>
+                
                 
                 
                 
@@ -3123,14 +3148,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

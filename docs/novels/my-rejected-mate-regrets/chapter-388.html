@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.069120">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.069120">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.508230">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.508230">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.069120",
-        "dateModified": "2025-10-13T13:35:01.069120",
+        "datePublished": "2025-10-13T14:11:52.508230",
+        "dateModified": "2025-10-13T14:11:52.508230",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Back at Blackthorn Manor, I headed straight for the kitchens to assess the day&#39;s progress. Several omegas kept glancing my way before quickly looking down at their tasks.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Rosalind stepped forward, twisting her apron in nervous hands. &#34;Luna, we were wondering... about the Nightshade Pack gathering. Did you confirm if omegas could attend?&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Victor moved beside me, his presence commanding attention. &#34;What&#39;s really troubling you?&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>The entire kitchen staff nodded in agreement. I exchanged a glance with Victor before responding.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Over the following week, Theodore and Rosalind made slow but steady recoveries. Theodore lost his leg in the attack, but Rosalind kept her eye despite the permanent scars marking her face. By week&#39;s end, we&#39;d moved Rosalind and their children into the manor as construction freed up more rooms.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>News of my attendance at Nightshade&#39;s gathering spread quickly. Thirty omegas signed up, bringing our delegation to eighty. Seraphina was thrilled about both the increased numbers and my participation, suggesting we practice enhancing our Guardian abilities beforehand.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>The gathering proved wildly successful with twenty-six mating pairs found - fifty-two wolves united. Fifteen were our omegas. Of the remaining matches, six were warriors and five workers, including our head gardener who mated with a Nightshade warrior. She decided to relocate, eager to establish gardens for her new pack. Surprisingly, most warriors chose to stay with Blackthorn, drawn by the opportunity to build new homes and lives. Their mates agreed readily.</p>
+                
                 
                 
                 
@@ -740,6 +755,7 @@
                 
                 
                 
+                
                 <p>Adrian, Evelyn, Sebastian, Seraphina, Victor and I convened to establish a solution: newly mated pairs would spend alternating weeks in each pack before deciding permanently.</p>
                 
                 
@@ -748,7 +764,9 @@
                 
                 
                 
+                
                 <p>I insisted both Alphas publicly guarantee no forced allegiances. Additionally, I reminded them Victor and I would return to Blackthorn in a week, offering transport back for any who chose to come. This assurance eased tensions, and all agreed to begin their trial period in their mates&#39; packs.</p>
+                
                 
                 
                 
@@ -3067,14 +3085,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

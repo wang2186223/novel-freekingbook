@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.708950">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.708950">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.175419">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.175419">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.708950",
-        "dateModified": "2025-10-13T13:35:00.708950",
+        "datePublished": "2025-10-13T14:11:52.175419",
+        "dateModified": "2025-10-13T14:11:52.175419",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>We dive into work, tackling the backlog that&#39;s been piling up in my absence. Nathaniel is a capable Beta who can seamlessly step into the Alpha role when needed, but he&#39;s meticulously documented every decision made while I was gone. It&#39;s reassuring to see the pack functioning smoothly despite everything. I update him on the company&#39;s progress and the new hires I brought in during my time away.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>I&#39;m out the door and up three flights of stairs in an instant, bursting into her room. Her eyes meet mine, haunted and wide with terror. When I step closer, she flinches away. Damn it.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Without hesitation, I shift, shredding my clothes in the process. Dorian leaps onto the bed, and Seraphina immediately clings to him, her grip desperate. He settles over her just like last night, his massive frame pressing gently against hers.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;No. Another nightmare. Keep everyone off this floor.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>I know. For the first time in my life, I’ve had a female secluded on my private floor for nearly two weeks—unseen by anyone. And now that Evelyn has visited, the speculation will only grow wilder.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>She has nothing to apologize for. The horrors she endured—I can’t even fathom them. Anger surges through me. I should have found her sooner. Logically, I know searching a vampire coven for my mate would’ve been madness, but the guilt still claws at me. I’m her mate. I was supposed to protect her.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Dorian licks her face. &#39;I don’t like when mate cries.&#39;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Dorian nudges her with his nose, the same way that coaxed her to talk last night. I need to know what’s haunting her.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Her voice wavers. &#34;We made eye contact once. After that, we’d mouth words to each other at night. Just a way to say, You’re not alone. Someone here cares.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>I need to speak to her. Dorian agrees.</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>&#34;What are you doing?&#34; she asks, voice tight.</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>&#34;Shhh. I just want to talk to you.&#34;</p>
+                
                 
                 
                 
@@ -3115,14 +3139,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

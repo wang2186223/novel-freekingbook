@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.531937">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.531937">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.999622">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.999622">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.531937",
-        "dateModified": "2025-10-13T13:35:00.531937",
+        "datePublished": "2025-10-13T14:11:51.999622",
+        "dateModified": "2025-10-13T14:11:51.999622",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Morning light brought the sounds of combat training drifting through my window. I curled into the window seat, watching the scene below. Adrian had mentioned Father was overseeing warrior drills, but I hadn&#39;t expected them to be using our private training grounds.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Father was brutal. His insults rained down like hailstones, calling them &#34;kittens&#34; and &#34;weaklings&#34; as he put them through hellish obstacle courses. Adrian never flinched, taking every challenge without complaint.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Sebastian gave him the toughest fight, but Adrian still emerged victorious.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;Really? This is how you&#39;re spending your recovery time? Staring at our Alpha like some lovestruck pup?&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Mmm, perhaps we should request private lessons. I&#39;m certain watching him up close would speed my recovery.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;You&#39;re no fun,&#34; she sulked, though her purring continued as we kept watching.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Downstairs, I was fixing breakfast when Father wheeled in. &#34;Sweetheart, you should be resting.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>He chuckled. &#34;Catch any of the training?&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Father&#39;s grin turned wicked. &#34;Oh, this was just the warm-up.&#34; He rubbed his hands together like a cartoon villain.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>The pack hospital visit came at 3pm. Dr. Whitmore wanted both bloodwork and an IV for hydration. Once the needle was in, I seized my chance.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>His expression shuttered. &#34;What makes you think—&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>He exhaled heavily. &#34;This should come from Sebastian... but you deserve the truth.&#34; His gaze turned grave. &#34;When you were taken and we realized Victor was responsible, Sebastian revealed something shocking about him.&#34;</p>
+                
                 
                 
                 
@@ -3123,14 +3148,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

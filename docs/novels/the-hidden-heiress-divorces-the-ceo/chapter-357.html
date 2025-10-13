@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.643904">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.643904">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.171969">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.171969">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.643904",
-        "dateModified": "2025-10-13T13:34:58.643904",
+        "datePublished": "2025-10-13T14:11:50.171969",
+        "dateModified": "2025-10-13T14:11:50.171969",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Every head turned toward her, tracking her movement until she took her place at the head of the long mahogany table.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Evelyn met his gaze with equal politeness. &#34;Flattery won&#39;t change our quarterly reports, Director Hawthorne. We&#39;re all here for Kingsley Industries&#39; success.&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>His words triggered a ripple of nods around the table, as if he held the gavel instead of Evelyn.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>After a calculated pause, she continued, &#34;Our first half performance shows promising growth across all divisions. Let&#39;s hear from each department head—&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Ms. Carter, these financials tell quite a story. Shouldn&#39;t we address the elephant in the room first?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Evelyn crossed her arms, one perfectly manicured brow arching.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>The first director smirked. &#34;Your little wager with Director Hawthorne makes these figures particularly... entertaining. Do recall your exact words from last quarter?&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Julian&#39;s smug expression said everything. He rose with theatrical grace. &#34;Now gentlemen, let&#39;s not rush to conclusions. The year isn&#39;t over yet, is it?&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;Well, Ms. Carter? Your thoughts?&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Julian&#39;s facade slipped for a fraction of a second before he recovered. &#34;You misunderstand me completely. Just some friendly boardroom banter.&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Julian spread his hands with mock innocence. &#34;A simple business wager between colleagues, nothing more. We all witnessed the terms.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>Murmurs of assent circled the table. Maxwell wasn&#39;t having it. &#34;So you&#39;re declaring victory already? Interesting timing, considering we still have two quarters left.&#34;</p>
+                
                 
                 
                 
@@ -823,6 +848,7 @@
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824594360-0'); });
                   </script>
                 </div>
+                
                 
                 
                 
@@ -3146,14 +3172,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

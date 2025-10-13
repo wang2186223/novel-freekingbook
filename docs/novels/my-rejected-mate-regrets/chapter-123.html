@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.599174">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.599174">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.075375">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.075375">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.599174",
-        "dateModified": "2025-10-13T13:35:00.599174",
+        "datePublished": "2025-10-13T14:11:52.075375",
+        "dateModified": "2025-10-13T14:11:52.075375",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>&#34;I&#39;ll do my best,&#34; Evelyn replies, waving at my father before we step outside. The evening air is crisp, the last remnants of daylight fading fast. &#34;You cold? I can grab you a jacket.&#34; A thought strikes me. &#34;Better yet, come with me. I&#39;ll give you one of mine.&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>As we enter, I release her hand and head to the closet.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>I pause, seeing my space through her eyes for the first time. It&#39;s just always been my room—filled with trophies from school and Alpha tournaments, a few personal touches here and there. But if she doesn’t like something, I’ll change it. The only thing that matters is that she’s happy here with me.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;It&#39;s enormous!&#34; she breathes, eyes wide.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>If I hadn’t been watching her closely, I would’ve missed the way she stiffens. She doesn’t know she’s my mate yet, and I can only imagine what’s running through her mind.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Gods, her birthday can’t come soon enough.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;Ready.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>But as we reach the forest’s edge, emotion swells in my chest, impossible to contain. It’s too soon, but I don’t care.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;I love you, Evelyn Sinclair.&#34; The words spill out, raw and honest. &#34;I know it’s early. I know you’re waiting for your birthday before making this kind of commitment. But I need you to know—what I feel for you is real. I love you. That will never change.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>&#34;I think I’m falling for you too, Adrian.&#34;</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>She’s falling for me.</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>I respond the only way I can—pulling her close and kissing her with everything I have.</p>
+                
                 
                 
                 
@@ -3115,14 +3139,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.453819">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.453819">
+    <meta property="article:published_time" content="2025-10-13T14:11:49.979250">
+    <meta property="article:modified_time" content="2025-10-13T14:11:49.979250">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:49">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.453819",
-        "dateModified": "2025-10-13T13:34:58.453819",
+        "datePublished": "2025-10-13T14:11:49.979250",
+        "dateModified": "2025-10-13T14:11:49.979250",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Her fingers grasped empty air as Evelyn sidestepped with dancer-like grace.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Rosalind&#39;s face drained of color. The reality of her situation crashed over her like icy waves. &#34;Evelyn, please—&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Adrian leaned against the marble pillar, watching with amused detachment. &#34;Tell me, Ms. Blackwell, is this your first corporate heist? Or just the first time you&#39;ve been caught?&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Evelyn&#39;s frosty gaze didn&#39;t waver. &#34;You must think I&#39;m incredibly naive.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Evelyn&#39;s laugh cut through the lobby like shattering crystal. &#34;The Sterlings? Nathan? Since when did they ever show me basic human decency?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;That,&#34; Evelyn said, adjusting her watch with deliberate slowness, &#34;is the most hilarious thing I&#39;ve heard all year.&#34; She leaned down until their faces were inches apart. &#34;Here&#39;s your choice—turn yourself in within seventy-two hours, or I deliver this evidence personally. Clock&#39;s ticking.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Outside the Times Building, autumn leaves swirled around Evelyn&#39;s heels as she turned to Adrian. &#34;That contract acquisition was masterfully done. Drinks at The Velvet Room tonight?&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Evelyn pretended to consider, tapping one stiletto against the pavement. &#34;For Kingsley Industries&#39; new MVP? I suppose I&#39;ll need to prepare something special.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>As Adrian disappeared into the parking structure, a midnight-blue Rolls-Royce glided to the curb. The tinted window descended to reveal Dominic&#39;s sharp profile.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>&#34;Brother dearest.&#34; She arched an eyebrow. &#34;To what do I owe this royal summons?&#34;</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>After texting Adrian, Evelyn slid into the butter-soft leather interior. The car accelerated onto the expressway, Manhattan&#39;s skyline blurring past the windows in a kaleidoscope of steel and glass.</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>Evelyn&#39;s fingers tightened around her phone case as unfamiliar skyscrapers loomed ahead. &#34;Dominic...where exactly are we going?&#34;</p>
+                
                 
                 
                 
@@ -3123,14 +3147,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

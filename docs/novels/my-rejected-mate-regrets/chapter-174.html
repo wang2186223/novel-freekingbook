@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.689417">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.689417">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.156322">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.156322">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.689417",
-        "dateModified": "2025-10-13T13:35:00.689417",
+        "datePublished": "2025-10-13T14:11:52.156322",
+        "dateModified": "2025-10-13T14:11:52.156322",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>When the doctor suggested reconnecting the IV, my pulse spiked. The thought of being tethered again sent ice through my veins. I’d spent seven years as a prisoner—I couldn’t go back to that helplessness. Relief flooded me when Sebastian intervened, demanding alternatives. I’d do anything to avoid restraints.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>A bath.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>I studied him, weighing the offer against potential traps.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>My gaze flicked to the adjoining bathroom. The temptation was unbearable. &#34;Okay.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Need help getting there?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>He nodded and disappeared into the bathroom. The sound of running water followed. I pushed upright, dragging the sheet around myself before sliding off the bed. My legs buckled instantly. The floor rushed up to meet me—</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>I curled against him, painfully aware the sheet hadn’t followed. Naked, I pressed into his chest, desperate for modesty. He adjusted his grip, testing the water one-handed like I weighed nothing. The sheer strength left me stunned.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>He set the bottles beside me, then moved to the door. I thought he was leaving, but he only pushed it halfway shut before returning. &#34;Lean back.&#34;</p>
+                
                 
                 
                 
@@ -756,6 +773,7 @@
                 
                 
                 
+                
                 <p>&#34;Your hair’s a disaster. I’m washing it.&#34;</p>
                 
                 
@@ -764,7 +782,9 @@
                 
                 
                 
+                
                 <p>I hesitated. His sigh was heavy as his hands settled on my shoulders. I flinched, but he leaned close, voice low. &#34;I won’t hurt you. You’re under my protection now. Relax.&#34;</p>
+                
                 
                 
                 
@@ -3083,14 +3103,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

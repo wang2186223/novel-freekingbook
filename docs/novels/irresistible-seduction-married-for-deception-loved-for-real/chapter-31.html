@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:59.969484">
-    <meta property="article:modified_time" content="2025-10-13T13:34:59.969484">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.405354">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.405354">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:59">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:59.969484",
-        "dateModified": "2025-10-13T13:34:59.969484",
+        "datePublished": "2025-10-13T14:11:51.405354",
+        "dateModified": "2025-10-13T14:11:51.405354",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Brinley lowered her gaze, silent tears slipping down her cheeks.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;Get to the point,&#34; Vincent snapped, his patience wearing thin.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Vincent&#39;s gaze locked on Brinley. &#34;How do you know it was Hannah?&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>After that, Danica sent a sharp glare in Hannah&#39;s direction.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Hannah arched an eyebrow, looked at Brinley, and said calmly, &#34;That wasn&#39;t my doing.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>After the scene at breakfast, Danica had been itchy for an opportunity to bring Hannah down. This was exactly what she wanted.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>so I hired someone to investigate. That&#39;s how I found those messages and the bank transfer.&#34; Tears rolled down her cheeks. &#34;I just never imagined that Hannah would hate me enough to destroy me.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Hannah let out a laugh. &#34;Well, since you&#39;re so sure I paid off those men, then bring them in. Let&#39;s hear their story right to my face.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Hannah raised an eyebrow. &#34;Or is it possible you&#39;re just scared of what might come out?&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Naturally, Danica took Brinley&#39;s side without question.</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>Danica flushed with rage.&#34;Unbelievable! First,you hurt her, and now, you call her a liar? You&#39;re despicable!&#34;</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>Danica raised her hand, ready to slap Hannah. Vincent stepped in, catching Danica&#39;s wrist before she could follow through.</p>
+                
                 
                 
                 
@@ -1551,14 +1575,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

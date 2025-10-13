@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.681192">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.681192">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.148260">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.148260">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.681192",
-        "dateModified": "2025-10-13T13:35:00.681192",
+        "datePublished": "2025-10-13T14:11:52.148260",
+        "dateModified": "2025-10-13T14:11:52.148260",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>&#34;Open your eyes.&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>My limbs feel weak as water, but I force myself to assess the situation. This isn&#39;t my cell at the vampire coven. The space feels... welcoming. Ridiculous. Bedrooms should be described as cozy or well-decorated, not safe. Especially not for me. I need to move before whoever put me here realizes I&#39;m conscious.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Footsteps echo in the hallway. I drop back against the pillows, dragging the covers up to my chin just as the door swings open.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Then his scent hits me.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Our eyes lock as his dominance rolls over me. Fear surges like a tidal wave, but I&#39;ve had years of practice drowning it. I shove the emotion down, locking it away. Whatever comes next, I&#39;ll survive it. I always do.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Not a question. I remain silent, waiting.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;We were treating severe dehydration and malnutrition. Your blood levels were critically low - explains why that isn&#39;t clotting.&#34; He reaches for my arm.</p>
+                
                 
                 
                 
@@ -740,6 +755,7 @@
                 
                 
                 
+                
                 <p>A low growl rumbles in his chest. &#34;I don&#39;t drink blood, little wolf. Only reason I care about yours is because I didn&#39;t waste a week of my life healing you just to watch you bleed out.&#34; His palm remains outstretched. &#34;Arm. Now.&#34;</p>
                 
                 
@@ -748,7 +764,9 @@
                 
                 
                 
+                
                 <p>Not a request. And I&#39;m fresh out of options.</p>
+                
                 
                 
                 
@@ -3067,14 +3085,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

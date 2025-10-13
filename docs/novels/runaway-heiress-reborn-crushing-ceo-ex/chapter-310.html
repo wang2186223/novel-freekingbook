@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:59.451923">
-    <meta property="article:modified_time" content="2025-10-13T13:34:59.451923">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.961839">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.961839">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:59">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:59.451923",
-        "dateModified": "2025-10-13T13:34:59.451923",
+        "datePublished": "2025-10-13T14:11:50.961839",
+        "dateModified": "2025-10-13T14:11:50.961839",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Sophia Whitmore kept glancing at the clock, clearly eager to return to the Whitmore residence with Isabella later. During a quiet moment, Isabella texted Alexander Whitmore, requesting he arrange for Sophia&#39;s transportation home that evening.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Once Sophia departed, Isabella drove away as well.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>After careful consideration, Margaret Sinclair agreed their absence would be best. With their decision made, Isabella and Margaret called Eleanor that evening.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>She glanced at Alexander before excusing herself from the dining room, warmth coloring her voice. &#34;Isabella, have you eaten yet?&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Eleanor had anticipated this. Though disappointed, she understood. Her soft chuckle carried through the phone. &#34;That&#39;s quite alright, dear. Just promise me this won&#39;t create distance between us. Call me often, yes? And remember - if you ever need anything, don&#39;t hesitate to ask. No formalities between family.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Their conversation continued briefly before ending.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Henry Whitmore was also present.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Given Isabella&#39;s closeness to Eleanor and the pending divorce status - coupled with this being Eleanor&#39;s first major birthday celebration in years - Isabella&#39;s attendance seemed almost expected.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Sophia had already finished eating and left the dining area.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Henry paused. Did Alexander not know? Or had Isabella just called about this? If she&#39;d planned to attend, a special call wouldn&#39;t be necessary.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Henry genuinely liked Isabella. He studied Alexander, fighting the urge to ask if he was absolutely certain about the divorce.</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>When Eleanor returned, Henry asked gently, &#34;Grandmother, what did Isabella say?&#34;</p>
+                
                 
                 
                 
@@ -827,7 +852,9 @@
                 
                 
                 
+                
                 <p>Alexander showed no reaction to the unspoken implications. He silently served Eleanor some food, only for her to move her bowl away, leaving his utensils suspended mid-air.</p>
+                
                 
                 
                 
@@ -3182,14 +3209,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

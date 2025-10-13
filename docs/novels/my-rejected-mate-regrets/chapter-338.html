@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.987530">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.987530">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.427388">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.427388">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.987530",
-        "dateModified": "2025-10-13T13:35:00.987530",
+        "datePublished": "2025-10-13T14:11:52.427388",
+        "dateModified": "2025-10-13T14:11:52.427388",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>His hand slips between my legs, two fingers sliding inside me. His tongue slows, matching the deliberate rhythm of his fingers. I whimper, my body trembling as he curls them just right, hitting that sweet spot. When he sucks hard on my clit, my knees buckle.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>He pulls his fingers free, gripping my thighs as he lifts me effortlessly. His mouth stays locked on me, relentless, even as he carries me to the bed. The moment my back hits the sheets, his fingers are inside me again, driving me toward another peak.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>He finally lifts his head, his voice rough with satisfaction. &#34;I love hearing you scream my name, Isolde.&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>He drags us up the bed, his body covering mine. I wrap my arms around him, pulling him closer as his mouth claims mine. I taste myself on his tongue, the intimacy of it making my pulse race.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>I nod.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>He reads me perfectly. He starts slow, but as my hips lift to meet him, his pace quickens. He hooks my leg over his arm, changing the angle, driving deeper.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>He gives it to me. His thrusts turn punishing, obliterating the line between us. My climax hits me like lightning, my vision whiting out.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>His fangs sink into my neck, marking me as his. I scream his name, my own fangs piercing his skin in return. His roar of pleasure vibrates through me as he spills inside me, our bond sealing completely.</p>
+                
                 
                 
                 
@@ -756,6 +773,7 @@
                 
                 
                 
+                
                 <p>I cradle his face in my hands. &#34;I love you too, Victor.&#34;</p>
                 
                 
@@ -764,7 +782,9 @@
                 
                 
                 
+                
                 <p>And the bond is complete.</p>
+                
                 
                 
                 
@@ -3083,14 +3103,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

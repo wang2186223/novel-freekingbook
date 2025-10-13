@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.720758">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.720758">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.186829">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.186829">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.720758",
-        "dateModified": "2025-10-13T13:35:00.720758",
+        "datePublished": "2025-10-13T14:11:52.186829",
+        "dateModified": "2025-10-13T14:11:52.186829",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>That hallway moment proved she&#39;s feeling the mate pull too, even if she doesn&#39;t understand the sensation yet.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>We reached the Sinclair residence five minutes early. I&#39;d brought two bottles of Cabernet since Evelyn hadn&#39;t specified any contributions.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Muffled voices carried through the wood. Gregory&#39;s gruff &#34;Who&#39;s here?&#34; blended with Evelyn&#39;s cheerful &#34;I&#39;ll get it!&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>We followed her into the kitchen where Evelyn positioned herself before Seraphina. &#34;Dad, we&#39;ve got company tonight,&#34; she announced.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;And someone special,&#34; Evelyn added, stepping aside to reveal my mate.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;Evander.&#34; Valeria responded through Seraphina. &#34;I go by Valeria now.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Seraphina knelt before his chair. &#34;We&#39;ll talk tonight. But first - Lily left you a message.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;You understand how Guardian spirits work? I inherit memories, but not all at once. Some surface when I meet certain people - like with Evelyn yesterday... and now you.&#34; Gregory&#39;s eyes darted to his daughter before locking onto Seraphina again.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Valeria covered their joined hands with her free one. &#34;She knew. That final battle? The Moon Goddess warned her days before. She traded her life for yours. The attack was meant to claim you, but she knew you&#39;d survive for Evelyn and Selene. Her sacrifice was deliberate.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>&#34;If you&#39;ll excuse me...&#34; Gregory wheeled away abruptly, disappearing down the hall.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Cradling her face, I murmured, &#34;Thirteen years wondering about her Guardian... and now he learns not only of Valeria&#39;s return, but that Lily chose death for him. It&#39;s overwhelming.&#34; My attention shifted to where Adrian cradled a weeping Evelyn against his chest.</p>
+                
                 
                 
                 
@@ -3107,14 +3130,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

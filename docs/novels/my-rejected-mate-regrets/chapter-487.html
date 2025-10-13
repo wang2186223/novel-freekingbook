@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.233824">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.233824">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.669446">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.669446">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.233824",
-        "dateModified": "2025-10-13T13:35:01.233824",
+        "datePublished": "2025-10-13T14:11:52.669446",
+        "dateModified": "2025-10-13T14:11:52.669446",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>She glances around at everyone before answering. I sit beside her, taking her hand in mine. &#34;What about my parents? Especially my mother. I don&#39;t think she has any idea what my father&#39;s been planning.&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Ivy nods, considering his words. &#34;I want to move into the packhouse. Before becoming a Guardian, I might have hesitated, but now... I can&#39;t trust him anymore.&#34; She hesitates. &#34;My mother won&#39;t leave him. Does that matter?&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>She&#39;s made it obvious she&#39;s waiting for her mate. And since that&#39;s me, she&#39;s essentially saving herself for me. I give Nathaniel a firm nod of understanding.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;I&#39;ll need clothes for school tomorrow. Maybe my mother can pack a bag for me?&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Yes, Alpha.&#34; She follows Lucian out.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;I know she&#39;s your mate. I know you&#39;re a Guardian, and you&#39;re like a son to me. But don&#39;t challenge me again.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Adrian steps up behind me, resting a hand on my shoulder. &#34;Grant, I get it. You and Evander are furious about what her father tried to do. And I can only imagine how angry you both are about Alpha Dominic&#39;s proposition. But you know my father. He always protects this pack—and that includes Ivy. Let him handle it.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;Apology accepted, Grant. And stop calling me Alpha—you know it irritates me.&#34; His gruff tone makes me smirk.</p>
+                
                 
                 
                 
@@ -756,6 +773,7 @@
                 
                 
                 
+                
                 <p>&#34;And Grant.&#34; I pause, glancing back. &#34;If I catch Ivy in your room or you in hers after hours, you&#39;ll answer to me. She&#39;s under my care now, and I&#39;ll treat her like my own daughter.&#34;</p>
                 
                 
@@ -764,7 +782,9 @@
                 
                 
                 
+                
                 <p>&#34;Understood, Nathaniel.&#34; I leave with a lighter heart, reassured about Ivy&#39;s safety.</p>
+                
                 
                 
                 
@@ -3083,14 +3103,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

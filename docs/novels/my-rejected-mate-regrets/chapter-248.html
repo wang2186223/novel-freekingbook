@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.833686">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.833686">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.277763">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.277763">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.833686",
-        "dateModified": "2025-10-13T13:35:00.833686",
+        "datePublished": "2025-10-13T14:11:52.277763",
+        "dateModified": "2025-10-13T14:11:52.277763",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>By the time Adrian proposed sparring, my anger had dissipated. I focused entirely on analyzing his movements, exploiting openings with precision. The successful takedown pleased me more than I expected.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>His brow furrows. &#34;Why?&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;Absolutely not. Evelyn&#39;s pregnant, and Gregory...&#34; He gestures vaguely at the wheelchair.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Donovan interjects. &#34;She&#39;s right about Gregory. When Victor attacked with those rogues, we kept throwing them his way. He dismantled them like a seasoned warrior. Mobility limitations didn&#39;t hinder him at all.&#34; Several Blackthorn warriors nod in agreement.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Of course,&#34; I reply quickly, turning away before he sees my smirk. Evelyn will have her own opinions about that.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;Truce.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Valeria practically vibrates with excitement. &#39;Yes! Now!&#39;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;Last one to the packhouse misses dessert,&#34; Sebastian declares mid-shift, his clothes shredding as Dorian bursts forth, already sprinting.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>She stretches into a full run, muscles coiling with newfound power. Dorian notices her gaining ground and accelerates. Valeria moves faster than ever before - her speed astonishes even me. At the cliff base, she scales the rock face with impossible agility, reaching the summit first.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>We pause briefly to nuzzle Genevieve on the staircase before skidding to a stop outside our room.</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>&#34;Seraphina and Sebastian racing,&#34; he explains. &#34;Looks like Seraphina won. The white wolf was Valeria - she stopped to thank you for helping Seraphina during the coven ordeal. The tawny one was Dorian.&#34;</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>I shift back, heading straight for the shower. Sebastian follows close behind. &#34;I won,&#34; I announce, pulling him in with me.</p>
+                
                 
                 
                 
@@ -3115,14 +3139,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

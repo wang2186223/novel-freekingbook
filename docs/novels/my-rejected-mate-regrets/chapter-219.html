@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.768155">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.768155">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.229820">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.229820">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.768155",
-        "dateModified": "2025-10-13T13:35:00.768155",
+        "datePublished": "2025-10-13T14:11:52.229820",
+        "dateModified": "2025-10-13T14:11:52.229820",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Valeria takes her time rising. When she finally stands, she shakes out her silver-tipped fur and wags her tail at Evander, letting out an excited yip.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#39;Like I could run forever!&#39; She bursts forward without warning. I have no idea where she&#39;s headed, but she doesn&#39;t care—she just needs to move. A joyful howl echoes behind her as she bolts westward. The moment she changes direction, I understand. She wants Sebastian and Dorian to see her.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#39;Wait until I&#39;m at full strength.&#39;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Near the summit, the first patrol spots us. Valeria doesn&#39;t slow—she pushes harder. Her triumphant howl rings through the mountains, announcing our arrival. I pray they recognize her. The last thing we need is to battle Sebastian&#39;s warriors.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>The moment Sebastian sees us, his face lights up. He spreads his arms wide. Valeria doesn&#39;t hesitate. She launches herself at him, knocking them both onto the soft grass. She&#39;s trembling with excitement, wriggling in his embrace like an overgrown puppy.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;Easy there, gorgeous.&#34; He sits up, brushing dirt from his shirt. Valeria rubs against him before prancing in circles, too exhilarated to stay still.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Valeria purrs, scent-marking Sebastian as he stands. She suddenly crouches playfully, front paws down, hindquarters raised, tail wagging furiously.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Valeria barks, darting forward to nip at his boots before retreating. She glances back over her shoulder—challenge gleaming in her golden eyes.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Valeria explodes into motion. Seconds later, thunderous paws shake the ground. She glances back to see Dorian in full pursuit. Her delighted howl splits the air. His answering cry is primal—the hunt is on.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>We&#39;re sprinting back through the canyon when that scent hits us—cloying, unnatural, unforgettable. Valeria skids to a halt, claws digging into earth. Her nose lifts, testing the air.</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>Just as Dorian reaches us, Valeria unleashes the warning howl. Danger.</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>We&#39;re stranded between Blackthorn and Nightshade territories. Alone until reinforcements arrive. And from the thickening stench, we&#39;re outnumbered.</p>
+                
                 
                 
                 
@@ -3115,14 +3139,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

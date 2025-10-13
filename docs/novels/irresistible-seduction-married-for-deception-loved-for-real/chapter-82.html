@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.001021">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.001021">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.434966">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.434966">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.001021",
-        "dateModified": "2025-10-13T13:35:00.001021",
+        "datePublished": "2025-10-13T14:11:51.434966",
+        "dateModified": "2025-10-13T14:11:51.434966",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>A storm brewed in Vincent&#39;s eyes as he caught her bythe arm and dragged her back, the door thudding shut behind them. His sleeve rolled up, he shot her a pointed look. &#34;You&#39;re not leaving,&#34; he ordered, voice crisp and unyielding.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>She smirked. What did he expect-was he seriously going to force her to stay in this room and witness his happiness with Brinley? She was hardly interested in watching.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>A crease appeared between Vincent&#39;s brows as he studied her, frustration clear. Recently, he found himself at a loss every time they spoke. Danica&#39;s presence upstairs with Brinley was the only reason he&#39;d cut his visit short-only to catch Hannah about to slip away. And on top of that, Hannah&#39;s icy tone stung. She wasn&#39;t like this before.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;Sharon gave me that responsibility. What does that have to do with you?&#34; Hannah retorted. Brinley was the only one Vincent ever seemed willing to defend.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Vincent&#39;s tone sank lower, rough and tight, like every word had to be forced past his jaw. &#34;I am not moving.Say it. What the hell&#39;s been going on with you these days?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Hannah didn&#39;t flinch. She lifted a hand and motioned toward the freshly redone bedroom behind her, her tone dripping with biting sarcasm. &#34;From whereI&#39;m standing, it looks like you&#39;re the eager one to walk away from this marriage.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>The words landed hard, each one stinging like a slap. Vincent&#39;s jaw tightened, a pulse hammering at his temple, and his breath started to come in heavy bursts.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Then came his voice again, quiet but sharpwith strain. &#34;Hannah, do you really want a divorce that badly?&#34;</p>
+                
                 
                 
                 
@@ -1495,14 +1512,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

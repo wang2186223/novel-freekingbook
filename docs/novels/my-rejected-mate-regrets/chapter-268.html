@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.870266">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.870266">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.310353">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.310353">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.870266",
-        "dateModified": "2025-10-13T13:35:00.870266",
+        "datePublished": "2025-10-13T14:11:52.310353",
+        "dateModified": "2025-10-13T14:11:52.310353",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>I curse myself for overlooking the Luna&#39;s office. The tradition had faded so long ago that the necessity never crossed my mind. Nathaniel practically vibrates with excitement when Genevieve offers assistance—exactly the role she&#39;d fulfill if she accepts their mate bond.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>At dawn, I verify Seraphina and Genevieve&#39;s arrangements before summoning Nathaniel to my office, surrendering his space to my mate. We review war strategies, scrutinize Dorian&#39;s border reinforcements, and coordinate Guardian-warrior training regimens.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>His fingers tighten around his pen. &#34;Genevieve refuses the fertility examination. It changes nothing for me, but...I&#39;d like to know if fatherhood is possible.&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>His coffee cup cracks under sudden pressure. &#34;She&#39;s terrified of intimacy. They took her as a virgin teenager. That monster was her only...&#34; He swallows hard. &#34;I&#39;d wait eternity if she needed. Marking her would be enough—just to show the world she&#39;s mine.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Fine, I want everything,&#34; he growls. &#34;But I&#39;ll settle for her accepting the bond. She already feels it—sleeps soundly only when I hold her, though she claims Magnus&#39;s presence would suffice.&#34; His smile turns feral. &#34;We both know she&#39;s lying.&#34;</p>
+                
                 
                 
                 
@@ -3004,14 +3015,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

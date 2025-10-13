@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:59.967244">
-    <meta property="article:modified_time" content="2025-10-13T13:34:59.967244">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.402824">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.402824">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:59">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:59.967244",
-        "dateModified": "2025-10-13T13:34:59.967244",
+        "datePublished": "2025-10-13T14:11:51.402824",
+        "dateModified": "2025-10-13T14:11:51.402824",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>She bet Vincent understood what this room meant for both of them. After they moved out, Danica had tried over and over to change everything in this room. She had insisted on keeping it just the way it was. This space held real meaning for her. Maybe it meant something to Vincent too, but clearly not enough.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;I saw it,&#34; Hannah replied, letting out a short,humorless laugh. &#34;You only pushed her away because I walked in.&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;Is that so? Nothing at all?&#34; Hannah retorted.&#34;Does &#39;nothing&#39; mean taking her to a hotel? Lying on the same bed with her?&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>With her hand pressed to his chest to create some distance, she responded sharply, &#34;I saw it with my own eyes.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Before she could get a word out, Vincent pulled her onto the bed. He pinned her hands over her head,</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>would have made a teasing remark. Maybe she would have leaned in and whispered something daring. He waited for a reaction from the Hannah he knew. But it didn&#39;t come.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>She made for the door, but Vincent caught her wrist.&#34;There&#39;s nothing happening between me and Brinley.I&#39;ve always told you, she&#39;s like a sister to me.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;I&#39;m serious. I&#39;ve never even slept with her,&#34; Vincent remarked, his face set.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Vincent pulled her closer, his voice rumbling low. &#34;So my dear wife is just going to leave me like this?&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>His words stirred something inside her. Still,reason rose like a wall between them. It made no difference that he and Brinley had never slept together. Maybe he held back for being a gentleman. That did not change the fact that Brinley had always been the one he truly loved. She had only ever been the substitute.And this was something he could&#39;ve told her earlier,so why was she only hearing it now? None of it mattered anymore.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>&#34;I&#39;ve spelled it out for you, and you&#39;re still throwing me at another woman?&#34; he asked coldly.</p>
+                
                 
                 
                 
@@ -1543,14 +1566,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

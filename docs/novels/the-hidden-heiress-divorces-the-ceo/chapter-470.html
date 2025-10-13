@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.835635">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.835635">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.365248">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.365248">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.835635",
-        "dateModified": "2025-10-13T13:34:58.835635",
+        "datePublished": "2025-10-13T14:11:50.365248",
+        "dateModified": "2025-10-13T14:11:50.365248",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>&#34;Take a deep breath. Tell me what&#39;s wrong.&#34; Evelyn&#39;s voice was steady as she handed over a tissue.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>After several shuddering breaths, Katherine finally composed herself. &#34;Ms. Carter... VERE Jewelry canceled my endorsement deal. And Ms. Whitmore... she struck me.&#34; Her trembling finger pointed to a faint mark on her cheekbone.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Sophia wasn&#39;t the type to initiate conflict. Evelyn would stake her reputation on that.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Katherine misinterpreted Evelyn&#39;s calm as belief. She launched into a dramatic retelling, carefully omitting key details and exaggerating others.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Yes!&#34; Katherine nodded eagerly, missing Evelyn&#39;s skeptical tone. &#34;She&#39;s targeting me! Her employee made a mistake with the necklace, but she demanded I pay for it.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>A cold smile touched Evelyn&#39;s lips. The pieces weren&#39;t fitting together. There had to be more to this story.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Katherine&#39;s eyes lit up with triumph. Perhaps Evelyn and Sophia&#39;s friendship wasn&#39;t as strong as rumored.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Evelyn held up a hand. &#34;Before I intervene, I need the full truth. Your version has... gaps.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;You said this happened in a backstage lounge at Longacre?&#34; Evelyn&#39;s gaze sharpened. &#34;Every private room there has 24/7 surveillance. Shall we review the footage together?&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>&#34;Standard practice for high-profile venues.&#34; Evelyn tilted her head. &#34;Surely you knew that, Ms. Whitaker?&#34;</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>&#34;That won&#39;t be necessary!&#34; she blurted. &#34;Our company still hopes to work with VERE Jewelry in the future. This... misunderstanding isn&#39;t worth damaging that relationship.&#34;</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>She forced a shaky smile. &#34;My personal loss means nothing compared to Kingsley Industries&#39; interests.&#34;</p>
+                
                 
                 
                 
@@ -3123,14 +3147,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

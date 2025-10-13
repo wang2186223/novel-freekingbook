@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.561441">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.561441">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.030487">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.030487">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.561441",
-        "dateModified": "2025-10-13T13:35:00.561441",
+        "datePublished": "2025-10-13T14:11:52.030487",
+        "dateModified": "2025-10-13T14:11:52.030487",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Her hands find their way around my neck as mine settle on her hips, anchoring her to me. The streetlight casts shadows across her face, highlighting the uncertainty in her eyes.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Her breath hitches. &#34;What?&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>I know about her vow to wait for her mate. The irony tastes sweet on my tongue—she&#39;s waiting for me without knowing it. Theron growls approval in my mind.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;Take your time.&#34; I capture her hand, pressing a kiss to her pulse point. &#34;But understand this—I want Evelyn Sinclair. Not just the Guardian. Not just the warrior. Every stubborn, beautiful inch of you.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Good.&#34; I nip her bottom lip. &#34;I&#39;ll collect you at seven tomorrow.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;Sweet dreams, love.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Alistair</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;You&#39;re brooding,&#34; Gregory observes from the armchair. Moonlight glints off the whiskey in his glass.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;Not brooding,&#34; I correct. &#34;Considering.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>I turn toward the darkened hallway. &#34;How Adrian will handle a mate who&#39;s also his Guardian. Our bond is unbreakable, but at least you weren&#39;t...&#34; I rub my sternum. &#34;If Seraphina had been a Guardian, I&#39;d have gone mad trying to protect her from herself.&#34;</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>&#34;I know.&#34; The weight of the Alpha mantle settles familiar across my shoulders. &#34;But their instincts will war against each other. That girl would throw herself in front of a bullet for him, and he&#39;d burn the world down to keep her safe.&#34;</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>The silence stretches between us, filled with the unspoken truth—we might be raising two warriors destined to destroy each other with devotion.</p>
+                
                 
                 
                 
@@ -3115,14 +3139,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

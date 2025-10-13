@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.902173">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.902173">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.428276">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.428276">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.902173",
-        "dateModified": "2025-10-13T13:34:58.902173",
+        "datePublished": "2025-10-13T14:11:50.428276",
+        "dateModified": "2025-10-13T14:11:50.428276",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Alexander&#39;s sharp gaze flickered with surprise before turning glacial. He strode past without acknowledgment, his tailored suit cutting an imposing silhouette against the marble floors.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>By the time the elevator doors closed behind him, she&#39;d already calculated how soon she could file divorce papers.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>The request stung like salt on a fresh wound. She&#39;d perfected her coffee craft for Alexander during those early, hopeful months of marriage. The way his shoulders relaxed after the first sip had been her private victory.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Victoria Kensington&#39;s crimson nails were tangled in Alexander&#39;s hair when Isabella froze on the threshold. Their lips parted with audible wetness.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Isabella&#39;s knuckles whitened around the tray. &#34;Your coffee, sir.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>The scalding liquid sloshed over her fingers as she turned. Alexander&#39;s final dagger followed her out: &#34;Repeat this, and you&#39;re terminated.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>In the staff kitchen, Isabella watched her reflection distort in the swirling drain. The burn cream in her purse—originally packed for Sophia&#39;s scraped knees—now soothed her blistered skin.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;—Whitmore&#39;s heiress girlfriend touring the executive floor—&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Isabella silenced them by standing. The elevator doors parted to reveal Victoria holding court with four fawning VPs.</p>
+                
                 
                 
                 
@@ -772,6 +791,7 @@
                 
                 
                 
+                
                 <p>Their sycophantic grins curdled when Isabella stepped forward. One VP actually shielded Victoria. &#34;Watch your step! You nearly bumped into the future Mrs. Whitmore!&#34;</p>
                 
                 
@@ -780,7 +800,9 @@
                 
                 
                 
+                
                 <p>Victoria&#39;s smirk could&#39;ve powered a frostbite epidemic. Isabella walked past without breaking stride, her heels clicking like a countdown to freedom.</p>
+                
                 
                 
                 
@@ -3135,14 +3157,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

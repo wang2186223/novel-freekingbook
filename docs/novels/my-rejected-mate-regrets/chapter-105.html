@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.569475">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.569475">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.039186">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.039186">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.569475",
-        "dateModified": "2025-10-13T13:35:00.569475",
+        "datePublished": "2025-10-13T14:11:52.039186",
+        "dateModified": "2025-10-13T14:11:52.039186",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Romantic Adrian is dangerously addictive.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>As we drive, he reminds me about my unanswered question. I don&#39;t understand why his answer matters so much, but the thought of him visiting my mother with me makes my pulse race. The intensity of my desire makes me hesitate, so I blurt out that he&#39;s free to refuse before even asking. I could swear I hear him stifle a laugh.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Hearing him repeat it back with disbelief makes me cringe. It sounds ridiculous now. I immediately start backtracking, offering him every possible out.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Here&#39;s the problem. My entire existence has revolved around training and academics. Morning drills, school, evening practice, homework, sleep. Repeat. Weekends? More training. Dating has never been part of the equation. At nearly eighteen, I&#39;m clueless about dating etiquette.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Lost in these thoughts, I barely notice we&#39;ve reached school until Adrian clears his throat. &#39;Just say yes. It&#39;s only dinner,&#39; Selene chimes in, deciding for me. His megawatt smile when I agree could power cities. Nothing compares to being the focus of that radiant expression. My heart does somersaults beneath my ribs.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Outside my classroom, he kisses me again. Though I&#39;d said this was conditional on being his girlfriend, I&#39;m growing addicted to this version of Adrian. He couldn&#39;t care less about spectators—his entire world seems to narrow to me alone. It&#39;s heady stuff.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>At lunch, Donovan&#39;s still trying to thaw Genevieve&#39;s icy demeanor. Her frosty attitude only seems to fuel his determination. Good luck with that.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>He reclaims control within seconds, the kiss turning possessive.</p>
+                
                 
                 
                 
@@ -756,6 +773,7 @@
                 
                 
                 
+                
                 <p>After school, we collect our weekend assignments before heading to his car. At the trunk, he suddenly spins me against the passenger door, claiming my mouth in a kiss so fierce it steals my breath. Forehead pressed to mine, he rasps, &#34;Consider that payback for driving me crazy in the middle of school, little guardian.&#34;</p>
                 
                 
@@ -764,7 +782,9 @@
                 
                 
                 
+                
                 <p>His smirk as he opens my door leaves me lightheaded. This man obliterates my senses with every kiss.</p>
+                
                 
                 
                 
@@ -3083,14 +3103,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

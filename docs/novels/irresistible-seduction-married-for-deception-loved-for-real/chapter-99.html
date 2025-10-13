@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.013106">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.013106">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.445001">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.445001">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.013106",
-        "dateModified": "2025-10-13T13:35:00.013106",
+        "datePublished": "2025-10-13T14:11:51.445001",
+        "dateModified": "2025-10-13T14:11:51.445001",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>As Hannah reached out for the suit from the sales assistant, Felix quietly stepped in to take it for her.Not once did he bother to set the record straight about being her boyfriend.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Brinley&#39;s eyes darted from Hannah and Felix to Vincent,noting the storm gathering on his face.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Vincent was really livid. Only days ago, they&#39;d been fighting, yet Hannah had already paraded around with the statement that she was with someone else.He saw through it-she wanted a reaction from him,and she knew exactly how to get under his skin. Felix was just the pawn for her little performance. Still,their closeness made a muscle jump at his temple.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>She couldn&#39;t fathom his audacity in throwing accusations her way. Wedding dresses, renovations,this little shopping excursion-did he just make preparations for his big day with Brinley this time?Not that it mattered to her anymore.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>With that, her focus went back to the suits, while Felix continued watching her intently.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>With reflexes sharpened by experience, Hannah slipped neatly behind Felix, dodging Vincent&#39;s grasp before he could touch her. Vincent&#39;s hand met nothing but empty air.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Hannah didn&#39;t flinch. &#34;I&#39;m staying right where | am.This time, you don&#39;t get to force me.&#34;</p>
+                
                 
                 
                 
@@ -735,6 +750,7 @@
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824554464-0'); });
                   </script>
                 </div>
+                
                 
                 
                 
@@ -1487,14 +1503,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

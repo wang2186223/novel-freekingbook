@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.870303">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.870303">
+    <meta property="article:published_time" content="2025-10-13T14:11:50.399490">
+    <meta property="article:modified_time" content="2025-10-13T14:11:50.399490">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:50">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.870303",
-        "dateModified": "2025-10-13T13:34:58.870303",
+        "datePublished": "2025-10-13T14:11:50.399490",
+        "dateModified": "2025-10-13T14:11:50.399490",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>&#34;Figure it out yourself, brother!&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Ignoring Elliot&#39;s teasing smirk, Harrison strode purposefully toward the art studio alone.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Harrison had never witnessed this side of her before.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Finally, Evelyn stretched her aching arm, a satisfied smile lighting up her face. &#34;Finally finished,&#34; she murmured to herself.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Evelyn turned, revealing smudges of charcoal across her cheek that she remained blissfully unaware of.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>He approached with amusement dancing in his eyes. &#34;Evelyn, perhaps you&#39;d like to check your reflection before we continue?&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>She rushed to the mirror and gasped. &#34;When did this happen? Harrison, wait here - I&#39;ll be right back!&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;Your hands.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>After drying her hands, she asked, &#34;Weren&#39;t you supposed to be in meetings all afternoon? What changed?&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Evelyn nodded without hesitation.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>As she spoke, her eyes sparkled with such intensity they seemed to catch fire. The afternoon sunlight streaming through the windows illuminated her like a spotlight.</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>She continued dreamily, &#34;A sprawling garden full of my favorite flowers would be ideal. And a porch swing where I could spend afternoons reading, watching dramas... in spring, summer, autumn, winter...&#34;</p>
+                
                 
                 
                 
@@ -827,7 +852,9 @@
                 
                 
                 
+                
                 <p>Harrison listened intently, committing each word to memory as she painted her future with words.</p>
+                
                 
                 
                 
@@ -843,6 +870,7 @@
                 
                 
                 
+                
                 <p>Evelyn turned to him with conviction. &#34;Absolutely! It sounds simple, but getting there won&#39;t be easy.&#34;</p>
                 
                 
@@ -851,7 +879,9 @@
                 
                 
                 
+                
                 <p>&#34;Don&#39;t worry.&#34; Harrison&#39;s voice held quiet certainty. &#34;It will happen.&#34;</p>
+                
                 
                 
                 
@@ -3178,14 +3208,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

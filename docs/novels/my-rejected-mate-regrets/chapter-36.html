@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.453881">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.453881">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.917517">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.917517">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.453881",
-        "dateModified": "2025-10-13T13:35:00.453881",
+        "datePublished": "2025-10-13T14:11:51.917517",
+        "dateModified": "2025-10-13T14:11:51.917517",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>This gift stands apart from the rest. No delivery person—just a fae repaying a debt. That alone speaks volumes about the giver&#39;s status. And with no card attached, maybe this isn&#39;t from my original secret admirer. Maybe it&#39;s someone new.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Flustered, I gather my things, clutching the ancient tome to my chest. I tell Nathaniel I&#39;m leaving—he can join me now or find his own ride later. He chooses the latter, so I head straight home to show my father this impossible treasure.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Could it really be Alpha Adrian? And if so... when did he figure me out?</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>The sight inside steals my breath. Dad&#39;s blasting music while assembling what looks like a hybrid of a military obstacle course and a gladiator arena. Since when did training an Alpha require this? Clearly, he&#39;s decided if I&#39;m competing against Sebastian, we&#39;re doing it with stakes—and a timer. A grin tugs at my lips. Tonight just got interesting.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>I blink at the chaos. &#34;What is all this?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>His gaze sharpens. &#34;Now—why are you here?&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>I explain the fae, the repaid debt, the lack of adornment—no card, no clues.</p>
+                
                 
                 
                 
@@ -740,6 +755,7 @@
                 
                 
                 
+                
                 <p>Oh, I do. It means secrets buried for generations are now within reach. Forgotten Guardian powers. Our origins. Whether we&#39;re truly the last. Every question we&#39;ve ever had—answered.</p>
                 
                 
@@ -748,7 +764,9 @@
                 
                 
                 
+                
                 <p>I smile. &#34;I do. But Dad?&#34; I wait until he meets my gaze. &#34;Now I have a problem. Because whoever did this... they&#39;re serious about wanting Selene. And me. And I don&#39;t know if I want to resist anymore.&#34;</p>
+                
                 
                 
                 
@@ -3067,14 +3085,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.595664">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.595664">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.072356">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.072356">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.595664",
-        "dateModified": "2025-10-13T13:35:00.595664",
+        "datePublished": "2025-10-13T14:11:52.072356",
+        "dateModified": "2025-10-13T14:11:52.072356",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>My muscles tense at his bold declaration. I should&#39;ve seen this coming. He&#39;s never been subtle about claiming me in public.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;Well damn! Sorry Evelyn, I was betting on you, but now...&#34; Nathaniel shakes his head. &#34;No way Alpha&#39;s losing this one.&#34; From my peripheral vision, I see Bianca slinking away, wounded pride evident.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;Are you serious right now?&#34; I demand.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;Evelyn?&#34; Alpha Alistair&#39;s voice cuts through the chatter. The betting table falls silent immediately.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;You heard the stories the other night. You should know a Grey never loses when his heart&#39;s set on something. Isn&#39;t that right, Seraphina?&#34; He turns the same infuriating smirk Adrian wears toward his mate.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>I shake my head in disbelief. &#34;Fine. If everyone&#39;s betting against me, at least make it interesting.&#34; They all turn expectantly. I step out of Adrian&#39;s embrace toward their table. &#34;You really think he&#39;ll take me down that easily? Why not bet on how long it&#39;ll take him to pin me?&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;Not yet, I-&#34; Selene pushes forward to answer. &#34;Tomorrow, warrior. My first shift comes tomorrow. And if any of you doubt me again, I&#39;ll personally remind you on the training grounds exactly who you&#39;re dealing with.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Only when Adrian&#39;s arms encircle me again does Selene settle. His voice drops an octave as Theron surfaces. &#34;Does this mean we get our run tomorrow, little guardian?&#34;</p>
+                
                 
                 
                 
@@ -3059,14 +3076,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

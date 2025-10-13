@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:59.962462">
-    <meta property="article:modified_time" content="2025-10-13T13:34:59.962462">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.398317">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.398317">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:59">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:59.962462",
-        "dateModified": "2025-10-13T13:34:59.962462",
+        "datePublished": "2025-10-13T14:11:51.398317",
+        "dateModified": "2025-10-13T14:11:51.398317",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>A little later, Vincent checked his phone and spoke to Hannah. &#34;I need to leave for a bit. The last IV should be finished in about thirty minutes.&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Pretending that it did not hurt would be a lie.Countless times before, she had called him, only to be told he was too busy. Always too busy to spare time for her. When it came to his first love,though,he dropped everything without hesitation.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>While she was sorting through this, a bouquet came into view. She lifted her gaze and found Felix standing there, holding the flowers.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>She answered softly, &#34;I&#39;m fine.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Felix set up his laptop, and both of them immediately shifted into work mode.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>A suspicious look crossed the nurse&#39;s face as she recognized him. &#34;Aren&#39;t you the one who stayed all night with the patient in bed thirty-two? What are you doing here?&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Vincent kept his voice level. &#34;The patient in bed 32 is my wife.&#34; He pointed toward Brinley. &#34;This is just an acquaintance.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Brinley&#39;s stomach churned. She had refused to look for Vincent last night, assuming he would come to her on his own. He never did, not even bothering to text her. It was only after she messaged him, saying  her condition had worsened and she needed IV fluids, that he finally came by.</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>As soon as the nurse left, Vincent looked at Brinley and spoke in a measured tone. &#34;I already know what happened last night.Hannah didn&#39;t push you.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Vincent responded, his tone cool and even, &#34;Then tell me your version.What really happened?&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Vincent cut her off. &#34;Brinley.&#34; He stood up,disappointment etched on his face. &#34;Hannah never accused you of anything. I checked with the doctor about your injuries myself.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>Vincent remarked coldly, &#34;She did not even know which room you were in. How could she possibly set you up?&#34;</p>
+                
                 
                 
                 
@@ -1559,14 +1584,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

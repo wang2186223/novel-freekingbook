@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.698209">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.698209">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.164027">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.164027">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.698209",
-        "dateModified": "2025-10-13T13:35:00.698209",
+        "datePublished": "2025-10-13T14:11:52.164027",
+        "dateModified": "2025-10-13T14:11:52.164027",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Morning light filters through the curtains when I wake, but the bed beside me is empty. The sheets still hold his warmth, though—Sebastian hasn’t been gone long. I push myself up, my body stiff but stronger than yesterday. The bathroom isn’t far, but the distance feels daunting.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>The door swings open before I can take the third.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Three long strides, and he’s scooping me up like I weigh nothing.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;You couldn’t wait five minutes?&#34; He shakes his head, carrying me toward the bathroom. &#34;Dorian just jumped down. I thought you’d still be asleep.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Out,&#34; I say flatly.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>He leaves the door cracked. Not ideal, but I’m desperate. The moment I finish, his voice drifts through the gap. &#34;Done?&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>He’s behind me before the faucet finishes running, hands steadying my hips as I wash up. &#34;Dr. Whitmore’s coming by later. Food’s on the way. Bedrest today—no arguments.&#34; His tone brokers no debate.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;Blackstone needs me. I’ve put off too much already.&#34; His thumb brushes my hipbone. &#34;Nathaniel will check on you. Need anything to pass the time? Books? Music?&#34; A teasing glint enters his eyes. &#34;Knitting?&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;Covering all bases, sweetheart.&#34; That damn smile does things to my stomach.</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>He nods, lifting me effortlessly. &#34;Couch or bed?&#34;</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>His lips thin, but he deposits me on the plush cushions anyway. &#34;Be right back.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>&#34;Sorry,&#34; I mutter, not in the mood to relive last night.</p>
+                
                 
                 
                 
@@ -827,6 +852,7 @@
                 
                 
                 
+                
                 <p>Sebastian’s growl rattles the windows.</p>
                 
                 
@@ -835,7 +861,9 @@
                 
                 
                 
+                
                 <p>Nathaniel just grins wider as Sebastian storms out, the door slamming behind him.</p>
+                
                 
                 
                 
@@ -3154,14 +3182,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:34:58.443136">
-    <meta property="article:modified_time" content="2025-10-13T13:34:58.443136">
+    <meta property="article:published_time" content="2025-10-13T14:11:49.969274">
+    <meta property="article:modified_time" content="2025-10-13T14:11:49.969274">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:34:58">
+    <meta name="last-modified" content="2025-10-13 14:11:49">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:34:58.443136",
-        "dateModified": "2025-10-13T13:34:58.443136",
+        "datePublished": "2025-10-13T14:11:49.969274",
+        "dateModified": "2025-10-13T14:11:49.969274",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>The moment the meeting adjourned, Evelyn Carter strode out first, her heels clicking decisively against the marble floor. Maxwell Donovan followed half a step behind, still briefing her on the quarterly projections.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>Rosalind Blackwell emerged from the waiting area, her designer dress swaying elegantly with each step.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;Ms. Blackwell,&#34; Evelyn kept her tone polite but distant. &#34;This is unexpected.&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Evelyn handed her files to Maxwell without breaking eye contact. &#34;Implement the changes we discussed.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Once alone, Evelyn gestured toward her office. &#34;Shall we?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;You&#39;ve changed,&#34; Rosalind murmured as she perched on the edge of the sofa.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;Grandmother still considers you family, you know.&#34; Rosalind&#39;s voice took on a conspiratorial tone. &#34;Despite everything with Nathan.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;But Nathan still cares!&#34; Rosalind leaned forward. &#34;You saw how he protected you at Grandmother&#39;s gala.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Rosalind&#39;s manicured fingers twisted in her lap. &#34;I-I&#39;m waiting for the right person. No need to rush into anything.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>The unspoken words hung between them - she&#39;d rather remain single than settle for being Nathan Sterling&#39;s consolation prize again.</p>
+                
                 
                 
                 
@@ -788,6 +809,7 @@
                 
                 
                 
+                
                 <p>But the soup delivery had merely been her opening move. The real game was just beginning.</p>
                 
                 
@@ -796,7 +818,9 @@
                 
                 
                 
+                
                 <p>&#34;You must think I&#39;m terribly nosy.&#34; Rosalind laughed too brightly as she rose to leave. The thermos remained on the desk, its contents cooling untouched.</p>
+                
                 
                 
                 
@@ -3123,14 +3147,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

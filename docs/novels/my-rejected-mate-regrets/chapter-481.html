@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:01.221046">
-    <meta property="article:modified_time" content="2025-10-13T13:35:01.221046">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.659418">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.659418">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:01">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:01.221046",
-        "dateModified": "2025-10-13T13:35:01.221046",
+        "datePublished": "2025-10-13T14:11:52.659418",
+        "dateModified": "2025-10-13T14:11:52.659418",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>&#34;Good morning.&#34; Alpha Dominic strides into the room, his presence commanding. He takes my hands in his, his grip firm. &#34;How did you sleep, darling? I wanted to check on you, but you locked your door.&#34; The way he says &#39;check&#39; makes my skin crawl—I know exactly what he intended.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>His entire posture shifts as he watches the exchange between Alpha Dominic and me. &#34;So, we have an agreement?&#34; he asks, eyes locked on the Alpha.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>I force a tight-lipped smile, my stomach churning.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Alpha Dominic escorts us to the car. Then, without warning, he yanks me against him, his mouth crashing onto mine, his tongue invading before I can react. I shove him away, my eyes darting to my father—who just climbs into the car without a word.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>I scramble into the car, my hands shaking.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;Watch your tone, Ivy.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;You should be grateful. Alpha Dominic is wealthy, powerful. He can provide for you.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>&#34;You&#39;re being ungrateful. I secured you a position as Luna, and this is how you repay me?&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;You will be his mate, Ivy. End of discussion.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>Silence fills the car for the rest of the drive.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>I stay there all morning, lost in the rhythm of combat drills, until Grant&#39;s message pulls me back.</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>Relief floods me. I shift back, hurrying to his room. My knocks are frantic.</p>
+                
                 
                 
                 
@@ -827,6 +852,7 @@
                 
                 
                 
+                
                 <p>When he growls, demanding to know if Dominic hurt me, I nearly break. Instead, I whisper, &#34;I need your help,&#34; before turning and letting Valeria rise to the surface.</p>
                 
                 
@@ -835,7 +861,9 @@
                 
                 
                 
+                
                 <p>His sharp inhale cuts through the air. For a heartbeat, he just stares. Then his arms wrap around me, and I finally let go—sobbing into his chest as the weight of everything crashes down.</p>
+                
                 
                 
                 
@@ -3154,14 +3182,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

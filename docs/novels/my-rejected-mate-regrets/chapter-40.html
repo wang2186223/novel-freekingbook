@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.460796">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.460796">
+    <meta property="article:published_time" content="2025-10-13T14:11:51.927963">
+    <meta property="article:modified_time" content="2025-10-13T14:11:51.927963">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:51">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.460796",
-        "dateModified": "2025-10-13T13:35:00.460796",
+        "datePublished": "2025-10-13T14:11:51.927963",
+        "dateModified": "2025-10-13T14:11:51.927963",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Months later, when the memory of that book resurfaced, I began searching for another copy. After nearly a year of fruitless efforts, I consulted my father. That&#39;s when I discovered the terrible truth - only one such volume exists, crafted by the Guardians, for the Guardians. How Oberon&#39;s ancestors obtained it remains a mystery, but now it&#39;s finally where it belongs - in the hands of a true Guardian.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>He&#39;s correct about one thing - the book needs no introduction. When he declares our debt settled, I murmur my agreement, acutely aware of the Fae King&#39;s supernatural hearing that surpasses even our kind.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Clutching the ancient text to her chest, her gaze sweeps the room and locks with mine. Does she understand it came from me? Few could orchestrate such a delivery. In truth, only one. Me. But she likely doesn&#39;t realize that yet. My subtle nod acknowledges her unspoken thanks. Perhaps now she&#39;ll comprehend that I know exactly who she is - how vital she, Selene, and her lineage are to the pack, to my family, but most importantly, to me and Theron.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Training that afternoon buzzes with excitement about my impending birthday celebration. An Alpha&#39;s eighteenth birthday isn&#39;t an ordinary occasion. Naturally, everyone wants to attend.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>&#34;Evelyn, is it?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>&#34;Who&#39;s the other frontrunner?&#34; I ask, already knowing Sebastian has been ruled out.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>I nod curtly and head toward the forest, eager to check on Evelyn&#39;s training session with Sebastian. Maintaining focus during drills has been challenging with jealousy gnawing at me over their private sessions.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>Theron grows increasingly agitated as we approach. Tuning into his heightened senses, I understand why - Evelyn&#39;s soft moans mingle with Sebastian&#39;s pleasure-filled growls. Theron nearly rips control from me in his fury when suddenly they emerge hand-in-hand from the building. With immense effort, I restrain him and settle into watchful waiting.</p>
+                
                 
                 
                 
@@ -3059,14 +3076,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.930945">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.930945">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.370915">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.370915">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.930945",
-        "dateModified": "2025-10-13T13:35:00.930945",
+        "datePublished": "2025-10-13T14:11:52.370915",
+        "dateModified": "2025-10-13T14:11:52.370915",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>My breath catches. This wasn&#39;t what I expected.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;My mother died bringing me into this world.&#34; His jaw clenches so tight I hear his teeth grind.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>Muscles ripple along his throat before he speaks. &#34;Short version? My father challenged our Alpha&#39;s heir to a duel after that bastard got my older brother killed—the brother who was supposed to be our next Beta. The Alpha forbade it, but his son accepted. My father... in his grief, he killed the Alpha&#39;s only child.&#34; He drains his tea in one swallow before meeting my gaze again.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>My throat constricts. Our stories mirror each other—except he had no one.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>A ghost of a smile touches his lips as he stares past me. &#34;Six months of starving in the woods before the Luna of a neighboring pack found me. Brought me food, clothes... even read to me. Those few months were the only time I ever knew what having a mother felt like.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>His exhale carries the weight of centuries. &#34;The Alpha who banished me wanted more territory. More power. Another heir. He attacked her pack. I heard he planned to kill the Luna first—to weaken her mate before finishing him.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Silence stretches between us, thick with shared grief. Finally, I ask, &#34;Did her Alpha win?&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>My brows shoot up. &#34;Sebastian? Why were you—&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>Words fail me. His life makes mine look like a fairy tale. &#34;How&#39;d you get free?&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>We sit in heavy silence, lost in our ghosts. Eventually, I voice the question that&#39;s been burning since he returned.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>His eyes darken. &#34;Overheard humans at the diner talking about animal attacks.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>&#34;Those weren&#39;t animals.&#34; His gaze turns lethal. &#34;Vampires. Headed south to slaughter Sebastian and Adrian&#39;s packs. Take their Guardians as blood slaves. Sebastian&#39;s mate, Seraphina? A vampire prince kept her captive for seven years. I had to warn them.&#34; He exhales sharply. &#34;Couldn&#39;t save Isolde... but I made damn sure her son got enough warning to protect his own.&#34;</p>
+                
                 
                 
                 
@@ -3123,14 +3148,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

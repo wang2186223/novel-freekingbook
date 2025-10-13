@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.873677">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.873677">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.313498">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.313498">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.873677",
-        "dateModified": "2025-10-13T13:35:00.873677",
+        "datePublished": "2025-10-13T14:11:52.313498",
+        "dateModified": "2025-10-13T14:11:52.313498",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Seraphina&#39;s gaze flicked to Sebastian. &#34;I don&#39;t believe that&#39;s necessary.&#34; She addressed Penelope. &#34;I&#39;ve appointed you as Lead Omega for the kitchens, and I&#39;ll be hiring another Lead for packhouse maintenance.&#34;</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;Indeed, congratulations,&#34; Nathaniel added beside me.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>I met Seraphina&#39;s eyes. &#34;Ready for combat training?&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;You&#39;re welcome to use my office as long as required, Luna,&#34; Nathaniel assured her as Genevieve joined our group.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Seraphina glanced over her shoulder with an encouraging smile. &#34;That&#39;s excellent! I know you&#39;ll excel at this.&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>Tristan and Sebastian, our top warriors, arrived last, energy crackling around them. Their passion for combat was matched only by their skill—the very reason Donovan and I had promoted them. We sparred with our own warriors first, then switched opponents to increase the challenge.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;Nathaniel.&#34; I summoned him. &#34;Let&#39;s upgrade her to a live target.&#34;</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>I cupped her face. &#34;She needs to experience aiming at something that moves. If she can&#39;t throw at a person, she won&#39;t be able to defend herself or the pack.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>&#34;Nathaniel, bring Genevieve. We&#39;ll take this gradually.&#34;</p>
+                
                 
                 
                 
@@ -772,7 +791,9 @@
                 
                 
                 
+                
                 <p>&#34;What&#39;s happening?&#34; Genevieve asked, fingers twisting together.</p>
+                
                 
                 
                 
@@ -788,7 +809,9 @@
                 
                 
                 
+                
                 <p>Her head shook violently. &#34;Absolutely not! I won&#39;t endanger someone who&#39;s shown me nothing but kindness.&#34;</p>
+                
                 
                 
                 
@@ -804,7 +827,9 @@
                 
                 
                 
+                
                 <p>A ring of warriors formed around us—standard procedure, but undoubtedly intimidating for a novice. This simulated real combat conditions: distractions, pressure, adrenaline.</p>
+                
                 
                 
                 
@@ -823,6 +848,7 @@
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824594360-0'); });
                   </script>
                 </div>
+                
                 
                 
                 
@@ -3138,14 +3164,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

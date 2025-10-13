@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.885833">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.885833">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.324833">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.324833">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.885833",
-        "dateModified": "2025-10-13T13:35:00.885833",
+        "datePublished": "2025-10-13T14:11:52.324833",
+        "dateModified": "2025-10-13T14:11:52.324833",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>Now my sights lock onto him. That bastard belongs to me. For every torment he inflicted on Seraphina, I&#39;ll make sure he suffers tenfold before I end him.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>The second wave crashes against us before the first even finishes. The initial attackers disintegrate upon contact with the Guardian energy, turning to ash mid-stride. But the relentless assault takes its toll - cracks appear in our defenses as more vampires break through.</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>The vampires move with unnatural speed. Every wounded howl from my pack members feels like a physical blow. Every life extinguished leaves a gaping hole in our defenses.</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>Adrian and I gradually shift forward, creating a living barrier between our mates and the onslaught. Dorian&#39;s silver fur glistens crimson - whether from vampire blood or our own wounds, I can&#39;t tell. The injuries sting, but Seraphina&#39;s enhanced healing already knits my flesh back together.</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>Whether by design or chaos of battle, the Guardians begin separating. Adrian stays glued to Evelyn&#39;s side while I remain Seraphina&#39;s shadow.</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>We reinforce Oberon&#39;s warriors, though many fae already litter the battlefield. Werewolf corpses appear with increasing frequency among the fallen.</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>Hours blur into endless combat when suddenly Prince Damien and his second-in-command Malachi emerge. Their royal status shows in their superior strength and tactics. Damien makes straight for Seraphina while multiple vampires keep us both occupied.</p>
+                
                 
                 
                 
@@ -735,6 +750,7 @@
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824554464-0'); });
                   </script>
                 </div>
+                
                 
                 
                 
@@ -3051,14 +3067,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);

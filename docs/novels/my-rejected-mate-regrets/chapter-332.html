@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-13T13:35:00.977596">
-    <meta property="article:modified_time" content="2025-10-13T13:35:00.977596">
+    <meta property="article:published_time" content="2025-10-13T14:11:52.417892">
+    <meta property="article:modified_time" content="2025-10-13T14:11:52.417892">
     <meta name="date" content="2025-10-13">
-    <meta name="last-modified" content="2025-10-13 13:35:00">
+    <meta name="last-modified" content="2025-10-13 14:11:52">
     
     
     <!-- Open Graph Meta Tags -->
@@ -50,6 +50,7 @@
         googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
         googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -535,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-13T13:35:00.977596",
-        "dateModified": "2025-10-13T13:35:00.977596",
+        "datePublished": "2025-10-13T14:11:52.417892",
+        "dateModified": "2025-10-13T14:11:52.417892",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -614,7 +615,9 @@
                 
                 
                 
+                
                 <p>I nod. There&#39;s so much to discuss, but first I need to speak with Isolde. And I have to call Adrian to let him know we arrived safely.</p>
+                
                 
                 
                 
@@ -630,7 +633,9 @@
                 
                 
                 
+                
                 <p>&#34;I&#39;m sorry. Aurora took control and I know we didn&#39;t plan this...&#34;</p>
+                
                 
                 
                 
@@ -653,7 +658,9 @@
                 
                 
                 
+                
                 <p>&#34;You&#39;re not angry?&#34;</p>
+                
                 
                 
                 
@@ -669,7 +676,9 @@
                 
                 
                 
+                
                 <p>&#34;About marking you at all. Because that she-wolf—&#34; Her lip curls in a snarl. &#34;—dared touch what&#39;s mine.&#34;</p>
+                
                 
                 
                 
@@ -685,7 +694,9 @@
                 
                 
                 
+                
                 <p>I brush my lips against her nose. &#34;Now I need to wash off the mess you made marking me.&#34; I step back with a smirk. &#34;But tonight? Tonight I&#39;ll claim you in every way possible. Are you ready for that?&#34;</p>
+                
                 
                 
                 
@@ -701,7 +712,9 @@
                 
                 
                 
+                
                 <p>A growl rips from my throat as I close the distance between us, capturing her mouth in a searing kiss. &#34;Hearing you say that makes me feel more like an Alpha than anything else. Most days, I still feel like an impostor.&#34;</p>
+                
                 
                 
                 
@@ -717,7 +730,9 @@
                 
                 
                 
+                
                 <p>&#34;You&#39;re more of an Alpha than you realize, Victor. You might not see it, but everyone else does.&#34; Isolde follows me as I start the shower.</p>
+                
                 
                 
                 
@@ -740,7 +755,9 @@
                 
                 
                 
+                
                 <p>I turn to face her. &#34;I know this isn&#39;t the future you imagined. But can you see yourself building this life with me? There&#39;s so much work ahead, but together... I believe we could create something extraordinary.&#34;</p>
+                
                 
                 
                 
@@ -756,7 +773,9 @@
                 
                 
                 
+                
                 <p>I rest my forehead against hers. &#34;How did I get so lucky to have you as my mate?&#34;</p>
+                
                 
                 
                 
@@ -772,6 +791,7 @@
                 
                 
                 
+                
                 <p>I shake my head. &#34;No. Honestly, I wouldn&#39;t care if you were an omega or even human. Hell, I thought you were human when we met, and I was already falling for you. Alpha Sebastian&#39;s Beta is mated to a human, and from what I hear, she&#39;s remarkable. It&#39;s not about your gifts—though I do believe only someone extraordinary could become a Guardian. It&#39;s about who you are, Isolde. You were born an Alpha female, chosen as a Guardian, yet you&#39;re willing to roll up your sleeves and help me build a pack from nothing.&#34;</p>
                 
                 
@@ -780,7 +800,9 @@
                 
                 
                 
+                
                 <p>She steps closer, wrapping her arms around my waist. &#34;I&#39;m not naive enough to think this will be easy. We both have so much to learn about leading a pack. But together? I believe we can do anything.&#34;</p>
+                
                 
                 
                 
@@ -3099,14 +3121,24 @@
                 const rect = adElement.getBoundingClientRect();
                 const isValidHeight = rect.height > 100 && rect.height <= 650;
                 
-                // 更新广告填充检测逻辑 - 支持ADX广告结构
-                const isFilled = adElement.dataset.adStatus === 'filled' || 
-                                adElement.querySelector('iframe') !== null ||
-                                adElement.innerHTML.includes('googleads') ||
-                                adElement.innerHTML.includes('google_ads_iframe') ||
-                                adElement.querySelector('[data-google-container-id]') !== null ||
-                                adElement.querySelector('[data-google-query-id]') !== null ||
-                                adElement.innerHTML.includes('data-load-complete="true"');
+                // 更新广告填充检测逻辑 - 支持ADX广告结构并排除未填充的广告
+                let isFilled = false;
+                
+                // 检查是否有有效的iframe（高度大于0）
+                const iframe = adElement.querySelector('iframe');
+                if (iframe) {
+                    const iframeRect = iframe.getBoundingClientRect();
+                    isFilled = iframeRect.height > 0;
+                }
+                
+                // 如果没有iframe，检查其他填充标识
+                if (!isFilled) {
+                    isFilled = adElement.dataset.adStatus === 'filled' || 
+                              adElement.innerHTML.includes('googleads') ||
+                              (adElement.querySelector('[data-google-container-id]') !== null && 
+                               adElement.querySelector('iframe[title="3rd party ad content"]') !== null) ||
+                              adElement.innerHTML.includes('data-load-complete="true"');
+                }
 
                 if (isValidHeight && isFilled && !this.currentPageAds.includes(adElement)) {
                     this.currentPageAds.push(adElement);
