@@ -45,11 +45,8 @@
     <script>
       window.googletag = window.googletag || {cmd: []};
       googletag.cmd.push(function() {
-        // Define multiple ad slots for the chapter page
-        googletag.defineSlot('/93656639/myfreenovel.com/banner_1', [300, 250], 'div-gpt-ad-1').addService(googletag.pubads());
-        googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-2').addService(googletag.pubads());
-        googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-3').addService(googletag.pubads());
-        googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-4').addService(googletag.pubads());
+        // Define ad slot for the chapter page
+        googletag.defineSlot('/93656639/myfreenovel.com/banner_1', [300, 250], 'div-gpt-ad-1759824443383-0').addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
       });
@@ -601,35 +598,35 @@
                 {% if paragraph.strip() %}
                 <p>{{ paragraph.strip() }}</p>
                 {% if loop.index == 1 %}
-                <!-- GPT Ad after first paragraph -->
-                <div id="div-gpt-ad-1" style="text-align:center; margin: 20px 0;">
-                    <script>
-                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1'); });
-                    </script>
+                <!-- /93656639/myfreenovel.com/banner_1 -->
+                <div id='div-gpt-ad-1759824443383-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
+                  <script>
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824443383-0'); });
+                  </script>
                 </div>
                 {% endif %}
                 {% if loop.index == 5 %}
-                <!-- GPT Ad after fifth paragraph -->
-                <div id="div-gpt-ad-2" style="text-align:center; margin: 20px 0;">
-                    <script>
-                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-2'); });
-                    </script>
+                <!-- /93656639/myfreenovel.com/banner_1 -->
+                <div id='div-gpt-ad-1759824443383-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
+                  <script>
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824443383-0'); });
+                  </script>
                 </div>
                 {% endif %}
                 {% if loop.index == 15 %}
-                <!-- GPT Ad after fifteenth paragraph -->
-                <div id="div-gpt-ad-3" style="text-align:center; margin: 20px 0;">
-                    <script>
-                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-3'); });
-                    </script>
+                <!-- /93656639/myfreenovel.com/banner_1 -->
+                <div id='div-gpt-ad-1759824443383-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
+                  <script>
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824443383-0'); });
+                  </script>
                 </div>
                 {% endif %}
                 {% if loop.index == 25 %}
-                <!-- GPT Ad after twenty-fifth paragraph -->
-                <div id="div-gpt-ad-4" style="text-align:center; margin: 20px 0;">
-                    <script>
-                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-4'); });
-                    </script>
+                <!-- /93656639/myfreenovel.com/banner_1 -->
+                <div id='div-gpt-ad-1759824443383-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
+                  <script>
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824443383-0'); });
+                  </script>
                 </div>
                 {% endif %}
                 {% endif %}
@@ -941,7 +938,7 @@
 
             startAdMonitoring() {
                 const checkForAds = () => {
-                    const adElements = document.querySelectorAll('[id^="div-gpt-ad"]');
+                    const adElements = document.querySelectorAll('[id^="div-gpt-ad-1759824443383"]');
                     adElements.forEach(ad => {
                         if (!ad.dataset.guideMonitored) {
                             ad.dataset.guideMonitored = 'true';
