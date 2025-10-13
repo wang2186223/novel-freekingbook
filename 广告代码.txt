@@ -1,0 +1,70 @@
+"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/myfreenovel.com/banner_1', [300, 250], 'div-gpt-ad-1759824443383-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/myfreenovel.com/banner_1 -->
+<div id='div-gpt-ad-1759824443383-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824443383-0'); });
+  </script>
+</div>"
+"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/myfreenovel.com/banner_2', [300, 250], 'div-gpt-ad-1759824489086-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/myfreenovel.com/banner_2 -->
+<div id='div-gpt-ad-1759824489086-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824489086-0'); });
+  </script>
+</div>"
+"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/myfreenovel.com/banner_3', [300, 250], 'div-gpt-ad-1759824554464-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/myfreenovel.com/banner_3 -->
+<div id='div-gpt-ad-1759824554464-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824554464-0'); });
+  </script>
+</div>"
+"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/myfreenovel.com/banner_4', [300, 250], 'div-gpt-ad-1759824594360-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/myfreenovel.com/banner_4 -->
+<div id='div-gpt-ad-1759824594360-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824594360-0'); });
+  </script>
+</div>"
+"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/myfreenovel.com/banner_5', [300, 250], 'div-gpt-ad-1759824626879-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/myfreenovel.com/banner_5 -->
+<div id='div-gpt-ad-1759824626879-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759824626879-0'); });
+  </script>
+</div>"

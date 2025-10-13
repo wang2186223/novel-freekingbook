@@ -4,7 +4,7 @@
 function doPost(e) {
   try {
     // 获取电子表格
-    const spreadsheetId = '1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4';
+    const spreadsheetId = '1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek';
     const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
     
     // 解析请求数据
@@ -233,7 +233,7 @@ function cleanupOldSheets(spreadsheet) {
 
 // 手动触发数据清理（可以设置定时器调用）
 function manualCleanup() {
-  const spreadsheetId = '1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4';
+  const spreadsheetId = '1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek';
   const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   
   cleanupOldSheets(spreadsheet);
@@ -463,7 +463,7 @@ function updateStatsInTable(sheet, newStats, dateLabel) {
 
 // 每小时统计更新函数（用于定时触发器）
 function hourlyStatisticsUpdate() {
-  const spreadsheetId = '1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4';
+  const spreadsheetId = '1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek';
   const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   
   updateStatisticsTable(spreadsheet);
@@ -473,7 +473,7 @@ function hourlyStatisticsUpdate() {
 
 // 手动触发统计更新（测试用）
 function manualStatisticsUpdate() {
-  const spreadsheetId = '1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4';
+  const spreadsheetId = '1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek';
   const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
   
   updateStatisticsTable(spreadsheet);
