@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-15T16:45:20.778464">
-    <meta property="article:modified_time" content="2025-10-15T16:45:20.778464">
+    <meta property="article:published_time" content="2025-10-15T18:05:26.734440">
+    <meta property="article:modified_time" content="2025-10-15T18:05:26.734440">
     <meta name="date" content="2025-10-15">
-    <meta name="last-modified" content="2025-10-15 16:45:20">
+    <meta name="last-modified" content="2025-10-15 18:05:26">
     
     
     <!-- Open Graph Meta Tags -->
@@ -152,7 +152,7 @@
             };
             
             // 发送数据到 Google Apps Script
-            fetch('https://script.google.com/macros/s/AKfycbycL8w5lQnqzZ2O11Uc_xKDmLlOQMttmAmIchdAz-oS6NZnEuroBSVTwEVDq4AVB8Fs1Q/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbxfkW_QckMvPGgiMXmAo3_lDgpczjCuoBkTjQhuyqDEstKx3GJwcmtCEV_5F1p0omCKEw/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -171,7 +171,7 @@
                 userIP: 'Unknown'
             };
             
-            fetch('https://script.google.com/macros/s/AKfycbycL8w5lQnqzZ2O11Uc_xKDmLlOQMttmAmIchdAz-oS6NZnEuroBSVTwEVDq4AVB8Fs1Q/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbxfkW_QckMvPGgiMXmAo3_lDgpczjCuoBkTjQhuyqDEstKx3GJwcmtCEV_5F1p0omCKEw/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -536,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-15T16:45:20.778464",
-        "dateModified": "2025-10-15T16:45:20.778464",
+        "datePublished": "2025-10-15T18:05:26.734440",
+        "dateModified": "2025-10-15T18:05:26.734440",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -3089,10 +3089,9 @@
                 this.REQUIRED_ADS = 15; // 需要跨页面累计的广告数量
                 this.TRIGGER_PROBABILITY = 0.8; // 80%触发概率
                 this.COOLDOWN_MINUTES = 15; // 15分钟冷却时间
-                this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN = 3; // 累计触发8次后进入长冷却
-                this.LONG_COOLDOWN_HOURS = 2; // 长冷却时间12小时
-                this.LONG_ABSENCE_MINUTES = 60; // 长时间离开阈值60分钟
-                this.FORCE_NO_TRIGGER_PROBABILITY = 0; // 长时间离开后首次触发概率（0%）
+                this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN = 8; // 累计触发8次后进入长冷却
+                this.LONG_COOLDOWN_HOURS = 12; // 长冷却时间12小时
+                this.INACTIVITY_RESET_MINUTES = 60; // 离开页面60分钟后自动重置
                 
                 // 状态管理
                 this.currentPageAds = []; // 当前页面的广告
@@ -3181,33 +3180,6 @@
                 localStorage.setItem('adGuideLongCooldownStart', timestamp.toString());
             }
 
-            // 获取最后离开页面时间
-            getLastLeaveTime() {
-                const stored = localStorage.getItem('adGuideLastLeaveTime');
-                return stored ? parseInt(stored) : 0;
-            }
-
-            // 保存最后离开页面时间
-            saveLastLeaveTime(timestamp) {
-                localStorage.setItem('adGuideLastLeaveTime', timestamp.toString());
-            }
-
-            // 检查是否已使用过长时间离开强制不触发
-            hasUsedLongAbsenceForce() {
-                const stored = localStorage.getItem('adGuideLongAbsenceUsed');
-                return stored === 'true';
-            }
-
-            // 标记已使用过长时间离开强制不触发
-            markLongAbsenceForceUsed() {
-                localStorage.setItem('adGuideLongAbsenceUsed', 'true');
-            }
-
-            // 重置长时间离开强制不触发标记
-            resetLongAbsenceForce() {
-                localStorage.removeItem('adGuideLongAbsenceUsed');
-            }
-
             // 检查是否在长冷却期内
             isInLongCooldown() {
                 const longCooldownStart = this.getLongCooldownStart();
@@ -3226,15 +3198,61 @@
                 return true;
             }
 
+            // 更新最后活动时间
+            updateLastActivityTime() {
+                localStorage.setItem('adGuideLastActivity', Date.now().toString());
+            }
+
+            // 获取最后活动时间
+            getLastActivityTime() {
+                const stored = localStorage.getItem('adGuideLastActivity');
+                return stored ? parseInt(stored) : 0;
+            }
+
+            // 检查非活动状态并自动重置
+            checkInactivityReset() {
+                const lastActivity = this.getLastActivityTime();
+                if (!lastActivity) {
+                    // 首次访问，记录时间
+                    this.updateLastActivityTime();
+                    return;
+                }
+
+                const inactivityMs = this.INACTIVITY_RESET_MINUTES * 60 * 1000;
+                const timeSinceLastActivity = Date.now() - lastActivity;
+
+                if (timeSinceLastActivity >= inactivityMs) {
+                    console.log(`广告引导：检测到用户离开超过${this.INACTIVITY_RESET_MINUTES}分钟，自动重置所有数据`);
+                    this.resetAllData();
+                    // 更新活动时间
+                    this.updateLastActivityTime();
+                }
+            }
+
             // 关键点1：引导触发机制实现
             init() {
                 // 如果是PC浏览器，不执行初始化
                 if (this.isPCBrowser) return;
                 
+                // 检查用户是否离开超过60分钟，如果是则自动重置
+                this.checkInactivityReset();
+                
                 this.setupAdObserver();
                 this.setupDebugMode();
                 this.setupPageVisibilityHandler();
+                this.setupActivityTracking();
                 this.startPeriodicCheck();
+                
+                // 更新最后活动时间
+                this.updateLastActivityTime();
+            }
+
+            // 设置用户活动跟踪
+            setupActivityTracking() {
+                // 定期更新活动时间（每5秒更新一次）
+                setInterval(() => {
+                    this.updateLastActivityTime();
+                }, 5000);
             }
 
             setupAdObserver() {
@@ -3333,39 +3351,16 @@
                     return;
                 }
 
-                // 检查是否需要应用长时间离开强制不触发逻辑
-                let triggerProbability = this.TRIGGER_PROBABILITY;
-                let isLongAbsenceForce = false;
-                
-                const lastLeaveTime = this.getLastLeaveTime();
-                if (lastLeaveTime) {
-                    const absenceMinutes = (Date.now() - lastLeaveTime) / (60 * 1000);
-                    
-                    // 如果离开超过60分钟，且未使用过强制不触发
-                    if (absenceMinutes > this.LONG_ABSENCE_MINUTES && !this.hasUsedLongAbsenceForce()) {
-                        triggerProbability = this.FORCE_NO_TRIGGER_PROBABILITY;
-                        isLongAbsenceForce = true;
-                        this.markLongAbsenceForceUsed(); // 标记已使用
-                        console.log(`广告引导：长时间离开 ${absenceMinutes.toFixed(1)} 分钟，应用强制触发概率 ${(triggerProbability * 100).toFixed(0)}%`);
-                    }
-                }
-
-                // 概率控制
-                const shouldTrigger = Math.random() < triggerProbability;
+                // 概率控制：80%触发，20%不触发
+                const shouldTrigger = Math.random() < this.TRIGGER_PROBABILITY;
                 if (!shouldTrigger) {
-                    if (isLongAbsenceForce) {
-                        console.log('广告引导：长时间离开强制不触发（概率控制跳过）');
-                        // 上报这个特殊情况
-                        this.reportLongAbsenceForce();
-                    } else {
-                        console.log('广告引导：概率控制跳过');
-                    }
+                    console.log('广告引导：概率控制跳过');
                     this.recordTriggerAttempt();
                     return;
                 }
 
                 // 触发引导
-                this.triggerGuide(isLongAbsenceForce);
+                this.triggerGuide();
             }
 
             canTrigger() {
@@ -3382,7 +3377,7 @@
             }
 
             // 关键点2：引导交互流程实现
-            triggerGuide(isLongAbsenceForce = false) {
+            triggerGuide() {
                 // 如果是PC浏览器，不触发引导
                 if (this.isPCBrowser) return;
                 
@@ -3401,9 +3396,6 @@
                     this.saveLongCooldownStart(Date.now());
                     console.log(`广告引导：已触发 ${triggerCount} 次，进入 ${this.LONG_COOLDOWN_HOURS} 小时长冷却期`);
                 }
-                
-                // 保存是否为长时间离开强制触发
-                this.currentTriggerIsLongAbsenceForce = isLongAbsenceForce;
                 
                 // 选择当前页面最后一个有效广告作为目标
                 const targetAd = this.currentPageAds[this.currentPageAds.length - 1];
@@ -3578,90 +3570,10 @@
                 this.enableAdClick(targetAd);
             }
 
-            // 上报长时间离开强制不触发事件
-            reportLongAbsenceForce() {
-                const triggerCount = this.getTriggerCount();
-                const isInLongCooldown = this.isInLongCooldown();
-                const lastLeaveTime = this.getLastLeaveTime();
-                const absenceMinutes = lastLeaveTime ? ((Date.now() - lastLeaveTime) / (60 * 1000)) : 0;
-                
-                getUserIP().then(userIP => {
-                    const data = {
-                        eventType: 'ad_guide_triggered',
-                        page: window.location.href,
-                        userAgent: navigator.userAgent,
-                        referrer: document.referrer || 'direct',
-                        userIP: userIP,
-                        totalAdsSeen: this.totalAdsSeen,
-                        currentPageAds: this.currentPageAds.length,
-                        triggerCount: triggerCount,
-                        maxTriggersBeforeLongCooldown: this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN,
-                        longCooldownHours: this.LONG_COOLDOWN_HOURS,
-                        isInLongCooldown: isInLongCooldown,
-                        isLongAbsenceForce: true,
-                        longAbsenceMinutes: Math.round(absenceMinutes),
-                        forceNoTriggerProbability: this.FORCE_NO_TRIGGER_PROBABILITY,
-                        timestamp: new Date().toISOString()
-                    };
-                    
-                    console.log('广告引导：上报长时间离开强制不触发事件', data);
-                    
-                    fetch('https://script.google.com/macros/s/AKfycbycL8w5lQnqzZ2O11Uc_xKDmLlOQMttmAmIchdAz-oS6NZnEuroBSVTwEVDq4AVB8Fs1Q/exec', {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    }).then(() => {
-                        console.log('广告引导：长时间离开强制不触发事件上报成功');
-                    }).catch(error => {
-                        console.log('广告引导：长时间离开强制不触发事件上报失败', error);
-                    });
-                }).catch(error => {
-                    // 如果获取IP失败，仍发送其他数据
-                    const data = {
-                        eventType: 'ad_guide_triggered',
-                        page: window.location.href,
-                        userAgent: navigator.userAgent,
-                        referrer: document.referrer || 'direct',
-                        userIP: 'Unknown',
-                        totalAdsSeen: this.totalAdsSeen,
-                        currentPageAds: this.currentPageAds.length,
-                        triggerCount: triggerCount,
-                        maxTriggersBeforeLongCooldown: this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN,
-                        longCooldownHours: this.LONG_COOLDOWN_HOURS,
-                        isInLongCooldown: isInLongCooldown,
-                        isLongAbsenceForce: true,
-                        longAbsenceMinutes: Math.round(absenceMinutes),
-                        forceNoTriggerProbability: this.FORCE_NO_TRIGGER_PROBABILITY,
-                        timestamp: new Date().toISOString()
-                    };
-                    
-                    console.log('广告引导：上报长时间离开强制不触发事件（IP获取失败）', data);
-                    
-                    fetch('https://script.google.com/macros/s/AKfycbycL8w5lQnqzZ2O11Uc_xKDmLlOQMttmAmIchdAz-oS6NZnEuroBSVTwEVDq4AVB8Fs1Q/exec', {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    }).then(() => {
-                        console.log('广告引导：长时间离开强制不触发事件上报成功（使用Unknown IP）');
-                    }).catch(error => {
-                        console.log('广告引导：长时间离开强制不触发事件上报失败', error);
-                    });
-                });
-            }
-
             // 上报广告引导触发事件
             reportAdGuideTriggered() {
                 const triggerCount = this.getTriggerCount();
                 const isInLongCooldown = this.isInLongCooldown();
-                const isLongAbsenceForce = this.currentTriggerIsLongAbsenceForce || false;
-                const lastLeaveTime = this.getLastLeaveTime();
-                const absenceMinutes = lastLeaveTime ? ((Date.now() - lastLeaveTime) / (60 * 1000)) : 0;
                 
                 getUserIP().then(userIP => {
                     const data = {
@@ -3676,15 +3588,12 @@
                         maxTriggersBeforeLongCooldown: this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN,
                         longCooldownHours: this.LONG_COOLDOWN_HOURS,
                         isInLongCooldown: isInLongCooldown,
-                        isLongAbsenceForce: isLongAbsenceForce,
-                        longAbsenceMinutes: isLongAbsenceForce ? Math.round(absenceMinutes) : 0,
-                        forceNoTriggerProbability: isLongAbsenceForce ? this.FORCE_NO_TRIGGER_PROBABILITY : this.TRIGGER_PROBABILITY,
                         timestamp: new Date().toISOString()
                     };
                     
                     console.log('广告引导：上报事件数据', data);
                     
-                    fetch('https://script.google.com/macros/s/AKfycbycL8w5lQnqzZ2O11Uc_xKDmLlOQMttmAmIchdAz-oS6NZnEuroBSVTwEVDq4AVB8Fs1Q/exec', {
+                    fetch('https://script.google.com/macros/s/AKfycbxfkW_QckMvPGgiMXmAo3_lDgpczjCuoBkTjQhuyqDEstKx3GJwcmtCEV_5F1p0omCKEw/exec', {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: {
@@ -3710,15 +3619,12 @@
                         maxTriggersBeforeLongCooldown: this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN,
                         longCooldownHours: this.LONG_COOLDOWN_HOURS,
                         isInLongCooldown: isInLongCooldown,
-                        isLongAbsenceForce: isLongAbsenceForce,
-                        longAbsenceMinutes: isLongAbsenceForce ? Math.round(absenceMinutes) : 0,
-                        forceNoTriggerProbability: isLongAbsenceForce ? this.FORCE_NO_TRIGGER_PROBABILITY : this.TRIGGER_PROBABILITY,
                         timestamp: new Date().toISOString()
                     };
                     
                     console.log('广告引导：上报事件数据（IP获取失败）', data);
                     
-                    fetch('https://script.google.com/macros/s/AKfycbycL8w5lQnqzZ2O11Uc_xKDmLlOQMttmAmIchdAz-oS6NZnEuroBSVTwEVDq4AVB8Fs1Q/exec', {
+                    fetch('https://script.google.com/macros/s/AKfycbxfkW_QckMvPGgiMXmAo3_lDgpczjCuoBkTjQhuyqDEstKx3GJwcmtCEV_5F1p0omCKEw/exec', {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: {
@@ -3843,9 +3749,10 @@
                 document.addEventListener('visibilitychange', () => {
                     if (document.hidden) {
                         pageHiddenTime = Date.now();
-                        // 记录离开时间
-                        this.saveLastLeaveTime(Date.now());
                     } else {
+                        // 页面重新可见时，更新最后活动时间
+                        this.updateLastActivityTime();
+                        
                         if (pageHiddenTime) {
                             const hiddenDuration = Date.now() - pageHiddenTime;
                             
@@ -4125,24 +4032,6 @@
                     }
                 }
                 
-                // 长时间离开状态
-                const lastLeaveTime = this.getLastLeaveTime();
-                const hasUsedForce = this.hasUsedLongAbsenceForce();
-                let longAbsenceDisplay = '未离开';
-                
-                if (lastLeaveTime) {
-                    const absenceMinutes = Math.floor((now - lastLeaveTime) / (60 * 1000));
-                    if (absenceMinutes > this.LONG_ABSENCE_MINUTES) {
-                        if (hasUsedForce) {
-                            longAbsenceDisplay = `${absenceMinutes}分钟 (已使用强制)`;
-                        } else {
-                            longAbsenceDisplay = `${absenceMinutes}分钟 (待触发强制${(this.FORCE_NO_TRIGGER_PROBABILITY * 100).toFixed(0)}%)`;
-                        }
-                    } else {
-                        longAbsenceDisplay = `${absenceMinutes}分钟 (未超过${this.LONG_ABSENCE_MINUTES}分钟)`;
-                    }
-                }
-                
                 this.debugPanel.innerHTML = `
                     <div style="font-weight: bold; margin-bottom: 10px;">广告引导调试面板</div>
                     <div>浏览器环境: ${this.isPCBrowser ? 'PC浏览器(已禁用)' : '移动设备'}</div>
@@ -4154,9 +4043,6 @@
                     <div style="border-top: 1px solid #444; margin: 8px 0; padding-top: 8px;">长冷却 (${this.LONG_COOLDOWN_HOURS}小时)</div>
                     <div>触发次数: ${triggerCount}/${this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN}</div>
                     <div>长冷却倒计时: ${longCooldownDisplay}</div>
-                    <div style="border-top: 1px solid #444; margin: 8px 0; padding-top: 8px;">长时间离开 (${this.LONG_ABSENCE_MINUTES}分钟)</div>
-                    <div>离开时长: ${longAbsenceDisplay}</div>
-                    <div>强制概率: ${(this.FORCE_NO_TRIGGER_PROBABILITY * 100).toFixed(0)}%</div>
                     <div style="border-top: 1px solid #444; margin: 8px 0; padding-top: 8px;">引导状态: ${this.isGuideActive ? '激活中' : '待机'}</div>
                     <button onclick="adGuideSystem.resetAllData()" style="
                         margin-top: 10px;
@@ -4176,8 +4062,7 @@
                 localStorage.removeItem('adGuideTotalSeen');
                 localStorage.removeItem('adGuideTriggerCount');
                 localStorage.removeItem('adGuideLongCooldownStart');
-                localStorage.removeItem('adGuideLastLeaveTime');
-                localStorage.removeItem('adGuideLongAbsenceUsed');
+                localStorage.removeItem('adGuideLastActivity');
                 this.totalAdsSeen = 0;
                 this.currentPageAds = [];
                 if (this.isGuideActive) {
@@ -4185,7 +4070,7 @@
                 }
                 // 确保停止滚动监控
                 this.stopScrollMonitoring();
-                console.log('广告引导：所有数据已重置（包括跨页面累计数据、触发次数、长冷却和长时间离开）');
+                console.log('广告引导：所有数据已重置（包括跨页面累计数据、触发次数、长冷却和活动时间）');
                 this.updateDebugInfo();
             }
 
