@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-15T18:14:33.522591">
-    <meta property="article:modified_time" content="2025-10-15T18:14:33.522591">
+    <meta property="article:published_time" content="2025-10-15T18:18:13.208808">
+    <meta property="article:modified_time" content="2025-10-15T18:18:13.208808">
     <meta name="date" content="2025-10-15">
-    <meta name="last-modified" content="2025-10-15 18:14:33">
+    <meta name="last-modified" content="2025-10-15 18:18:13">
     
     
     <!-- Open Graph Meta Tags -->
@@ -536,8 +536,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-15T18:14:33.522591",
-        "dateModified": "2025-10-15T18:14:33.522591",
+        "datePublished": "2025-10-15T18:18:13.208808",
+        "dateModified": "2025-10-15T18:18:13.208808",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
@@ -3039,7 +3039,7 @@
                 this.COOLDOWN_MINUTES = 15; // 15分钟冷却时间
                 this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN = 3; // 累计触发3次后进入长冷却
                 this.LONG_COOLDOWN_HOURS = 2; // 长冷却时间2小时
-                this.INACTIVITY_RESET_MINUTES = 61; // 离开页面60分钟后自动重置
+                this.INACTIVITY_RESET_MINUTES = 60; // 离开页面60分钟后自动重置
                 
                 // 状态管理
                 this.currentPageAds = []; // 当前页面的广告
@@ -3980,6 +3980,24 @@
                     }
                 }
                 
+                // 非活动自动重置倒计时
+                const lastActivity = this.getLastActivityTime();
+                let inactivityDisplay = '未开始';
+                
+                if (lastActivity) {
+                    const inactivityMs = this.INACTIVITY_RESET_MINUTES * 60 * 1000;
+                    const timeSinceActivity = now - lastActivity;
+                    const inactivityRemaining = Math.max(0, inactivityMs - timeSinceActivity);
+                    
+                    if (inactivityRemaining > 0) {
+                        const inactivityMinutes = Math.floor(inactivityRemaining / (60 * 1000));
+                        const inactivitySeconds = Math.floor((inactivityRemaining % (60 * 1000)) / 1000);
+                        inactivityDisplay = `${inactivityMinutes}:${inactivitySeconds.toString().padStart(2, '0')}`;
+                    } else {
+                        inactivityDisplay = '已触发重置';
+                    }
+                }
+                
                 this.debugPanel.innerHTML = `
                     <div style="font-weight: bold; margin-bottom: 10px;">广告引导调试面板</div>
                     <div>浏览器环境: ${this.isPCBrowser ? 'PC浏览器(已禁用)' : '移动设备'}</div>
@@ -3991,6 +4009,8 @@
                     <div style="border-top: 1px solid #444; margin: 8px 0; padding-top: 8px;">长冷却 (${this.LONG_COOLDOWN_HOURS}小时)</div>
                     <div>触发次数: ${triggerCount}/${this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN}</div>
                     <div>长冷却倒计时: ${longCooldownDisplay}</div>
+                    <div style="border-top: 1px solid #444; margin: 8px 0; padding-top: 8px;">非活动自动重置 (${this.INACTIVITY_RESET_MINUTES}分钟)</div>
+                    <div>倒计时: ${inactivityDisplay}</div>
                     <div style="border-top: 1px solid #444; margin: 8px 0; padding-top: 8px;">引导状态: ${this.isGuideActive ? '激活中' : '待机'}</div>
                     <button onclick="adGuideSystem.resetAllData()" style="
                         margin-top: 10px;
