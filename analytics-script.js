@@ -49,14 +49,18 @@ function handleAdGuideEvent(spreadsheet, data) {
   console.log('Sheet 名称:', adGuideSheet.getName());
   
   const rowData = [
-    getTimeString(),              // 时间
-    data.page || '',              // 访问页面
-    data.userAgent || '',         // 用户属性
-    data.referrer || '',          // 来源页面
-    data.userIP || 'Unknown',     // IP地址
-    data.totalAdsSeen || 0,       // 累计广告数
-    data.currentPageAds || 0,     // 当前页广告数
-    data.timestamp || ''          // 事件时间戳
+    getTimeString(),                        // 时间
+    data.page || '',                        // 访问页面
+    data.userAgent || '',                   // 用户属性
+    data.referrer || '',                    // 来源页面
+    data.userIP || 'Unknown',               // IP地址
+    data.totalAdsSeen || 0,                 // 累计广告数
+    data.currentPageAds || 0,               // 当前页广告数
+    data.triggerCount || 0,                 // 触发次数
+    data.maxTriggersBeforeLongCooldown || 0, // 最大触发次数
+    data.longCooldownHours || 0,            // 长冷却小时数
+    data.isInLongCooldown ? '是' : '否',    // 是否在长冷却期
+    data.timestamp || ''                    // 事件时间戳
   ];
   
   console.log('准备插入的数据:', JSON.stringify(rowData));
@@ -74,21 +78,25 @@ function getOrCreateAdGuideSheet(spreadsheet, dateString) {
     console.log('Sheet 不存在，开始创建新 Sheet');
     sheet = spreadsheet.insertSheet(sheetName);
     
-    sheet.getRange(1, 1, 1, 8).setValues([
-      ['时间', '访问页面', '用户属性', '来源页面', 'IP地址', '累计广告数', '当前页广告数', '事件时间戳']
+    sheet.getRange(1, 1, 1, 12).setValues([
+      ['时间', '访问页面', '用户属性', '来源页面', 'IP地址', '累计广告数', '当前页广告数', '触发次数', '最大触发次数', '长冷却小时数', '是否长冷却', '事件时间戳']
     ]);
     
-    const headerRange = sheet.getRange(1, 1, 1, 8);
+    const headerRange = sheet.getRange(1, 1, 1, 12);
     headerRange.setBackground('#FF6B6B').setFontColor('white').setFontWeight('bold');
     
-    sheet.setColumnWidth(1, 150);
-    sheet.setColumnWidth(2, 300);
-    sheet.setColumnWidth(3, 200);
-    sheet.setColumnWidth(4, 200);
-    sheet.setColumnWidth(5, 120);
-    sheet.setColumnWidth(6, 100);
-    sheet.setColumnWidth(7, 120);
-    sheet.setColumnWidth(8, 180);
+    sheet.setColumnWidth(1, 150);   // 时间
+    sheet.setColumnWidth(2, 300);   // 访问页面
+    sheet.setColumnWidth(3, 200);   // 用户属性
+    sheet.setColumnWidth(4, 200);   // 来源页面
+    sheet.setColumnWidth(5, 120);   // IP地址
+    sheet.setColumnWidth(6, 100);   // 累计广告数
+    sheet.setColumnWidth(7, 120);   // 当前页广告数
+    sheet.setColumnWidth(8, 100);   // 触发次数
+    sheet.setColumnWidth(9, 120);   // 最大触发次数
+    sheet.setColumnWidth(10, 120);  // 长冷却小时数
+    sheet.setColumnWidth(11, 100);  // 是否长冷却
+    sheet.setColumnWidth(12, 180);  // 事件时间戳
     
     console.log('✅ 新 Sheet 创建完成');
   } else {
@@ -422,7 +430,7 @@ function manualStatisticsUpdate() {
 function testAdGuideEvent() {
   console.log('=== 开始测试广告引导事件 ===');
   
-  const spreadsheet = SpreadsheetApp.openById('1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4');
+  const spreadsheet = SpreadsheetApp.openById('1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek');
   
   const testData = {
     eventType: 'ad_guide_triggered',
@@ -432,6 +440,10 @@ function testAdGuideEvent() {
     userIP: '127.0.0.1',
     totalAdsSeen: 15,
     currentPageAds: 3,
+    triggerCount: 5,
+    maxTriggersBeforeLongCooldown: 8,
+    longCooldownHours: 12,
+    isInLongCooldown: false,
     timestamp: new Date().toISOString()
   };
   
