@@ -60,6 +60,9 @@ function handleAdGuideEvent(spreadsheet, data) {
     data.maxTriggersBeforeLongCooldown || 0, // 最大触发次数
     data.longCooldownHours || 0,            // 长冷却小时数
     data.isInLongCooldown ? '是' : '否',    // 是否在长冷却期
+    data.isLongAbsenceForce ? '是' : '否',  // 是否长时间离开强制
+    data.longAbsenceMinutes || 0,           // 离开时长(分钟)
+    (data.forceNoTriggerProbability !== undefined ? (data.forceNoTriggerProbability * 100).toFixed(0) + '%' : '80%'), // 触发概率
     data.timestamp || ''                    // 事件时间戳
   ];
   
@@ -78,11 +81,11 @@ function getOrCreateAdGuideSheet(spreadsheet, dateString) {
     console.log('Sheet 不存在，开始创建新 Sheet');
     sheet = spreadsheet.insertSheet(sheetName);
     
-    sheet.getRange(1, 1, 1, 12).setValues([
-      ['时间', '访问页面', '用户属性', '来源页面', 'IP地址', '累计广告数', '当前页广告数', '触发次数', '最大触发次数', '长冷却小时数', '是否长冷却', '事件时间戳']
+    sheet.getRange(1, 1, 1, 15).setValues([
+      ['时间', '访问页面', '用户属性', '来源页面', 'IP地址', '累计广告数', '当前页广告数', '触发次数', '最大触发次数', '长冷却小时数', '是否长冷却', '长时间离开强制', '离开时长(分钟)', '触发概率', '事件时间戳']
     ]);
     
-    const headerRange = sheet.getRange(1, 1, 1, 12);
+    const headerRange = sheet.getRange(1, 1, 1, 15);
     headerRange.setBackground('#FF6B6B').setFontColor('white').setFontWeight('bold');
     
     sheet.setColumnWidth(1, 150);   // 时间
@@ -96,7 +99,10 @@ function getOrCreateAdGuideSheet(spreadsheet, dateString) {
     sheet.setColumnWidth(9, 120);   // 最大触发次数
     sheet.setColumnWidth(10, 120);  // 长冷却小时数
     sheet.setColumnWidth(11, 100);  // 是否长冷却
-    sheet.setColumnWidth(12, 180);  // 事件时间戳
+    sheet.setColumnWidth(12, 140);  // 长时间离开强制
+    sheet.setColumnWidth(13, 130);  // 离开时长(分钟)
+    sheet.setColumnWidth(14, 100);  // 触发概率
+    sheet.setColumnWidth(15, 180);  // 事件时间戳
     
     console.log('✅ 新 Sheet 创建完成');
   } else {
@@ -432,7 +438,8 @@ function testAdGuideEvent() {
   
   const spreadsheet = SpreadsheetApp.openById('1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek');
   
-  const testData = {
+  // 测试正常触发
+  const testData1 = {
     eventType: 'ad_guide_triggered',
     page: 'https://re.cankalp.com/novels/test/chapter-1',
     userAgent: 'Mozilla/5.0 (iPhone; Test)',
@@ -444,13 +451,37 @@ function testAdGuideEvent() {
     maxTriggersBeforeLongCooldown: 8,
     longCooldownHours: 12,
     isInLongCooldown: false,
+    isLongAbsenceForce: false,
+    longAbsenceMinutes: 0,
+    forceNoTriggerProbability: 0.8,
     timestamp: new Date().toISOString()
   };
   
-  console.log('测试数据:', JSON.stringify(testData));
+  // 测试长时间离开强制不触发
+  const testData2 = {
+    eventType: 'ad_guide_triggered',
+    page: 'https://re.cankalp.com/novels/test/chapter-2',
+    userAgent: 'Mozilla/5.0 (iPhone; Test)',
+    referrer: 'https://re.cankalp.com/novels/test/chapter-1',
+    userIP: '127.0.0.1',
+    totalAdsSeen: 20,
+    currentPageAds: 5,
+    triggerCount: 6,
+    maxTriggersBeforeLongCooldown: 8,
+    longCooldownHours: 12,
+    isInLongCooldown: false,
+    isLongAbsenceForce: true,
+    longAbsenceMinutes: 75,
+    forceNoTriggerProbability: 0,
+    timestamp: new Date().toISOString()
+  };
+  
+  console.log('测试数据1 (正常触发):', JSON.stringify(testData1));
+  console.log('测试数据2 (长时间离开强制):', JSON.stringify(testData2));
   
   try {
-    handleAdGuideEvent(spreadsheet, testData);
+    handleAdGuideEvent(spreadsheet, testData1);
+    handleAdGuideEvent(spreadsheet, testData2);
     console.log('✅ 测试成功！');
     return '测试成功 - 请检查 Google Sheets 中的"广告引导-' + getDateString() + '"表格';
   } catch (error) {
