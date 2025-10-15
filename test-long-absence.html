@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试长时间离开功能</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007AFF;
+            padding-bottom: 10px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #007AFF;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #007AFF;
+        }
+        button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0051D5;
+        }
+        button.secondary {
+            background: #34C759;
+        }
+        button.secondary:hover {
+            background: #28A745;
+        }
+        button.danger {
+            background: #FF3B30;
+        }
+        button.danger:hover {
+            background: #D32F2F;
+        }
+        .log {
+            background: #000;
+            color: #0F0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        .log-entry {
+            margin: 5px 0;
+        }
+        .log-success {
+            color: #0F0;
+        }
+        .log-error {
+            color: #F00;
+        }
+        .log-info {
+            color: #0FF;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 广告引导系统 - 长时间离开功能测试</h1>
+        
+        <div class="status">
+            <strong>测试说明：</strong>此页面用于测试长时间离开（60分钟）强制不触发功能
+        </div>
+
+        <div class="test-section">
+            <h3>📊 测试场景 1: 正常触发（80%概率）</h3>
+            <p>模拟用户正常使用，触发广告引导弹窗</p>
+            <button onclick="testNormalTrigger()">发送正常触发事件</button>
+        </div>
+
+        <div class="test-section">
+            <h3>⏰ 测试场景 2: 长时间离开强制不触发（0%概率）</h3>
+            <p>模拟用户离开超过60分钟后返回，应用强制不触发逻辑</p>
+            <div class="input-group">
+                <label>离开时长（分钟）：</label>
+                <input type="number" id="absenceMinutes" value="75" min="61" max="1440">
+            </div>
+            <button onclick="testLongAbsenceForce()">发送长时间离开事件</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🔄 测试场景 3: 长冷却期触发</h3>
+            <p>模拟用户已触发8次，进入12小时长冷却期</p>
+            <button onclick="testLongCooldown()">发送长冷却事件</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🎯 测试场景 4: 组合测试</h3>
+            <p>依次发送多个不同场景的事件</p>
+            <button onclick="testAll()">发送所有测试场景</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🗑️ 清理 localStorage</h3>
+            <p>清除本地存储的所有广告引导数据</p>
+            <button class="danger" onclick="clearLocalStorage()">清除 localStorage</button>
+        </div>
+
+        <div class="test-section">
+            <h3>📋 查看 Google Sheets</h3>
+            <p>测试完成后，查看数据是否成功记录</p>
+            <button class="secondary" onclick="openGoogleSheets()">打开 Google Sheets</button>
+        </div>
+
+        <h2>📝 测试日志</h2>
+        <div class="log" id="logContainer"></div>
+    </div>
+
+    <script>
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbycL8w5lQnqzZ2O11Uc_xKDmLlOQMttmAmIchdAz-oS6NZnEuroBSVTwEVDq4AVB8Fs1Q/exec';
+        const GOOGLE_SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek/edit';
+
+        function log(message, type = 'info') {
+            const logContainer = document.getElementById('logContainer');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            const timestamp = new Date().toLocaleTimeString('zh-CN');
+            entry.textContent = `[${timestamp}] ${message}`;
+            logContainer.appendChild(entry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            console.log(message);
+        }
+
+        async function sendEvent(eventData) {
+            log(`📤 发送事件数据: ${JSON.stringify(eventData, null, 2)}`, 'info');
+            
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(eventData)
+                });
+                
+                log('✅ 事件发送成功！', 'success');
+                return true;
+            } catch (error) {
+                log(`❌ 事件发送失败: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function testNormalTrigger() {
+            log('========== 测试场景 1: 正常触发 ==========', 'info');
+            
+            const data = {
+                eventType: 'ad_guide_triggered',
+                page: window.location.href,
+                userAgent: navigator.userAgent,
+                referrer: 'https://test.com/novels/test/index',
+                userIP: '192.168.1.100',
+                totalAdsSeen: 15,
+                currentPageAds: 3,
+                triggerCount: 3,
+                maxTriggersBeforeLongCooldown: 8,
+                longCooldownHours: 12,
+                isInLongCooldown: false,
+                isLongAbsenceForce: false,
+                longAbsenceMinutes: 0,
+                forceNoTriggerProbability: 0.8,
+                timestamp: new Date().toISOString()
+            };
+            
+            await sendEvent(data);
+        }
+
+        async function testLongAbsenceForce() {
+            log('========== 测试场景 2: 长时间离开强制 ==========', 'info');
+            
+            const absenceMinutes = parseInt(document.getElementById('absenceMinutes').value) || 75;
+            log(`⏰ 设置离开时长: ${absenceMinutes} 分钟`, 'info');
+            
+            const data = {
+                eventType: 'ad_guide_triggered',
+                page: window.location.href,
+                userAgent: navigator.userAgent,
+                referrer: 'https://test.com/novels/test/chapter-1',
+                userIP: '192.168.1.100',
+                totalAdsSeen: 20,
+                currentPageAds: 5,
+                triggerCount: 5,
+                maxTriggersBeforeLongCooldown: 8,
+                longCooldownHours: 12,
+                isInLongCooldown: false,
+                isLongAbsenceForce: true,
+                longAbsenceMinutes: absenceMinutes,
+                forceNoTriggerProbability: 0,
+                timestamp: new Date().toISOString()
+            };
+            
+            await sendEvent(data);
+            log(`🔍 长时间离开: ${absenceMinutes}分钟 > 60分钟阈值`, 'info');
+            log(`🎯 强制触发概率: 0% (forceNoTriggerProbability = 0)`, 'info');
+        }
+
+        async function testLongCooldown() {
+            log('========== 测试场景 3: 长冷却期 ==========', 'info');
+            
+            const data = {
+                eventType: 'ad_guide_triggered',
+                page: window.location.href,
+                userAgent: navigator.userAgent,
+                referrer: 'https://test.com/novels/test/chapter-5',
+                userIP: '192.168.1.100',
+                totalAdsSeen: 25,
+                currentPageAds: 4,
+                triggerCount: 8,
+                maxTriggersBeforeLongCooldown: 8,
+                longCooldownHours: 12,
+                isInLongCooldown: true,
+                isLongAbsenceForce: false,
+                longAbsenceMinutes: 0,
+                forceNoTriggerProbability: 0.8,
+                timestamp: new Date().toISOString()
+            };
+            
+            await sendEvent(data);
+            log(`🔒 已触发 8 次，进入 12 小时长冷却期`, 'info');
+        }
+
+        async function testAll() {
+            log('========== 开始组合测试 ==========', 'info');
+            
+            await testNormalTrigger();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            await testLongAbsenceForce();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            await testLongCooldown();
+            
+            log('========== 组合测试完成 ==========', 'success');
+            log('📊 请打开 Google Sheets 查看数据', 'info');
+        }
+
+        function clearLocalStorage() {
+            const keys = [
+                'adGuideLastTrigger',
+                'adGuideTotalSeen',
+                'adGuideTriggerCount',
+                'adGuideLongCooldownStart',
+                'adGuideLastLeaveTime',
+                'adGuideLongAbsenceUsed'
+            ];
+            
+            log('🗑️ 开始清除 localStorage...', 'info');
+            
+            keys.forEach(key => {
+                if (localStorage.getItem(key)) {
+                    localStorage.removeItem(key);
+                    log(`  ✓ 已删除: ${key}`, 'success');
+                } else {
+                    log(`  - 不存在: ${key}`, 'info');
+                }
+            });
+            
+            log('✅ localStorage 清除完成！', 'success');
+        }
+
+        function openGoogleSheets() {
+            log('🔗 打开 Google Sheets...', 'info');
+            window.open(GOOGLE_SHEETS_URL, '_blank');
+        }
+
+        // 页面加载时显示欢迎信息
+        window.addEventListener('DOMContentLoaded', () => {
+            log('🚀 广告引导系统测试工具已加载', 'success');
+            log(`📍 Apps Script URL: ${APPS_SCRIPT_URL.substring(0, 50)}...`, 'info');
+            log(`📊 Google Sheets: 1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek`, 'info');
+            log('', 'info');
+            log('💡 提示: 选择测试场景并点击按钮开始测试', 'info');
+        });
+    </script>
+</body>
+</html>
