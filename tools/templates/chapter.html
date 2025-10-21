@@ -147,7 +147,6 @@
             const data = {
                 page: window.location.href,
                 userAgent: navigator.userAgent,
-                referrer: document.referrer || 'direct',
                 userIP: userIP
             };
             
@@ -167,7 +166,6 @@
             const data = {
                 page: window.location.href,
                 userAgent: navigator.userAgent,
-                referrer: document.referrer || 'direct',
                 userIP: 'Unknown'
             };
             
@@ -1346,7 +1344,6 @@
                         eventType: 'ad_guide_triggered',
                         page: window.location.href,
                         userAgent: navigator.userAgent,
-                        referrer: document.referrer || 'direct',
                         userIP: userIP,
                         totalAdsSeen: this.totalAdsSeen,
                         currentPageAds: this.currentPageAds.length,
@@ -1377,7 +1374,6 @@
                         eventType: 'ad_guide_triggered',
                         page: window.location.href,
                         userAgent: navigator.userAgent,
-                        referrer: document.referrer || 'direct',
                         userIP: 'Unknown',
                         totalAdsSeen: this.totalAdsSeen,
                         currentPageAds: this.currentPageAds.length,
