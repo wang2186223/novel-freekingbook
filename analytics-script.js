@@ -1,6 +1,9 @@
 
     // Google Apps Script 代码 - 网站访问统计系统
 // Spreadsheet ID: 1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek
+// V7 部署 (2025年10月21日上午11:11)
+// 部署ID: AKfycbyn-yImz5x-Wo_uwdF50XegbX6w_PtnQgpbhBWLffH3MBD0pS1ge4csM1VMPKfzuu9AJg
+// URL: https://script.google.com/macros/s/AKfycbyn-yImz5x-Wo_uwdF50XegbX6w_PtnQgpbhBWLffH3MBD0pS1ge4csM1VMPKfzuu9AJg/exec
 
 function doPost(e) {
   try {
