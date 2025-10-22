@@ -1,9 +1,10 @@
 
     // Google Apps Script 代码 - 网站访问统计系统
 // Spreadsheet ID: 1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek
-// V7 部署 (2025年10月21日上午11:11)
-// 部署ID: AKfycbyn-yImz5x-Wo_uwdF50XegbX6w_PtnQgpbhBWLffH3MBD0pS1ge4csM1VMPKfzuu9AJg
-// URL: https://script.google.com/macros/s/AKfycbyn-yImz5x-Wo_uwdF50XegbX6w_PtnQgpbhBWLffH3MBD0pS1ge4csM1VMPKfzuu9AJg/exec
+// V9 部署 (2025年10月22日下午2:23)
+// 部署ID: AKfycbwPpYUm4SO3tj1N6bZE1SAYRma4QQm78_tDQGCWQZwFBlOQR0hMupQWOkfIYNrZeAGvew
+// URL: https://script.google.com/macros/s/AKfycbwPpYUm4SO3tj1N6bZE1SAYRma4QQm78_tDQGCWQZwFBlOQR0hMupQWOkfIYNrZeAGvew/exec
+// 更新内容: 修复统计汇总表IP地址读取位置 (row[4]→row[3])
 
 function doPost(e) {
   try {
@@ -324,7 +325,7 @@ function generateDailyStatistics(spreadsheet, dateLabel) {
   for (let i = 1; i < values.length; i++) {
     const row = values[i];
     const pageUrl = row[1] || '';
-    const userIP = row[4] || '';
+    const userIP = row[3] || '';  // 修复：删除referrer后，IP地址在第4列（索引3）
     
     if (!pageUrl || !userIP) continue;
     
