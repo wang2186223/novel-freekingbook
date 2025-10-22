@@ -85,33 +85,16 @@
     /></noscript>
     <!-- End Facebook Pixel Code -->
     
-    <!-- 追踪参数保持系统 -->
+    <!-- Facebook追踪参数保持系统 -->
     <script>
-    // ==================== Facebook/UTM 追踪参数保持系统 ====================
-    
-    /**
-     * 追踪参数管理系统
-     * 目的：保持 Facebook 和 UTM 参数在站内跳转时不丢失
-     */
+    // Facebook/UTM 追踪参数管理
     (function() {
-        // 定义需要保持的追踪参数
-        const TRACKING_PARAMS = [
-            'fbclid',           // Facebook Click ID
-            'utm_source',       // 流量来源
-            'utm_medium',       // 流量媒介
-            'utm_campaign',     // 广告系列
-            'utm_content',      // 广告内容
-            'utm_term',         // 关键词
-            'utm_id'            // 广告系列ID
-        ];
+        const TRACKING_PARAMS = ['fbclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id'];
+        const STORAGE_KEY = 'fb_tracking_params';
+        const STORAGE_TIMESTAMP_KEY = 'fb_tracking_timestamp';
+        const PARAM_LIFETIME = 24 * 60 * 60 * 1000; // 24小时有效期
         
-        const STORAGE_KEY = 'tracking_params';
-        const STORAGE_TIMESTAMP_KEY = 'tracking_params_timestamp';
-        const PARAMS_EXPIRY = 30 * 24 * 60 * 60 * 1000; // 30天过期
-        
-        /**
-         * 从 URL 中提取追踪参数
-         */
+        // 从 URL 中提取追踪参数
         function extractTrackingParams() {
             const urlParams = new URLSearchParams(window.location.search);
             const params = {};
@@ -128,131 +111,119 @@
             return hasParams ? params : null;
         }
         
-        /**
-         * 保存追踪参数到 sessionStorage
-         */
+        // 保存追踪参数到 localStorage
         function saveTrackingParams(params) {
-            if (params && Object.keys(params).length > 0) {
-                sessionStorage.setItem(STORAGE_KEY, JSON.stringify(params));
-                sessionStorage.setItem(STORAGE_TIMESTAMP_KEY, Date.now().toString());
-                console.log('📊 追踪参数已保存:', params);
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(params));
+                localStorage.setItem(STORAGE_TIMESTAMP_KEY, Date.now().toString());
+                console.log('Facebook追踪参数已保存:', params);
+            } catch (e) {
+                console.log('保存追踪参数失败:', e);
             }
         }
         
-        /**
-         * 获取已保存的追踪参数
-         */
+        // 获取已保存的追踪参数
         function getSavedTrackingParams() {
             try {
-                const timestamp = sessionStorage.getItem(STORAGE_TIMESTAMP_KEY);
-                if (timestamp && (Date.now() - parseInt(timestamp)) > PARAMS_EXPIRY) {
-                    // 参数已过期，清除
-                    sessionStorage.removeItem(STORAGE_KEY);
-                    sessionStorage.removeItem(STORAGE_TIMESTAMP_KEY);
+                const savedParams = localStorage.getItem(STORAGE_KEY);
+                const savedTimestamp = localStorage.getItem(STORAGE_TIMESTAMP_KEY);
+                
+                if (!savedParams || !savedTimestamp) {
                     return null;
                 }
                 
-                const saved = sessionStorage.getItem(STORAGE_KEY);
-                return saved ? JSON.parse(saved) : null;
-            } catch (error) {
-                console.error('读取追踪参数失败:', error);
+                // 检查是否过期
+                const age = Date.now() - parseInt(savedTimestamp);
+                if (age > PARAM_LIFETIME) {
+                    // 已过期，清除
+                    localStorage.removeItem(STORAGE_KEY);
+                    localStorage.removeItem(STORAGE_TIMESTAMP_KEY);
+                    console.log('追踪参数已过期，已清除');
+                    return null;
+                }
+                
+                return JSON.parse(savedParams);
+            } catch (e) {
+                console.log('读取追踪参数失败:', e);
                 return null;
             }
         }
         
-        /**
-         * 为 URL 添加追踪参数
-         */
-        function addTrackingParams(url, params) {
-            if (!params || Object.keys(params).length === 0) {
-                return url;
-            }
-            
+        // 为链接添加追踪参数
+        function addTrackingParamsToUrl(url, params) {
             try {
                 const urlObj = new URL(url, window.location.origin);
                 
-                // 添加参数
+                // 检查是否是站内链接
+                if (urlObj.origin !== window.location.origin) {
+                    return url; // 不修改站外链接
+                }
+                
+                // 检查 URL 是否已经有追踪参数（新参数优先）
+                const existingParams = new URLSearchParams(urlObj.search);
+                let hasExistingTracking = false;
+                TRACKING_PARAMS.forEach(param => {
+                    if (existingParams.has(param)) {
+                        hasExistingTracking = true;
+                    }
+                });
+                
+                // 如果已有新的追踪参数，不添加旧的
+                if (hasExistingTracking) {
+                    return url;
+                }
+                
+                // 添加保存的追踪参数
                 Object.keys(params).forEach(key => {
                     urlObj.searchParams.set(key, params[key]);
                 });
                 
                 return urlObj.toString();
-            } catch (error) {
-                console.error('添加追踪参数失败:', error);
+            } catch (e) {
+                console.log('添加追踪参数失败:', e);
                 return url;
             }
         }
         
-        /**
-         * 处理站内链接，添加追踪参数
-         */
-        function enhanceInternalLinks() {
-            const params = getSavedTrackingParams();
-            if (!params) return;
-            
-            // 获取所有站内链接
-            const internalLinks = document.querySelectorAll('a[href]');
-            
-            internalLinks.forEach(link => {
+        // 处理页面上的所有链接
+        function processPageLinks(params) {
+            // 处理普通链接
+            document.querySelectorAll('a[href]').forEach(link => {
                 const href = link.getAttribute('href');
-                
-                // 跳过外部链接、锚点、JavaScript链接
-                if (!href || 
-                    href.startsWith('http://') || 
-                    href.startsWith('https://') || 
-                    href.startsWith('#') || 
-                    href.startsWith('javascript:')) {
-                    return;
-                }
-                
-                // 检查是否是站内链接（相对路径或同域名）
-                try {
-                    const linkUrl = new URL(href, window.location.origin);
-                    if (linkUrl.hostname === window.location.hostname) {
-                        // 为站内链接添加追踪参数
-                        const enhancedUrl = addTrackingParams(href, params);
-                        if (enhancedUrl !== href) {
-                            link.setAttribute('href', enhancedUrl);
-                        }
+                if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                    const newHref = addTrackingParamsToUrl(href, params);
+                    if (newHref !== href) {
+                        link.setAttribute('href', newHref);
                     }
-                } catch (error) {
-                    // 忽略无效URL
                 }
             });
             
-            console.log('✅ 站内链接已增强，追踪参数将保持');
-        }
-        
-        // 页面加载时执行
-        function init() {
-            // 1. 检查当前URL是否有追踪参数
-            const currentParams = extractTrackingParams();
-            
-            if (currentParams) {
-                // 有新参数，优先使用新参数（覆盖旧的）
-                saveTrackingParams(currentParams);
-                console.log('🎯 检测到新的追踪参数');
-            } else {
-                // 没有新参数，检查是否有保存的参数
-                const savedParams = getSavedTrackingParams();
-                if (savedParams) {
-                    console.log('📌 使用已保存的追踪参数:', savedParams);
-                }
-            }
-            
-            // 2. 增强所有站内链接
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', enhanceInternalLinks);
-            } else {
-                enhanceInternalLinks();
-            }
-            
-            // 3. 监听动态添加的链接
-            const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    if (mutation.addedNodes.length > 0) {
-                        enhanceInternalLinks();
-                    }
+            // 监听动态添加的链接
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.nodeType === 1) { // Element node
+                            if (node.tagName === 'A' && node.href) {
+                                const href = node.getAttribute('href');
+                                if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                                    const newHref = addTrackingParamsToUrl(href, params);
+                                    if (newHref !== href) {
+                                        node.setAttribute('href', newHref);
+                                    }
+                                }
+                            }
+                            // 处理子元素中的链接
+                            node.querySelectorAll && node.querySelectorAll('a[href]').forEach(link => {
+                                const href = link.getAttribute('href');
+                                if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                                    const newHref = addTrackingParamsToUrl(href, params);
+                                    if (newHref !== href) {
+                                        link.setAttribute('href', newHref);
+                                    }
+                                }
+                            });
+                        }
+                    });
                 });
             });
             
@@ -262,7 +233,47 @@
             });
         }
         
-        // 立即执行初始化
+        // 初始化
+        function init() {
+            // 检查当前 URL 是否有新的追踪参数
+            const currentParams = extractTrackingParams();
+            
+            if (currentParams) {
+                // 有新参数，保存并使用新参数
+                console.log('检测到新的Facebook追踪参数');
+                saveTrackingParams(currentParams);
+                
+                // 清理 URL（移除参数，但保持追踪）
+                const cleanUrl = window.location.origin + window.location.pathname;
+                if (window.history.replaceState) {
+                    window.history.replaceState({}, document.title, cleanUrl);
+                }
+                
+                // 等待 DOM 加载完成后处理链接
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', () => processPageLinks(currentParams));
+                } else {
+                    processPageLinks(currentParams);
+                }
+            } else {
+                // 没有新参数，检查是否有保存的参数
+                const savedParams = getSavedTrackingParams();
+                
+                if (savedParams) {
+                    console.log('使用已保存的Facebook追踪参数');
+                    // 等待 DOM 加载完成后处理链接
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', () => processPageLinks(savedParams));
+                    } else {
+                        processPageLinks(savedParams);
+                    }
+                } else {
+                    console.log('无Facebook追踪参数');
+                }
+            }
+        }
+        
+        // 页面加载时执行
         init();
     })();
     </script>
