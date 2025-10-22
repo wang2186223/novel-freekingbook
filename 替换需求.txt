@@ -1,7 +1,27 @@
 需要替换的
 
-1、facebook pixel：
+1、facebook pixel：   1176123737890684
+
+
 2、GA4：
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ND2Y00VMY2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ND2Y00VMY2');
+</script>
+
+
 3、广告代码：
+
+
+
 4、域名：
+
+
+
+
 5、统计平台：
