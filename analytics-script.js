@@ -1,10 +1,10 @@
 
     // Google Apps Script 代码 - 网站访问统计系统
 // Spreadsheet ID: 1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek
-// V9 部署 (2025年10月22日下午2:23)
-// 部署ID: AKfycbwPpYUm4SO3tj1N6bZE1SAYRma4QQm78_tDQGCWQZwFBlOQR0hMupQWOkfIYNrZeAGvew
-// URL: https://script.google.com/macros/s/AKfycbwPpYUm4SO3tj1N6bZE1SAYRma4QQm78_tDQGCWQZwFBlOQR0hMupQWOkfIYNrZeAGvew/exec
-// 更新内容: 修复统计汇总表IP地址读取位置 (row[4]→row[3])
+// V10 部署 (2025年10月22日下午2:36)
+// 部署ID: AKfycbwOxUKaKUp5SIuaFpbI9f8ByAVz4Qje-Xcpi8EHl2W-2bXsDynULXdAs-N3YgFY00Ak6g
+// URL: https://script.google.com/macros/s/AKfycbwOxUKaKUp5SIuaFpbI9f8ByAVz4Qje-Xcpi8EHl2W-2bXsDynULXdAs-N3YgFY00Ak6g/exec
+// 更新内容: 修复统计汇总表IP地址读取位置 (row[4]→row[3]) + 修复手动函数Spreadsheet ID
 
 function doPost(e) {
   try {
@@ -262,7 +262,7 @@ function cleanupOldSheets(spreadsheet) {
 }
 
 function manualCleanup() {
-  const spreadsheet = SpreadsheetApp.openById('1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4');
+  const spreadsheet = SpreadsheetApp.openById('1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek');
   cleanupOldSheets(spreadsheet);
   updateDashboard(spreadsheet, getDateString());
   return '数据清理完成';
@@ -415,13 +415,13 @@ function updateStatsInTable(sheet, newStats, dateLabel) {
 }
 
 function hourlyStatisticsUpdate() {
-  const spreadsheet = SpreadsheetApp.openById('1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4');
+  const spreadsheet = SpreadsheetApp.openById('1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek');
   updateStatisticsTable(spreadsheet);
   return '每小时统计更新完成';
 }
 
 function manualStatisticsUpdate() {
-  const spreadsheet = SpreadsheetApp.openById('1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4');
+  const spreadsheet = SpreadsheetApp.openById('1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek');
   updateStatisticsTable(spreadsheet);
   return '手动统计更新完成';
 }
