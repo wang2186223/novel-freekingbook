@@ -1,10 +1,9 @@
 
     // Google Apps Script 代码 - 网站访问统计系统
 // Spreadsheet ID: 1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek
-// V10 部署 (2025年10月22日下午2:36)
-// 部署ID: AKfycbwOxUKaKUp5SIuaFpbI9f8ByAVz4Qje-Xcpi8EHl2W-2bXsDynULXdAs-N3YgFY00Ak6g
-// URL: https://script.google.com/macros/s/AKfycbwOxUKaKUp5SIuaFpbI9f8ByAVz4Qje-Xcpi8EHl2W-2bXsDynULXdAs-N3YgFY00Ak6g/exec
-// 更新内容: 修复统计汇总表IP地址读取位置 (row[4]→row[3]) + 修复手动函数Spreadsheet ID
+// V7 部署 (2025年10月21日上午11:11)
+// 部署ID: AKfycbyn-yImz5x-Wo_uwdF50XegbX6w_PtnQgpbhBWLffH3MBD0pS1ge4csM1VMPKfzuu9AJg
+// URL: https://script.google.com/macros/s/AKfycbyn-yImz5x-Wo_uwdF50XegbX6w_PtnQgpbhBWLffH3MBD0pS1ge4csM1VMPKfzuu9AJg/exec
 
 function doPost(e) {
   try {
@@ -262,7 +261,7 @@ function cleanupOldSheets(spreadsheet) {
 }
 
 function manualCleanup() {
-  const spreadsheet = SpreadsheetApp.openById('1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek');
+  const spreadsheet = SpreadsheetApp.openById('1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4');
   cleanupOldSheets(spreadsheet);
   updateDashboard(spreadsheet, getDateString());
   return '数据清理完成';
@@ -325,7 +324,7 @@ function generateDailyStatistics(spreadsheet, dateLabel) {
   for (let i = 1; i < values.length; i++) {
     const row = values[i];
     const pageUrl = row[1] || '';
-    const userIP = row[3] || '';  // 修复：删除referrer后，IP地址在第4列（索引3）
+    const userIP = row[4] || '';
     
     if (!pageUrl || !userIP) continue;
     
@@ -415,13 +414,13 @@ function updateStatsInTable(sheet, newStats, dateLabel) {
 }
 
 function hourlyStatisticsUpdate() {
-  const spreadsheet = SpreadsheetApp.openById('1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek');
+  const spreadsheet = SpreadsheetApp.openById('1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4');
   updateStatisticsTable(spreadsheet);
   return '每小时统计更新完成';
 }
 
 function manualStatisticsUpdate() {
-  const spreadsheet = SpreadsheetApp.openById('1hO9dXSL6mG9UJlhSgVp-5nyKk3YGtU7hg205iortWek');
+  const spreadsheet = SpreadsheetApp.openById('1kEvOkFHVQ92HK0y7I1-8qEjfzYrwt0DFQWEiVNTqXS4');
   updateStatisticsTable(spreadsheet);
   return '手动统计更新完成';
 }

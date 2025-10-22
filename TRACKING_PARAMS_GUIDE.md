@@ -1,254 +1,259 @@
-# Facebook/UTM 追踪参数保持系统
+# 追踪参数保持系统说明文档
 
-## 📋 功能说明
+## 📋 功能概述
 
-此系统确保用户从 Facebook 广告点击进入网站后，在站内跳转（如点击"下一章"、"章节列表"等）时，Facebook 追踪参数不会丢失，从而让 Google AdSense 能够正确识别流量来源。
+这个系统会自动保持 Facebook 和其他营销渠道的追踪参数（如 `fbclid`、`utm_*` 等），确保用户在网站内浏览时，这些参数始终存在，让 Google AdSense 能够正确识别流量来源。
 
 ## 🎯 解决的问题
 
-### 之前的问题：
+**问题**：用户从 Facebook 广告点击进入网站时，URL 包含追踪参数：
 ```
-用户从 Facebook 点击 → 带参数进入
-https://re.cankalp.com/novels/book/chapter-1?fbclid=xxx&utm_source=fb
-
-点击"下一章" → 参数丢失
-https://re.cankalp.com/novels/book/chapter-2
-
-结果：AdSense 将流量归类为"其他"，无法追踪 Facebook 广告效果
+https://re.cankalp.com/novels/heartbreak-billionairehe-should-never-have-let-go?fbclid=IwZXh0bgNhZW0...&utm_source=fb&utm_medium=paid
 ```
 
-### 现在的解决方案：
+但当用户点击"下一章"或其他链接时，这些参数丢失：
 ```
-用户从 Facebook 点击 → 带参数进入
-https://re.cankalp.com/novels/book/chapter-1?fbclid=xxx&utm_source=fb
-
-系统自动保存参数到 sessionStorage
-
-点击"下一章" → 自动附加参数
-https://re.cankalp.com/novels/book/chapter-2?fbclid=xxx&utm_source=fb
-
-结果：AdSense 正确识别为 "Facebook 流量"
+https://re.cankalp.com/novels/heartbreak-billionairehe-should-never-have-let-go/chapter-2
 ```
 
-## 🔧 技术实现
+导致 Google AdSense 将流量归类为"其他"而非"Facebook"。
 
-### 1. 支持的追踪参数
+## ✅ 解决方案
+
+系统会自动：
+1. **检测并保存**：当用户首次访问时，提取 URL 中的追踪参数并保存到 localStorage
+2. **自动添加**：处理页面上的所有链接，自动添加追踪参数
+3. **智能更新**：如果检测到新的追踪参数（用户从新的 Facebook 链接进入），自动更新存储
+4. **自动过期**：参数保存 24 小时后自动过期，避免无限保留旧数据
+
+## 📊 支持的追踪参数
 
 系统会自动保持以下参数：
 
-- `fbclid` - Facebook Click ID（核心追踪参数）
-- `utm_source` - 流量来源（如：fb）
-- `utm_medium` - 流量媒介（如：paid）
-- `utm_campaign` - 广告系列ID
-- `utm_content` - 广告内容ID
-- `utm_term` - 关键词ID
-- `utm_id` - 广告系列ID
+| 参数 | 来源 | 说明 |
+|------|------|------|
+| `fbclid` | Facebook | Facebook 点击 ID |
+| `utm_source` | 通用 | 流量来源（如：fb, google） |
+| `utm_medium` | 通用 | 流量媒介（如：paid, organic） |
+| `utm_campaign` | 通用 | 营销活动 ID |
+| `utm_content` | 通用 | 广告内容 ID |
+| `utm_term` | 通用 | 广告关键词 |
+| `utm_id` | 通用 | 营销活动 ID |
 
-### 2. 工作流程
+## 🔄 工作流程
 
-```javascript
-// 1. 页面加载时，检测 URL 参数
-URL: https://re.cankalp.com/novels/book?fbclid=IwZXh0bgNhZW0...&utm_source=fb
+### 场景 1: 用户从 Facebook 广告进入
 
-// 2. 提取并保存到 sessionStorage
-{
-  "fbclid": "IwZXh0bgNhZW0...",
-  "utm_source": "fb",
-  "utm_medium": "paid",
-  ...
-}
-
-// 3. 扫描所有站内链接，自动添加参数
-<a href="/novels/book/chapter-2">下一章</a>
-↓
-<a href="/novels/book/chapter-2?fbclid=IwZXh0bgNhZW0...&utm_source=fb">下一章</a>
-
-// 4. 监听动态添加的链接（如弹窗）
-广告引导弹窗中的链接也会自动添加参数
-```
-
-### 3. 智能规则
-
-#### ✅ 新参数优先
-```javascript
-// 场景：用户点击了新的 Facebook 广告
-旧参数：fbclid=OLD123
-新参数：fbclid=NEW456
-
-结果：使用 NEW456（自动覆盖旧参数）
-```
-
-#### ✅ 直接访问不添加
-```javascript
-// 场景：用户直接输入网址或从书签访问
-URL 没有参数 + sessionStorage 有旧参数
-
-结果：不添加旧参数（保持原始访问意图）
-```
-
-#### ✅ 参数有效期
-```javascript
-// 30天后自动过期
-保存时间：2025-01-01
-当前时间：2025-02-01（超过30天）
-
-结果：自动清除旧参数，不再附加
-```
-
-## 📄 已更新的模板文件
-
-所有模板都已添加追踪参数保持系统：
-
-1. ✅ `tools/templates/chapter.html` - 章节页面（最重要）
-2. ✅ `tools/templates/novel.html` - 小说详情页
-3. ✅ `tools/templates/index.html` - 小说目录页
-4. ✅ `tools/templates/home.html` - 首页
-
-## 🧪 测试方法
-
-### 测试步骤：
-
-1. **模拟 Facebook 访问**：
+1. **用户点击 Facebook 广告**
    ```
-   https://re.cankalp.com/novels/heartbreak-billionairehe-should-never-have-let-go?fbclid=TEST123&utm_source=fb&utm_medium=paid
+   原始链接: https://re.cankalp.com/novels/novel-name?fbclid=ABC123&utm_source=fb
    ```
 
-2. **打开浏览器控制台**，应该看到：
-   ```
-   🎯 检测到新的追踪参数
-   📊 追踪参数已保存: {fbclid: "TEST123", utm_source: "fb", utm_medium: "paid"}
-   ✅ 站内链接已增强，追踪参数将保持
+2. **系统自动保存参数**
+   ```javascript
+   localStorage.setItem('tracking_params', '{"fbclid":"ABC123","utm_source":"fb"}')
    ```
 
-3. **检查页面链接**：
-   - 右键点击"第1章"链接 → 复制链接地址
-   - 应该看到：`/chapter-1?fbclid=TEST123&utm_source=fb&utm_medium=paid`
+3. **用户点击"下一章"**
+   ```
+   原始链接: /novels/novel-name/chapter-2
+   系统自动修改为: /novels/novel-name/chapter-2?fbclid=ABC123&utm_source=fb
+   ```
 
-4. **点击链接跳转**：
-   - 点击任意章节链接
-   - 查看浏览器地址栏，参数应该被保持
-   - 控制台显示：`📌 使用已保存的追踪参数`
+4. **Google AdSense 正确识别**
+   ```
+   流量来源: Facebook (而不是"其他")
+   ```
 
-5. **测试广告引导弹窗**：
-   - 触发广告引导弹窗
-   - 检查弹窗中的链接是否也带有参数
+### 场景 2: 用户从新的 Facebook 链接进入（新参数优先）
 
-### 验证 Google AdSense 识别：
+1. **用户之前访问过**
+   ```
+   存储的参数: {"fbclid":"OLD123","utm_source":"fb"}
+   ```
 
-1. 访问 Google AdSense 报告
-2. 查看"流量来源"报告
-3. 应该看到流量被正确归类为 "Facebook" 而不是 "其他"
+2. **用户点击新的 Facebook 广告**
+   ```
+   新链接: https://re.cankalp.com/novels/another-novel?fbclid=NEW456&utm_source=fb&utm_campaign=spring2025
+   ```
 
-## 📊 预期效果
+3. **系统更新存储（新参数优先）**
+   ```javascript
+   localStorage.setItem('tracking_params', '{"fbclid":"NEW456","utm_source":"fb","utm_campaign":"spring2025"}')
+   ```
 
-### AdSense 流量报告改善：
+4. **后续浏览使用新参数**
+   ```
+   所有链接都会带上最新的追踪参数
+   ```
 
-**之前**：
+### 场景 3: 用户直接访问（无参数）
+
+1. **用户直接输入网址**
+   ```
+   访问: https://re.cankalp.com/
+   ```
+
+2. **系统检查存储**
+   ```javascript
+   const stored = localStorage.getItem('tracking_params');
+   // 如果有之前的参数且未过期，继续使用
+   // 如果没有参数，不添加任何参数（保持干净的URL）
+   ```
+
+3. **不会强制添加旧参数**
+   - 如果用户是直接访问（没有任何追踪参数），系统**不会**添加之前保存的参数
+   - 只有当用户带着追踪参数进入时，才会保持这些参数
+
+## 🛠️ 技术实现
+
+### 已更新的模板文件
+
+所有页面模板都已添加追踪参数保持系统：
+
+- ✅ `tools/templates/chapter.html` - 章节页面
+- ✅ `tools/templates/index.html` - 首页
+- ✅ `tools/templates/novel.html` - 小说介绍页
+- ✅ `tools/templates/home.html` - 主页
+
+### 核心功能
+
+```javascript
+// 1. 提取当前URL的追踪参数
+extractTrackingParams(url)
+
+// 2. 保存到 localStorage（24小时有效期）
+saveTrackingParams(params)
+
+// 3. 从 localStorage 读取（自动检查过期）
+loadTrackingParams()
+
+// 4. 为链接添加追踪参数
+addTrackingParamsToUrl(url, params)
+
+// 5. 处理页面上的所有链接
+processPageLinks(params)
+
+// 6. 监听动态添加的链接（使用 MutationObserver）
 ```
-流量来源：
-- 其他：80%
-- Facebook：20%（只有首次进入的页面）
-```
 
-**之后**：
-```
-流量来源：
-- Facebook：95%（所有页面访问都正确归类）
-- 其他：5%
-```
+## 📱 兼容性
 
-### 广告收益优化：
-
-1. **更准确的数据**：能够追踪哪些 Facebook 广告系列带来最多阅读量
-2. **更高的 CPM**：广告商愿意为明确来源的流量支付更高价格
-3. **优化投放**：可以针对高转化的广告系列增加预算
+- ✅ **现代浏览器**：Chrome, Firefox, Safari, Edge
+- ✅ **移动设备**：iOS Safari, Chrome Mobile
+- ✅ **localStorage 支持**：所有支持 HTML5 的浏览器
+- ✅ **隐私模式**：在隐私模式下，参数不会跨会话保留（符合预期）
 
 ## 🔍 调试信息
 
-在浏览器控制台中，系统会输出详细日志：
+系统会在浏览器控制台输出详细的调试信息：
 
 ```javascript
-// 检测到新参数
-🎯 检测到新的追踪参数
+// 当检测到新参数时
+"检测到新的追踪参数，已更新存储"
+"追踪参数已保存: {fbclid: 'ABC123', utm_source: 'fb'}"
 
-// 参数已保存
-📊 追踪参数已保存: {fbclid: "...", utm_source: "fb"}
+// 当从存储加载参数时
+"从存储加载追踪参数: {fbclid: 'ABC123', utm_source: 'fb'}"
 
-// 使用已保存的参数
-📌 使用已保存的追踪参数: {fbclid: "...", utm_source: "fb"}
+// 当处理链接时
+"已处理 156 个链接"
 
-// 链接已增强
-✅ 站内链接已增强，追踪参数将保持
+// 当参数过期时
+"追踪参数已过期，已清除"
 ```
 
-## ⚙️ 技术细节
+## ⚙️ 配置选项
 
-### 存储机制：
-- 使用 `sessionStorage`（会话级别，关闭浏览器后清除）
-- 键名：`tracking_params`、`tracking_params_timestamp`
-- 有效期：30天
-
-### 性能优化：
-- 只处理站内链接（跳过外部链接）
-- 使用 MutationObserver 监听动态内容
-- 参数缓存避免重复解析
-
-### 兼容性：
-- 支持所有现代浏览器（Chrome, Safari, Firefox, Edge）
-- 移动端完全支持
-- 不影响搜索引擎爬虫
-
-## 📝 维护说明
-
-### 添加新的追踪参数：
-
-如果需要支持新的参数类型，修改 `TRACKING_PARAMS` 数组：
+可以在代码中修改以下配置：
 
 ```javascript
+// 参数有效期（小时）
+const EXPIRY_HOURS = 24; // 默认 24 小时
+
+// 需要保持的参数列表
 const TRACKING_PARAMS = [
-    'fbclid',
-    'utm_source',
-    'utm_medium',
-    'utm_campaign',
-    'utm_content',
-    'utm_term',
-    'utm_id',
-    'new_param'  // 添加新参数
+    'fbclid',        // Facebook Click ID
+    'utm_source',    // 流量来源
+    'utm_medium',    // 流量媒介
+    'utm_campaign',  // 营销活动
+    'utm_content',   // 广告内容
+    'utm_term',      // 广告关键词
+    'utm_id'         // 营销 ID
 ];
 ```
 
-### 调整参数有效期：
+## 📊 效果验证
+
+### 在 Google AdSense 中验证
+
+1. 登录 Google AdSense
+2. 进入"报告" → "流量来源"
+3. 应该能看到：
+   - ✅ **Facebook** 流量正确识别
+   - ✅ **付费流量** (utm_medium=paid) 正确标记
+   - ❌ 不再有大量"其他"来源的流量
+
+### 在浏览器中验证
+
+1. 打开控制台（F12）
+2. 从 Facebook 链接进入网站
+3. 检查控制台输出：
+   ```
+   追踪参数已保存: {fbclid: "...", utm_source: "fb"}
+   ```
+4. 点击"下一章"链接
+5. 检查新页面 URL，应该包含追踪参数
+
+### 检查 localStorage
 
 ```javascript
-const PARAMS_EXPIRY = 30 * 24 * 60 * 60 * 1000; // 30天
-// 改为 7 天：
-const PARAMS_EXPIRY = 7 * 24 * 60 * 60 * 1000;
+// 在控制台运行
+console.log(localStorage.getItem('tracking_params'));
+// 输出: {"fbclid":"...","utm_source":"fb"}
 ```
+
+## 🔐 隐私考虑
+
+- ✅ **仅同域名**：只处理同域名的链接，不会泄露参数到外部网站
+- ✅ **自动过期**：参数 24 小时后自动清除
+- ✅ **本地存储**：数据仅存储在用户浏览器中，不会发送到服务器
+- ✅ **符合 GDPR**：追踪参数的保持是为了正确归因流量，符合合规要求
 
 ## 🚀 部署说明
 
-1. 模板已更新完成
-2. 运行构建命令重新生成所有页面：
+系统已自动部署到所有页面，无需额外配置。
+
+### 验证部署
+
+1. 构建网站：
    ```bash
    python3 tools/build-website.py --force
    ```
-3. 提交代码到 Git
-4. 部署到 Vercel（自动触发）
 
-## 📈 监控建议
+2. 检查生成的 HTML 文件，应该包含追踪参数保持脚本
 
-### 定期检查：
-1. Google AdSense 流量来源报告（每周）
-2. Facebook 广告管理器中的转化追踪（每天）
-3. 浏览器控制台是否有错误日志（首周每天）
+3. 部署到生产环境
 
-### 成功指标：
-- AdSense "其他" 流量占比 < 10%
-- Facebook 流量正确归类率 > 90%
-- 用户会话中参数保持率 > 95%
+## 📝 注意事项
+
+1. **新参数优先**：如果用户从新的 Facebook 链接进入，新参数会覆盖旧参数
+2. **不影响直接访问**：如果用户直接访问（无参数），不会强制添加旧参数
+3. **不影响域名上报**：追踪参数不会影响正常的域名和页面 URL 上报到 Analytics
+4. **24小时有效期**：参数会在 24 小时后自动过期，避免长期污染数据
+
+## 🎉 预期效果
+
+实施后，你应该看到：
+
+1. ✅ Google AdSense 中 Facebook 流量占比增加
+2. ✅ "其他"来源流量占比减少
+3. ✅ 付费流量（utm_medium=paid）正确识别
+4. ✅ 营销活动效果更准确追踪
+5. ✅ 用户在网站内浏览时，URL 始终带有追踪参数
 
 ---
 
-**更新时间**：2025年10月22日  
-**版本**：v1.0  
-**状态**：✅ 已部署并测试
+**最后更新**：2025年10月22日  
+**版本**：1.0  
+**适用于**：所有页面（chapter.html, index.html, novel.html, home.html）
