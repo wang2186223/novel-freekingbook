@@ -9,10 +9,10 @@
     
     <!-- Time Meta Tags for SEO -->
     
-    <meta property="article:published_time" content="2025-10-21T11:13:28.017261">
-    <meta property="article:modified_time" content="2025-10-21T11:13:28.017261">
-    <meta name="date" content="2025-10-21">
-    <meta name="last-modified" content="2025-10-21 11:13:28">
+    <meta property="article:published_time" content="2025-10-22T14:06:37.245035">
+    <meta property="article:modified_time" content="2025-10-22T14:06:37.245035">
+    <meta name="date" content="2025-10-22">
+    <meta name="last-modified" content="2025-10-22 14:06:37">
     
     
     <!-- Open Graph Meta Tags -->
@@ -140,6 +140,187 @@
     
     <!-- 页面访问统计代码 -->
     <script>
+    // ==================== Facebook/UTM 追踪参数保持系统 ====================
+    
+    /**
+     * 追踪参数管理系统
+     * 目的：保持 Facebook 和 UTM 参数在站内跳转时不丢失
+     */
+    (function() {
+        // 定义需要保持的追踪参数
+        const TRACKING_PARAMS = [
+            'fbclid',           // Facebook Click ID
+            'utm_source',       // 流量来源
+            'utm_medium',       // 流量媒介
+            'utm_campaign',     // 广告系列
+            'utm_content',      // 广告内容
+            'utm_term',         // 关键词
+            'utm_id'            // 广告系列ID
+        ];
+        
+        const STORAGE_KEY = 'tracking_params';
+        const STORAGE_TIMESTAMP_KEY = 'tracking_params_timestamp';
+        const PARAMS_EXPIRY = 30 * 24 * 60 * 60 * 1000; // 30天过期
+        
+        /**
+         * 从 URL 中提取追踪参数
+         */
+        function extractTrackingParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const params = {};
+            let hasParams = false;
+            
+            TRACKING_PARAMS.forEach(param => {
+                const value = urlParams.get(param);
+                if (value) {
+                    params[param] = value;
+                    hasParams = true;
+                }
+            });
+            
+            return hasParams ? params : null;
+        }
+        
+        /**
+         * 保存追踪参数到 sessionStorage
+         */
+        function saveTrackingParams(params) {
+            if (params && Object.keys(params).length > 0) {
+                sessionStorage.setItem(STORAGE_KEY, JSON.stringify(params));
+                sessionStorage.setItem(STORAGE_TIMESTAMP_KEY, Date.now().toString());
+                console.log('📊 追踪参数已保存:', params);
+            }
+        }
+        
+        /**
+         * 获取已保存的追踪参数
+         */
+        function getSavedTrackingParams() {
+            try {
+                const timestamp = sessionStorage.getItem(STORAGE_TIMESTAMP_KEY);
+                if (timestamp && (Date.now() - parseInt(timestamp)) > PARAMS_EXPIRY) {
+                    // 参数已过期，清除
+                    sessionStorage.removeItem(STORAGE_KEY);
+                    sessionStorage.removeItem(STORAGE_TIMESTAMP_KEY);
+                    return null;
+                }
+                
+                const saved = sessionStorage.getItem(STORAGE_KEY);
+                return saved ? JSON.parse(saved) : null;
+            } catch (error) {
+                console.error('读取追踪参数失败:', error);
+                return null;
+            }
+        }
+        
+        /**
+         * 为 URL 添加追踪参数
+         */
+        function addTrackingParams(url, params) {
+            if (!params || Object.keys(params).length === 0) {
+                return url;
+            }
+            
+            try {
+                const urlObj = new URL(url, window.location.origin);
+                
+                // 添加参数
+                Object.keys(params).forEach(key => {
+                    urlObj.searchParams.set(key, params[key]);
+                });
+                
+                return urlObj.toString();
+            } catch (error) {
+                console.error('添加追踪参数失败:', error);
+                return url;
+            }
+        }
+        
+        /**
+         * 处理站内链接，添加追踪参数
+         */
+        function enhanceInternalLinks() {
+            const params = getSavedTrackingParams();
+            if (!params) return;
+            
+            // 获取所有站内链接
+            const internalLinks = document.querySelectorAll('a[href]');
+            
+            internalLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                
+                // 跳过外部链接、锚点、JavaScript链接
+                if (!href || 
+                    href.startsWith('http://') || 
+                    href.startsWith('https://') || 
+                    href.startsWith('#') || 
+                    href.startsWith('javascript:')) {
+                    return;
+                }
+                
+                // 检查是否是站内链接（相对路径或同域名）
+                try {
+                    const linkUrl = new URL(href, window.location.origin);
+                    if (linkUrl.hostname === window.location.hostname) {
+                        // 为站内链接添加追踪参数
+                        const enhancedUrl = addTrackingParams(href, params);
+                        if (enhancedUrl !== href) {
+                            link.setAttribute('href', enhancedUrl);
+                        }
+                    }
+                } catch (error) {
+                    // 忽略无效URL
+                }
+            });
+            
+            console.log('✅ 站内链接已增强，追踪参数将保持');
+        }
+        
+        // 页面加载时执行
+        function init() {
+            // 1. 检查当前URL是否有追踪参数
+            const currentParams = extractTrackingParams();
+            
+            if (currentParams) {
+                // 有新参数，优先使用新参数（覆盖旧的）
+                saveTrackingParams(currentParams);
+                console.log('🎯 检测到新的追踪参数');
+            } else {
+                // 没有新参数，检查是否有保存的参数
+                const savedParams = getSavedTrackingParams();
+                if (savedParams) {
+                    console.log('📌 使用已保存的追踪参数:', savedParams);
+                }
+            }
+            
+            // 2. 增强所有站内链接
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', enhanceInternalLinks);
+            } else {
+                enhanceInternalLinks();
+            }
+            
+            // 3. 监听动态添加的链接（如广告引导弹窗）
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length > 0) {
+                        enhanceInternalLinks();
+                    }
+                });
+            });
+            
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+        
+        // 立即执行初始化
+        init();
+    })();
+    
+    // ==================== 页面访问数据收集 ====================
+    
     // 页面访问数据收集
     function sendPageVisit() {
         // 先获取用户IP地址
@@ -534,8 +715,8 @@
             "@type": "Person",
             "name": "Unknown Author"
         },
-        "datePublished": "2025-10-21T11:13:28.017261",
-        "dateModified": "2025-10-21T11:13:28.017261",
+        "datePublished": "2025-10-22T14:06:37.245035",
+        "dateModified": "2025-10-22T14:06:37.245035",
         "publisher": {
             "@type": "Organization",
             "name": "NovelVibe",
