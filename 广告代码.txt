@@ -1,0 +1,70 @@
+banner_1	300x250	"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/freekingbook.com/banner_1', [300, 250], 'div-gpt-ad-1759827039113-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/freekingbook.com/banner_1 -->
+<div id='div-gpt-ad-1759827039113-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827039113-0'); });
+  </script>
+</div>"
+banner_2	300x250	"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/freekingbook.com/banner_2', [300, 250], 'div-gpt-ad-1759827064631-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/freekingbook.com/banner_2 -->
+<div id='div-gpt-ad-1759827064631-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827064631-0'); });
+  </script>
+</div>"
+banner_3	300x250	"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/freekingbook.com/banner_3', [300, 250], 'div-gpt-ad-1759827094695-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/freekingbook.com/banner_3 -->
+<div id='div-gpt-ad-1759827094695-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827094695-0'); });
+  </script>
+</div>"
+banner_4	300x250	"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/freekingbook.com/banner_4', [300, 250], 'div-gpt-ad-1759827119820-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/freekingbook.com/banner_4 -->
+<div id='div-gpt-ad-1759827119820-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827119820-0'); });
+  </script>
+</div>"
+banner_5	300x250	"<script async src=""https://securepubads.g.doubleclick.net/tag/js/gpt.js"" crossorigin=""anonymous""></script>
+<script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/93656639/freekingbook.com/banner_5', [300, 250], 'div-gpt-ad-1759827146148-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>"	"<!-- /93656639/freekingbook.com/banner_5 -->
+<div id='div-gpt-ad-1759827146148-0' style='min-width: 300px; min-height: 250px;'>
+  <script>
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827146148-0'); });
+  </script>
+</div>"
