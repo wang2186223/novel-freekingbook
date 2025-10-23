@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Disable Console Output -->
+    <script>
+    (function() {
+        // 禁用所有 console 方法
+        const noop = function() {};
+        const methods = ['log', 'debug', 'info', 'warn', 'error', 'dir', 'dirxml', 'table', 'trace', 'group', 'groupCollapsed', 'groupEnd', 'clear', 'count', 'countReset', 'assert', 'profile', 'profileEnd', 'time', 'timeLog', 'timeEnd', 'timeStamp'];
+        
+        methods.forEach(method => {
+            if (console[method]) {
+                console[method] = noop;
+            }
+        });
+        
+        // 防止通过其他方式访问原始 console
+        Object.freeze(console);
+    })();
+    </script>
+    
     <title>{% if chapter.title and novel.title %}{{ chapter.title }} - {{ novel.title }} | NovelVibe{% else %}Reading - NovelVibe{% endif %}</title>
     <meta name="description" content="{% if chapter.summary %}{{ chapter.summary }}{% else %}Read {{ novel.title }} Chapter {{ chapter.number }} on NovelVibe - Free werewolf romance novels{% endif %}">
     <meta name="keywords" content="{% if novel.tags %}{{ novel.tags|join(', ') }}{% else %}werewolf, romance, free novels, online reading{% endif %}">

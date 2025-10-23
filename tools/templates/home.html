@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Disable Console Output -->
+    <script>
+    (function() {
+        // 禁用所有 console 方法
+        const noop = function() {};
+        const methods = ['log', 'debug', 'info', 'warn', 'error', 'dir', 'dirxml', 'table', 'trace', 'group', 'groupCollapsed', 'groupEnd', 'clear', 'count', 'countReset', 'assert', 'profile', 'profileEnd', 'time', 'timeLog', 'timeEnd', 'timeStamp'];
+        
+        methods.forEach(method => {
+            if (console[method]) {
+                console[method] = noop;
+            }
+        });
+        
+        // 防止通过其他方式访问原始 console
+        Object.freeze(console);
+    })();
+    </script>
+    
     <title>{% if page_title %}{{ page_title }}{% else %}NovelVibe - Free Novels for Women{% endif %}</title>
     <meta name="description" content="{% if page_description %}{{ page_description }}{% else %}Discover thousands of free werewolf romance novels. Read passionate alpha stories, mate bonds, and pack adventures. Perfect for women who love paranormal romance.{% endif %}">
     <meta name="keywords" content="free werewolf novels, alpha romance, mate bond stories, paranormal romance, werewolf fiction, free books for women">
