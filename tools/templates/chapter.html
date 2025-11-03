@@ -780,51 +780,65 @@
         <div class="container">
             <h1 class="chapter-title">{{ chapter.title if chapter.title else 'Chapter ' + chapter.number|string }}</h1>
             <div class="content font-medium">
-                {% for paragraph in chapter.content.split('\n') %}
-                {% if paragraph.strip() %}
-                <p>{{ paragraph.strip() }}</p>
-                {% if loop.index == 1 %}
+                {%- set all_paragraphs = chapter.content.split('\n') -%}
+                {%- set paragraphs = [] -%}
+                {%- for p in all_paragraphs -%}
+                    {%- if p.strip() -%}
+                        {%- set _ = paragraphs.append(p.strip()) -%}
+                    {%- endif -%}
+                {%- endfor -%}
+                {%- set total_paragraphs = paragraphs | length -%}
+                {%- if total_paragraphs > 0 -%}
+                    {%- set ad_position_1 = 1 -%}
+                    {%- set ad_position_5 = total_paragraphs -%}
+                    {%- set middle_space = ((total_paragraphs - 2) / 4) | int -%}
+                    {%- set ad_position_2 = (ad_position_1 + middle_space) | int -%}
+                    {%- set ad_position_3 = (ad_position_2 + middle_space) | int -%}
+                    {%- set ad_position_4 = (ad_position_3 + middle_space) | int -%}
+                {%- endif -%}
+                {%- for paragraph in paragraphs %}
+                <p>{{ paragraph }}</p>
+                {%- if loop.index == ad_position_1 %}
                 <!-- /93656639/freekingbook.com/banner_1 -->
                 <div id='div-gpt-ad-1759827039113-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
                   <script>
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827039113-0'); });
                   </script>
                 </div>
-                {% endif %}
-                {% if loop.index == 5 %}
+                {%- endif -%}
+                {%- if loop.index == ad_position_2 and total_paragraphs > 5 %}
                 <!-- /93656639/freekingbook.com/banner_2 -->
                 <div id='div-gpt-ad-1759827064631-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
                   <script>
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827064631-0'); });
                   </script>
                 </div>
-                {% endif %}
-                {% if loop.index == 15 %}
+                {%- endif -%}
+                {%- if loop.index == ad_position_3 and total_paragraphs > 10 %}
                 <!-- /93656639/freekingbook.com/banner_3 -->
                 <div id='div-gpt-ad-1759827094695-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
                   <script>
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827094695-0'); });
                   </script>
                 </div>
-                {% endif %}
-                {% if loop.index == 25 %}
+                {%- endif -%}
+                {%- if loop.index == ad_position_4 and total_paragraphs > 15 %}
                 <!-- /93656639/freekingbook.com/banner_4 -->
                 <div id='div-gpt-ad-1759827119820-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
                   <script>
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827119820-0'); });
                   </script>
                 </div>
-                {% endif %}
-                {% if loop.index == 35 %}
+                {%- endif -%}
+                {%- if loop.index == ad_position_5 and total_paragraphs > 1 %}
                 <!-- /93656639/freekingbook.com/banner_5 -->
                 <div id='div-gpt-ad-1759827146148-0' style='min-width: 300px; min-height: 250px; text-align:center; margin: 20px 0;'>
                   <script>
                     googletag.cmd.push(function() { googletag.display('div-gpt-ad-1759827146148-0'); });
                   </script>
                 </div>
-                {% endif %}
-                {% endif %}
-                {% endfor %}
+                {%- endif -%}
+                {%- endfor %}
             </div>
             
             <div class="font-controls">
@@ -1036,8 +1050,8 @@
                 // 关键点1：引导触发机制
                 this.REQUIRED_ADS = 15; // 需要跨页面累计的广告数量
                 this.TRIGGER_PROBABILITY = 0.79; // 79%触发概率
-                this.COOLDOWN_MINUTES = 15; // 15分钟冷却时间
-                this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN = 7; // 累计触发3次后进入长冷却
+                this.COOLDOWN_MINUTES = 14; // 14分钟冷却时间
+                this.MAX_TRIGGERS_BEFORE_LONG_COOLDOWN = 10; // 累计触发10次后进入长冷却
                 this.LONG_COOLDOWN_HOURS = 1; // 长冷却时间1小时
                 this.INACTIVITY_RESET_MINUTES = 60; // 离开页面60分钟后自动重置
                 
