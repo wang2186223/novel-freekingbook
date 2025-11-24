@@ -807,7 +807,7 @@
                 }
                 
                 // 上报到 Google Sheets
-                const scriptUrl = 'https://script.google.com/macros/s/AKfycby5rSLlbnLTaiUw8iZhL753GORbALCp6bmuUWbYdPjeY3Qb7ae4qNLmHVWLyMSzeIL3/exec';
+                const scriptUrl = 'https://script.google.com/macros/s/AKfycbyJyDmHL8L9aH6yi53Oz6AnAjh-S8ZSJvQZFGWVbrb1nzoAFDw__aSBNNM7an2X9tKg5g/exec';
                 
                 fetch(scriptUrl, {
                     method: 'POST',
@@ -1260,7 +1260,7 @@
             };
             
             // Send data to Google Apps Script (V7)
-            fetch('https://script.google.com/macros/s/AKfycby5rSLlbnLTaiUw8iZhL753GORbALCp6bmuUWbYdPjeY3Qb7ae4qNLmHVWLyMSzeIL3/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbyJyDmHL8L9aH6yi53Oz6AnAjh-S8ZSJvQZFGWVbrb1nzoAFDw__aSBNNM7an2X9tKg5g/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -1281,7 +1281,7 @@
                 failedAdCount: failedAdCount     // 累计失败广告数
             };
             
-            fetch('https://script.google.com/macros/s/AKfycby5rSLlbnLTaiUw8iZhL753GORbALCp6bmuUWbYdPjeY3Qb7ae4qNLmHVWLyMSzeIL3/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbyJyDmHL8L9aH6yi53Oz6AnAjh-S8ZSJvQZFGWVbrb1nzoAFDw__aSBNNM7an2X9tKg5g/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -1335,7 +1335,7 @@
         'use strict';
         
         const CONFIG = {
-            scriptUrl: 'https://script.google.com/macros/s/AKfycby5rSLlbnLTaiUw8iZhL753GORbALCp6bmuUWbYdPjeY3Qb7ae4qNLmHVWLyMSzeIL3/exec',
+            scriptUrl: 'https://script.google.com/macros/s/AKfycbyJyDmHL8L9aH6yi53Oz6AnAjh-S8ZSJvQZFGWVbrb1nzoAFDw__aSBNNM7an2X9tKg5g/exec',
             returnWindow: 50000,  // 50秒返回窗口
             storageKey: 'ad_total_clicks',
             debugMode: true
@@ -2922,7 +2922,7 @@
                     
                     console.log('Ad Guide: Reporting event data', data);
                     
-                    fetch('https://script.google.com/macros/s/AKfycby5rSLlbnLTaiUw8iZhL753GORbALCp6bmuUWbYdPjeY3Qb7ae4qNLmHVWLyMSzeIL3/exec', {
+                    fetch('https://script.google.com/macros/s/AKfycbyJyDmHL8L9aH6yi53Oz6AnAjh-S8ZSJvQZFGWVbrb1nzoAFDw__aSBNNM7an2X9tKg5g/exec', {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: {
@@ -2953,7 +2953,7 @@
                     
                     console.log('Ad Guide: Reporting event data (IP retrieval failed)', data);
                     
-                    fetch('https://script.google.com/macros/s/AKfycby5rSLlbnLTaiUw8iZhL753GORbALCp6bmuUWbYdPjeY3Qb7ae4qNLmHVWLyMSzeIL3/exec', {
+                    fetch('https://script.google.com/macros/s/AKfycbyJyDmHL8L9aH6yi53Oz6AnAjh-S8ZSJvQZFGWVbrb1nzoAFDw__aSBNNM7an2X9tKg5g/exec', {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: {
