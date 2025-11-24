@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Disable Console Output -->
+    <!-- 禁用 Console 输出 -->
     <script>
     (function() {
-        // 禁用所有 console 方法
-        const noop = function() {};
-        const methods = ['log', 'debug', 'info', 'warn', 'error', 'dir', 'dirxml', 'table', 'trace', 'group', 'groupCollapsed', 'groupEnd', 'clear', 'count', 'countReset', 'assert', 'profile', 'profileEnd', 'time', 'timeLog', 'timeEnd', 'timeStamp'];
-        
-        methods.forEach(method => {
-            if (console[method]) {
-                console[method] = noop;
-            }
-        });
-        
-        // 防止通过其他方式访问原始 console
-        Object.freeze(console);
+        'use strict';
+        // 覆盖所有 console 方法，使其不输出任何内容
+        if (typeof console !== 'undefined') {
+            const noop = function() {};
+            const methods = ['log', 'debug', 'info', 'warn', 'error', 'trace', 'dir', 'dirxml', 
+                           'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'timeLog',
+                           'assert', 'profile', 'profileEnd', 'count', 'countReset', 'table', 'clear'];
+            methods.forEach(function(method) {
+                if (console[method]) {
+                    console[method] = noop;
+                }
+            });
+        }
     })();
     </script>
     
@@ -42,13 +43,13 @@
     <link rel="canonical" href="{{ canonical_url }}">
     
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ND2Y00VMY2"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-62HR245J7Y"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-ND2Y00VMY2');
+      gtag('config', 'G-62HR245J7Y');
     </script>
     
     <!-- Google Publisher Tag (GPT) -->
@@ -73,7 +74,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '1357769482743598');
+    fbq('init', '1355356909503023');
     
     // Natural 72-hour event tracking prevention (resets every 3 days)
     function shouldTrackEvent(eventName) {
@@ -100,7 +101,7 @@
     }
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1357769482743598&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=1355356909503023&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
     

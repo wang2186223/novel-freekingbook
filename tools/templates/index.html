@@ -4,59 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Disable Console Output -->
+    <!-- 禁用 Console 输出 -->
     <script>
     (function() {
-        // 禁用所有 console 方法
-        const noop = function() {};
-        const methods = ['log', 'debug', 'info', 'warn', 'error', 'dir', 'dirxml', 'table', 'trace', 'group', 'groupCollapsed', 'groupEnd', 'clear', 'count', 'countReset', 'assert', 'profile', 'profileEnd', 'time', 'timeLog', 'timeEnd', 'timeStamp'];
-        
-        methods.forEach(method => {
-            if (console[method]) {
-                console[method] = noop;
-            }
-        });
-        
-        // 防止通过其他方式访问原始 console
-        Object.freeze(console);
+        'use strict';
+        // 覆盖所有 console 方法，使其不输出任何内容
+        if (typeof console !== 'undefined') {
+            const noop = function() {};
+            const methods = ['log', 'debug', 'info', 'warn', 'error', 'trace', 'dir', 'dirxml', 
+                           'group', 'groupCollapsed', 'groupEnd', 'time', 'timeEnd', 'timeLog',
+                           'assert', 'profile', 'profileEnd', 'count', 'countReset', 'table', 'clear'];
+            methods.forEach(function(method) {
+                if (console[method]) {
+                    console[method] = noop;
+                }
+            });
+        }
     })();
     </script>
     
     <title>{% if page_title %}{{ page_title }}{% else %}NovelVibe - Free Novels for Women{% endif %}</title>
-    <meta name="description" content="{% if page_description %}{{ page_description }}{% else %}Discover thousands of free werewolf romance novels. Read passionate alpha stories, mate bonds, and pack adventures. Perfect for women who love paranormal romance.{% endif %}">
-    <meta name="keywords" content="free werewolf novels, alpha romance, mate bond stories, paranormal romance, werewolf fiction, free books for women">
-    
-    <!-- Time Meta Tags for SEO -->
-    {% if timestamps %}
-    <meta property="article:published_time" content="{{ timestamps.created_iso }}">
-    <meta property="article:modified_time" content="{{ timestamps.modified_iso }}">
-    <meta name="date" content="{{ timestamps.modified_date }}">
-    <meta name="last-modified" content="{{ timestamps.modified_readable }}">
-    {% endif %}
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="{% if page_title %}{{ page_title }}{% else %}NovelVibe - Free Novels for Women{% endif %}">
-    <meta property="og:description" content="{% if page_description %}{{ page_description }}{% else %}Discover thousands of free werewolf romance novels{% endif %}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:image" content="{{ site_url }}/assets/images/og-image.jpg">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{% if page_title %}{{ page_title }}{% else %}NovelVibe{% endif %}">
-    <meta name="twitter:description" content="{% if page_description %}{{ page_description }}{% else %}Free werewolf romance novels{% endif %}">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="{{ canonical_url }}">
     
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ND2Y00VMY2"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-62HR245J7Y"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-ND2Y00VMY2');
+      gtag('config', 'G-62HR245J7Y');
     </script>
     
     <!-- Google Publisher Tag (GPT) -->
@@ -81,7 +57,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '1357769482743598');
+    fbq('init', '1355356909503023');
     
     // Natural 72-hour event tracking prevention (resets every 3 days)
     function shouldTrackEvent(eventName) {
@@ -108,7 +84,7 @@
     }
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1357769482743598&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=1355356909503023&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
     
@@ -290,8 +266,8 @@
                 userIP: userIP
             };
             
-            // 发送数据到 Google Apps Script (V8)
-            fetch('https://script.google.com/macros/s/AKfycbzwU60p8Iqgm3vMP0TZZu1E6b9vvQQZldUVcrWNWzbRLPbuTNc8QCq9JquLb3mo29-D/exec', {
+            // 发送数据到 Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycby5rSLlbnLTaiUw8iZhL753GORbALCp6bmuUWbYdPjeY3Qb7ae4qNLmHVWLyMSzeIL3/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -310,7 +286,7 @@
                 userIP: 'Unknown'
             };
             
-            fetch('https://script.google.com/macros/s/AKfycbzwU60p8Iqgm3vMP0TZZu1E6b9vvQQZldUVcrWNWzbRLPbuTNc8QCq9JquLb3mo29-D/exec', {
+            fetch('https://script.google.com/macros/s/AKfycby5rSLlbnLTaiUw8iZhL753GORbALCp6bmuUWbYdPjeY3Qb7ae4qNLmHVWLyMSzeIL3/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -1288,10 +1264,12 @@
                 if (dataElement && dataElement.textContent.trim()) {
                     allNovels = JSON.parse(dataElement.textContent);
                     console.log('成功加载小说数据：', allNovels.length, '本');
-                    // 随机打乱小说顺序，但保持前8本不变（已经在模板中显示）
-                    const remainingNovels = allNovels.slice(8);
-                    shuffleArray(remainingNovels);
-                    allNovels = [...allNovels.slice(0, 8), ...remainingNovels];
+                    // 按时间倒序排列(最新的在前面)
+                    allNovels.sort((a, b) => {
+                        const dateA = new Date(a.last_updated);
+                        const dateB = new Date(b.last_updated);
+                        return dateB - dateA; // 降序排列
+                    });
                 } else {
                     console.error('未找到小说数据或数据为空');
                     allNovels = [];
@@ -1299,13 +1277,6 @@
             } catch (error) {
                 console.error('加载小说数据时出错:', error);
                 allNovels = [];
-            }
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
             }
         }
 
